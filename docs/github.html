@@ -6,10 +6,8 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="author" content="Team">
-<meta name="dcterms.date" content="2026-03-06">
 
-<title>Capstone</title>
+<title>1&nbsp; GitHub Setup – Capstone</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -32,7 +30,7 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./github.html" rel="next">
+<link href="./index.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -83,7 +81,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./index.html">Introduction</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./github.html"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">GitHub Setup</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -113,13 +111,13 @@ ul.task-list li input[type="checkbox"] {
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./index.html" class="sidebar-item-text sidebar-link active">
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Introduction</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./github.html" class="sidebar-item-text sidebar-link">
+  <a href="./github.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">GitHub Setup</span></span></a>
   </div>
 </li>
@@ -133,7 +131,13 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction">Introduction</a></li>
+  <li><a href="#steps-to-set-up-this-github-repository" id="toc-steps-to-set-up-this-github-repository" class="nav-link active" data-scroll-target="#steps-to-set-up-this-github-repository">Steps to set up this GitHub Repository</a></li>
+  <li><a href="#created-a-new-repository-on-github" id="toc-created-a-new-repository-on-github" class="nav-link" data-scroll-target="#created-a-new-repository-on-github"><span class="header-section-number">1.1</span> Created a new repository on GitHub</a></li>
+  <li><a href="#cloned-to-a-local-direcotry-and-set-up-repository-as-an-r-project" id="toc-cloned-to-a-local-direcotry-and-set-up-repository-as-an-r-project" class="nav-link" data-scroll-target="#cloned-to-a-local-direcotry-and-set-up-repository-as-an-r-project"><span class="header-section-number">1.2</span> Cloned to a local direcotry and set up repository as an R project</a></li>
+  <li><a href="#prepared-use-of-quarto-in-the-repository" id="toc-prepared-use-of-quarto-in-the-repository" class="nav-link" data-scroll-target="#prepared-use-of-quarto-in-the-repository"><span class="header-section-number">1.3</span> Prepared use of Quarto in the repository</a></li>
+  <li><a href="#render-html-and-pdf" id="toc-render-html-and-pdf" class="nav-link" data-scroll-target="#render-html-and-pdf"><span class="header-section-number">1.4</span> Render html and pdf</a></li>
+  <li><a href="#configure-github-pages" id="toc-configure-github-pages" class="nav-link" data-scroll-target="#configure-github-pages"><span class="header-section-number">1.5</span> Configure GitHub pages</a></li>
+  <li><a href="#create-a-new-chapter-in-the-book" id="toc-create-a-new-chapter-in-the-book" class="nav-link" data-scroll-target="#create-a-new-chapter-in-the-book"><span class="header-section-number">1.6</span> Create a new chapter in the book</a></li>
   </ul>
 </nav>
     </div>
@@ -142,26 +146,14 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Capstone</h1>
+<h1 class="title"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">GitHub Setup</span></h1>
 </div>
 
 
 
 <div class="quarto-title-meta">
 
-    <div>
-    <div class="quarto-title-meta-heading">Author</div>
-    <div class="quarto-title-meta-contents">
-             <p>Team </p>
-          </div>
-  </div>
     
-    <div>
-    <div class="quarto-title-meta-heading">Published</div>
-    <div class="quarto-title-meta-contents">
-      <p class="date">March 6, 2026</p>
-    </div>
-  </div>
   
     
   </div>
@@ -171,8 +163,57 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<section id="introduction" class="level2 unnumbered">
-<h2 class="unnumbered anchored" data-anchor-id="introduction">Introduction</h2>
+<section id="steps-to-set-up-this-github-repository" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="steps-to-set-up-this-github-repository">Steps to set up this GitHub Repository</h2>
+</section>
+<section id="created-a-new-repository-on-github" class="level2" data-number="1.1">
+<h2 data-number="1.1" class="anchored" data-anchor-id="created-a-new-repository-on-github"><span class="header-section-number">1.1</span> Created a new repository on GitHub</h2>
+<ol type="a">
+<li>Logged into GitHub and clicked on the “Create new…” icon</li>
+<li>Selected “New repository” ad specified owner, name, and description</li>
+<li>Chose public visibility, turned on README, and added the R .gitignore template</li>
+<li>Clicked on Create new repository, then copied the repository URL</li>
+</ol>
+</section>
+<section id="cloned-to-a-local-direcotry-and-set-up-repository-as-an-r-project" class="level2" data-number="1.2">
+<h2 data-number="1.2" class="anchored" data-anchor-id="cloned-to-a-local-direcotry-and-set-up-repository-as-an-r-project"><span class="header-section-number">1.2</span> Cloned to a local direcotry and set up repository as an R project</h2>
+<ol type="a">
+<li>Cloned repository with RStudio to create an associated .Rproj file by navigating to File &gt; New Project &gt; Version Control &gt; Git and paste the repository URL</li>
+<li>Staged, committed, and pushed the new .Rproj file</li>
+</ol>
+</section>
+<section id="prepared-use-of-quarto-in-the-repository" class="level2" data-number="1.3">
+<h2 data-number="1.3" class="anchored" data-anchor-id="prepared-use-of-quarto-in-the-repository"><span class="header-section-number">1.3</span> Prepared use of Quarto in the repository</h2>
+<ol type="a">
+<li>Added a new line for /.quarto/ to the <a href="https://github.com/adyadyan/MAP-5629-Capstone/blob/main/.gitignore">.gitignore</a> to ignore temporary files generated during the rendering process and remove the line that ignores docs/</li>
+<li>Created a simple <a href="https://github.com/adyadyan/MAP-5629-Capstone/blob/main/_quarto.yml">_quarto.yml</a> and <a href="https://github.com/adyadyan/MAP-5629-Capstone/blob/main/index.qmd">index.qmd</a> files</li>
+<li>Staged, committed, and pushed the 2 new files and the changes to the <a href="https://github.com/adyadyan/MAP-5629-Capstone/blob/main/.gitignore">.gitignore</a> file</li>
+</ol>
+</section>
+<section id="render-html-and-pdf" class="level2" data-number="1.4">
+<h2 data-number="1.4" class="anchored" data-anchor-id="render-html-and-pdf"><span class="header-section-number">1.4</span> Render html and pdf</h2>
+<ol type="a">
+<li>Restarted RStudio for the Build tab to appear</li>
+<li>In the build tab, selected Render Book &gt; All Formats</li>
+<li>Staged, committed, and pushed the new docs folder</li>
+</ol>
+</section>
+<section id="configure-github-pages" class="level2" data-number="1.5">
+<h2 data-number="1.5" class="anchored" data-anchor-id="configure-github-pages"><span class="header-section-number">1.5</span> Configure GitHub pages</h2>
+<ol type="a">
+<li>Navigated to Pages in the Repository settings on GitHub</li>
+<li>Selected and saved the main Branch and /docs folder as the source</li>
+<li>Refreshed the browser and copied the URL</li>
+</ol>
+</section>
+<section id="create-a-new-chapter-in-the-book" class="level2" data-number="1.6">
+<h2 data-number="1.6" class="anchored" data-anchor-id="create-a-new-chapter-in-the-book"><span class="header-section-number">1.6</span> Create a new chapter in the book</h2>
+<ol type="a">
+<li>Created a new quarto file called <a href="https://github.com/adyadyan/MAP-5629-Capstone/blob/main/GitHub.qmd">GitHub.qmd</a> in the R Studio project</li>
+<li>Added the name of the new GitHub quarto file to the <a href="https://github.com/adyadyan/MAP-5629-Capstone/blob/main/_quarto.yml">_quarto.yml</a> list of chapters</li>
+<li>In the build tab, selected Render Book &gt; All Formats</li>
+<li>Staged, committed, and pushed the new <a href="https://github.com/adyadyan/MAP-5629-Capstone/blob/main/GitHub.qmd">GitHub.qmd</a> file along with the updated /docs folder and <a href="https://github.com/adyadyan/MAP-5629-Capstone/blob/main/_quarto.yml">_quarto.yml</a> file</li>
+</ol>
 
 
 </section>
@@ -597,11 +638,11 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
+      <a href="./index.html" class="pagination-link" aria-label="Introduction">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Introduction</span>
+      </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./github.html" class="pagination-link" aria-label="GitHub Setup">
-        <span class="nav-page-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">GitHub Setup</span></span> <i class="bi bi-arrow-right-short"></i>
-      </a>
   </div>
 </nav>
 </div> <!-- /content -->

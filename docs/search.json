@@ -8,5 +8,75 @@
     "crumbs": [
       "Introduction"
     ]
+  },
+  {
+    "objectID": "github.html",
+    "href": "github.html",
+    "title": "1  GitHub Setup",
+    "section": "",
+    "text": "Steps to set up this GitHub Repository",
+    "crumbs": [
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>GitHub Setup</span>"
+    ]
+  },
+  {
+    "objectID": "github.html#created-a-new-repository-on-github",
+    "href": "github.html#created-a-new-repository-on-github",
+    "title": "1  GitHub Setup",
+    "section": "1.1 Created a new repository on GitHub",
+    "text": "1.1 Created a new repository on GitHub\n\nLogged into GitHub and clicked on the “Create new…” icon\nSelected “New repository” ad specified owner, name, and description\nChose public visibility, turned on README, and added the R .gitignore template\nClicked on Create new repository, then copied the repository URL",
+    "crumbs": [
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>GitHub Setup</span>"
+    ]
+  },
+  {
+    "objectID": "github.html#cloned-to-a-local-direcotry-and-set-up-repository-as-an-r-project",
+    "href": "github.html#cloned-to-a-local-direcotry-and-set-up-repository-as-an-r-project",
+    "title": "1  GitHub Setup",
+    "section": "1.2 Cloned to a local direcotry and set up repository as an R project",
+    "text": "1.2 Cloned to a local direcotry and set up repository as an R project\n\nCloned repository with RStudio to create an associated .Rproj file by navigating to File &gt; New Project &gt; Version Control &gt; Git and paste the repository URL\nStaged, committed, and pushed the new .Rproj file",
+    "crumbs": [
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>GitHub Setup</span>"
+    ]
+  },
+  {
+    "objectID": "github.html#prepared-use-of-quarto-in-the-repository",
+    "href": "github.html#prepared-use-of-quarto-in-the-repository",
+    "title": "1  GitHub Setup",
+    "section": "1.3 Prepared use of Quarto in the repository",
+    "text": "1.3 Prepared use of Quarto in the repository\n\nAdded a new line for /.quarto/ to the .gitignore to ignore temporary files generated during the rendering process and remove the line that ignores docs/\nCreated a simple _quarto.yml and index.qmd files\nStaged, committed, and pushed the 2 new files and the changes to the .gitignore file",
+    "crumbs": [
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>GitHub Setup</span>"
+    ]
+  },
+  {
+    "objectID": "github.html#render-html-and-pdf",
+    "href": "github.html#render-html-and-pdf",
+    "title": "1  GitHub Setup",
+    "section": "1.4 Render html and pdf",
+    "text": "1.4 Render html and pdf\n\nRestarted RStudio for the Build tab to appear\nIn the build tab, selected Render Book &gt; All Formats\nStaged, committed, and pushed the new docs folder",
+    "crumbs": [
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>GitHub Setup</span>"
+    ]
+  },
+  {
+    "objectID": "github.html#configure-github-pages",
+    "href": "github.html#configure-github-pages",
+    "title": "1  GitHub Setup",
+    "section": "1.5 Configure GitHub pages",
+    "text": "1.5 Configure GitHub pages\n\nNavigated to Pages in the Repository settings on GitHub\nSelected and saved the main Branch and /docs folder as the source\nRefreshed the browser and copied the URL",
+    "crumbs": [
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>GitHub Setup</span>"
+    ]
+  },
+  {
+    "objectID": "github.html#create-a-new-chapter-in-the-book",
+    "href": "github.html#create-a-new-chapter-in-the-book",
+    "title": "1  GitHub Setup",
+    "section": "1.6 Create a new chapter in the book",
+    "text": "1.6 Create a new chapter in the book\n\nCreated a new quarto file called GitHub.qmd in the R Studio project\nAdded the name of the new GitHub quarto file to the _quarto.yml list of chapters\nIn the build tab, selected Render Book &gt; All Formats\nStaged, committed, and pushed the new GitHub.qmd file along with the updated /docs folder and _quarto.yml file",
+    "crumbs": [
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>GitHub Setup</span>"
+    ]
   }
 ]

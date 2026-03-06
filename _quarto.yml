@@ -9,6 +9,7 @@ book:
   date: today
   chapters:
     - index.qmd
+    - github.qmd
     
 format:
   html:

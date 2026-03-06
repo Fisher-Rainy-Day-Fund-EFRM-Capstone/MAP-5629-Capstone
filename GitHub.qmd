@@ -1,0 +1,45 @@
+---
+title: "GitHub Setup"
+format:
+  pdf:
+    toc: true
+    toc-depth: 2
+    number-sections: true
+    shift-heading-level-by: -1
+---
+
+## Steps to setting up this GitHub Repository {.unnumbered}
+
+## Created a new repository on GitHub
+
+a. Logged into GitHub and clicked on the "Create new..." icon
+b. Selected "New repository" ad specified owner, name, and description
+c. Chose public visibility, turned on README, and added the R .gitignore template 
+d. Clicked on Create new repository, then copied the repository URL
+
+## Cloned to a local direcotry and set up repository as an R project
+
+a. Cloned repository with RStudio to create an associated .Rproj file by navigating to File > New Project > Version Control > Git and then pasting the repository URL
+b. Staged, committed, and pushed the new .Rproj file
+
+## Prepared use of Quarto in the repository
+
+a. Added a new line for /.quarto/ to the [.gitignore](https://github.com/adyadyan/MAP-5629-Capstone/blob/main/.gitignore) to ignore temporary files generated during the rendering process and remove the line that ignores docs/
+b. Created a simple [_quarto.yml](https://github.com/adyadyan/MAP-5629-Capstone/blob/main/_quarto.yml) and [index.qmd](https://github.com/adyadyan/MAP-5629-Capstone/blob/main/index.qmd) files
+c. Staged, committed, and pushed the 2 new files and the changes to the [.gitignore](https://github.com/adyadyan/MAP-5629-Capstone/blob/main/.gitignore) file
+
+## Render html and pdf
+a. Restarted RStudio for the Build tab to appear
+b. In the build tab, selected Render Book > All Formats
+c. Staged, committed, and pushed the new docs folder  
+
+## Configure GitHub pages
+a. Navigated to Pages in the Repository settings on GitHub
+b. Selected and saved the main Branch and /docs folder as the source
+c. Refreshed the browser and copied the URL
+
+## Create a new chapter in the book
+a. Created a new quarto file called [github.qmd](https://github.com/adyadyan/MAP-5629-Capstone/blob/main/github.qmd) in the R Studio project
+b. Added the name of the new GitHub quarto file to the [_quarto.yml](https://github.com/adyadyan/MAP-5629-Capstone/blob/main/_quarto.yml) list of chapters
+c. In the build tab, selected Render Book > All Formats
+d. Staged, committed, and pushed the new [github.qmd](https://github.com/adyadyan/MAP-5629-Capstone/blob/main/github.qmd) file along with the updated /docs folder and [_quarto.yml](https://github.com/adyadyan/MAP-5629-Capstone/blob/main/_quarto.yml) file
