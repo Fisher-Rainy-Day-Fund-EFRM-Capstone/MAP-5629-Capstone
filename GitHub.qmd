@@ -13,11 +13,11 @@ format:
 ## Created a new repository on GitHub
 
 a. Logged into GitHub and clicked on the "Create new..." icon
-b. Selected "New repository" ad specified owner, name, and description
+b. Selected "New repository" and specified owner, name, and description
 c. Chose public visibility, turned on README, and added the R .gitignore template 
 d. Clicked on Create new repository, then copied the repository URL
 
-## Cloned to a local direcotry and set up repository as an R project
+## Cloned to a local directory and set up repository as an R project
 
 a. Cloned repository with RStudio to create an associated .Rproj file by navigating to File > New Project > Version Control > Git and then pasting the repository URL
 b. Staged, committed, and pushed the new .Rproj file

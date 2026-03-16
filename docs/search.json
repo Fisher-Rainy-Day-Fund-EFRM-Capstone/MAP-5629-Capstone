@@ -24,7 +24,7 @@
     "href": "github.html#created-a-new-repository-on-github",
     "title": "1  GitHub Setup",
     "section": "1.1 Created a new repository on GitHub",
-    "text": "1.1 Created a new repository on GitHub\n\nLogged into GitHub and clicked on the “Create new…” icon\nSelected “New repository” ad specified owner, name, and description\nChose public visibility, turned on README, and added the R .gitignore template\nClicked on Create new repository, then copied the repository URL",
+    "text": "1.1 Created a new repository on GitHub\n\nLogged into GitHub and clicked on the “Create new…” icon\nSelected “New repository” and specified owner, name, and description\nChose public visibility, turned on README, and added the R .gitignore template\nClicked on Create new repository, then copied the repository URL",
     "crumbs": [
       "<span class='chapter-number'>1</span>  <span class='chapter-title'>GitHub Setup</span>"
     ]
