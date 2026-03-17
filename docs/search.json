@@ -30,11 +30,11 @@
     ]
   },
   {
-    "objectID": "github.html#cloned-to-a-local-direcotry-and-set-up-repository-as-an-r-project",
-    "href": "github.html#cloned-to-a-local-direcotry-and-set-up-repository-as-an-r-project",
+    "objectID": "github.html#cloned-to-a-local-directory-and-set-up-repository-as-an-r-project",
+    "href": "github.html#cloned-to-a-local-directory-and-set-up-repository-as-an-r-project",
     "title": "1  GitHub Setup",
-    "section": "1.2 Cloned to a local direcotry and set up repository as an R project",
-    "text": "1.2 Cloned to a local direcotry and set up repository as an R project\n\nCloned repository with RStudio to create an associated .Rproj file by navigating to File &gt; New Project &gt; Version Control &gt; Git and then pasting the repository URL\nStaged, committed, and pushed the new .Rproj file",
+    "section": "1.2 Cloned to a local directory and set up repository as an R project",
+    "text": "1.2 Cloned to a local directory and set up repository as an R project\n\nCloned repository with RStudio to create an associated .Rproj file by navigating to File &gt; New Project &gt; Version Control &gt; Git and then pasting the repository URL\nStaged, committed, and pushed the new .Rproj file",
     "crumbs": [
       "<span class='chapter-number'>1</span>  <span class='chapter-title'>GitHub Setup</span>"
     ]
@@ -87,6 +87,86 @@
     "text": "1.7 Protected the main branch and required all future changes to be submitted via pull requests\n\nConfigured required use of pull requests to prevent future merge conflicts by navigating to Settings &gt; Branches &gt; Add classic branch protection rule and then specifying the branch name pattern “main” along with selecting “Require a pull request before merging”",
     "crumbs": [
       "<span class='chapter-number'>1</span>  <span class='chapter-title'>GitHub Setup</span>"
+    ]
+  },
+  {
+    "objectID": "proposal.html",
+    "href": "proposal.html",
+    "title": "2  Proposal",
+    "section": "",
+    "text": "Design and Pricing of a Fishable Days Index Derivative Incorporating Weather Risk and Regulatory Closures Using a Regime-Switching Model\nProposal Submitted Feb 2, 2026",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Proposal</span>"
+    ]
+  },
+  {
+    "objectID": "proposal.html#introduction-and-objective",
+    "href": "proposal.html#introduction-and-objective",
+    "title": "2  Proposal",
+    "section": "2.1 Introduction and Objective",
+    "text": "2.1 Introduction and Objective\nFishermen often receive low income due to other reason beyond their control. Due to weather and ocean conditions, it will not be safe to fish. Additionally, fisheries are sometimes closed deliberately to allow marine ecosystems to recover, protect breeding times, and allow stocks to replenish. While environmentally necessary, these restrictions diminish short-term fishing opportunities and income. The aim of this project is to create and cost a parametric derivative agreement that provides financial protection when fishing days are lost due to negative environmental situation and regulatory closures. The Fishable Days Index (FDI) contract counts the days in a season when fishing is legally permitted and environmentally friendly. This project creates a quantitative framework with three objectives: (1) defines the fishable days using weather, ocean, and regulatory information, (2) models the stochastic behavior of fishable and unfishable days through a regime-switching approach, and (3) prices an index-based derivative by Monte Carlo simulation. The system is based on weather derivative pricing but altered slightly to fit the operational and regulatory realities of fisheries.",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Proposal</span>"
+    ]
+  },
+  {
+    "objectID": "proposal.html#why-this-project-is-necessary",
+    "href": "proposal.html#why-this-project-is-necessary",
+    "title": "2  Proposal",
+    "section": "2.2 Why This Project Is Necessary",
+    "text": "2.2 Why This Project Is Necessary\nIncome shocks have a big impact on small fisheries. The performance of traditional indemnity insurance in this sector is not up to the mark as it becomes difficult to verify losses and claims are settled slowly and controlling moral hazard is difficult. For this reason, many fishers are not insured. Parametric and index-based products provide clear and low-cost alternatives, as payouts depend on objective indices rather than observed losses (Skees, 2008). Apart from this, fisheries management depends on environmental regulations. Fish breeding closures are necessary to ensure sufficient aquatic animal breeding in nature during specific periods. These closures are expected and desired, but they still reduce short-term fishing income. Regulatory dimensions are rarely considered in current financial risk tools.",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Proposal</span>"
+    ]
+  },
+  {
+    "objectID": "proposal.html#fishable-days-index-with-environmental-and-regulatory-constraints",
+    "href": "proposal.html#fishable-days-index-with-environmental-and-regulatory-constraints",
+    "title": "2  Proposal",
+    "section": "2.3 Fishable Days Index with Environmental and Regulatory Constraints",
+    "text": "2.3 Fishable Days Index with Environmental and Regulatory Constraints\nThe Fishable Days Index is the core of the project.",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Proposal</span>"
+    ]
+  },
+  {
+    "objectID": "proposal.html#derivative-contract-design",
+    "href": "proposal.html#derivative-contract-design",
+    "title": "2  Proposal",
+    "section": "2.4 Derivative Contract Design",
+    "text": "2.4 Derivative Contract Design\nThe project will consider a put-style derivative written on the Fishable Days Index. The contract provides compensation when fishable days fall below the expected level (Turvey, 2001).",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Proposal</span>"
+    ]
+  },
+  {
+    "objectID": "proposal.html#model-choice-regime-switching-with-regulatory-closures",
+    "href": "proposal.html#model-choice-regime-switching-with-regulatory-closures",
+    "title": "2  Proposal",
+    "section": "2.5 Model Choice: Regime-Switching with Regulatory Closures",
+    "text": "2.5 Model Choice: Regime-Switching with Regulatory Closures\nThis project will use a regime-switching model, also known as a Hidden Markov Model, to describe environmental conditions (Hardy, 2001; Frühwirth-Schnatter, 2006). This model will be combined with deterministic regulatory closures.",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Proposal</span>"
+    ]
+  },
+  {
+    "objectID": "proposal.html#data-and-implementation-plan",
+    "href": "proposal.html#data-and-implementation-plan",
+    "title": "2  Proposal",
+    "section": "2.6 Data and Implementation Plan",
+    "text": "2.6 Data and Implementation Plan\nData on wind and waves have been taken daily and are available in the public domain such as that of NOAA. Regulatory closure calendars will be sourced from fishery management agencies. The Fishable Days Index will be validated using fishing activity data, when available.",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Proposal</span>"
+    ]
+  },
+  {
+    "objectID": "proposal.html#expected-contribution",
+    "href": "proposal.html#expected-contribution",
+    "title": "2  Proposal",
+    "section": "2.7 Expected Contribution",
+    "text": "2.7 Expected Contribution\nThis project would develop a new index-based risk management framework for environmental protection policies. It aids in creating transparent and fair parametric goods for small-scale fisheries.",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Proposal</span>"
     ]
   }
 ]

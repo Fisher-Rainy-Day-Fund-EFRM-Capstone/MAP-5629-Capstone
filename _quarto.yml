@@ -10,6 +10,7 @@ book:
   chapters:
     - index.qmd
     - github.qmd
+    - proposal.qmd
     
   site-url: https://adyadyan.github.io/MAP-5629-Capstone/
   repo-url: https://github.com/adyadyan/MAP-5629-Capstone
