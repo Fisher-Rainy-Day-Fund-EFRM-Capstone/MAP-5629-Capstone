@@ -11,29 +11,25 @@ book:
     - chapters/github.qmd
     - chapters/proposal.qmd
     - chapters/test_python.qmd
-    - section: "Individual Downloads"
-        contents:
-          - text: "Browse Chapter PDFs"
-            href: standalone-pdfs/
-            icon: file-pdf
     
   site-url: https://adyadyan.github.io/MAP-5629-Capstone/
   repo-url: https://github.com/adyadyan/MAP-5629-Capstone
   repo-actions: [edit, source, issue]
   search: true
+  
   sidebar:
     style: "docked"
     search: true
     contents:
+      - index.qmd  # This is your 'Home' page
       - section: "Chapters"
         contents:
-          - index.qmd
           - chapters/github.qmd
           - chapters/proposal.qmd
           - chapters/test_python.qmd
-      - section: "Downloads"
+      - section: "Individual Downloads"
         contents:
-          - text: "Individual Chapter PDFs"
+          - text: "Browse Chapter PDFs"
             href: standalone-pdfs/
     
 format:
@@ -44,4 +40,4 @@ format:
     toc-depth: 2
     
 execute:
-  freeze: auto  # 'auto' only re-runs if the source file has changed
+  freeze: auto
