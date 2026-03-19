@@ -15,10 +15,13 @@ jobs:
       pages: write
     steps:
       - name: Check out repository
-        uses: actions/checkout@v4 # You can try v5 or v6 if available
+        uses: actions/checkout@v4
 
       - name: Set up Quarto
         uses: quarto-dev/quarto-actions/setup@v2
+
+      - name: Install TinyTeX
+        run: quarto install tinytex
 
       - name: Set up Python
         uses: actions/setup-python@v5
