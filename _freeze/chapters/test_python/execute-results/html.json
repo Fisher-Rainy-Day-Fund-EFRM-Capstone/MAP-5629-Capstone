@@ -1,0 +1,12 @@
+{
+  "hash": "f231a9c9f3acfff5c23dfa6a987c229c",
+  "result": {
+    "engine": "jupyter",
+    "markdown": "---\ntitle: \"Test Python\"\nengine: jupyter\n---\n\n\n\n\n\n\nThis chapter demonstrates running Python code using the Jupyter engine.\n\n## Steps\n\n1. Download python \n2. Set a Default Python Interpreter in RStudio\n3. Install Jupyter Kernel and the PyYAML: `pip install PyYAML`\n4. Install Jupyter Kernel: `pip install jupyter`\n5. Install libraries: `pip install numpy pandas matplotlib`\n6. Create a .qmd file: `engine: jupyter`\n\n## Python Code Chunk\n\nThe following code chunk calculates and prints a result.\n\n::: {#11ac00e7 .cell execution_count=1}\n``` {.python .cell-code}\n# Import a library and perform a calculation\nimport numpy as np\n\n# Create an array and calculate the mean\ndata = np.array([1, 2, 3, 4, 5])\ndata_mean = np.mean(data)\n\n# Print the result\nprint(f\"The mean of the data is: {data_mean}\")\n```\n\n::: {.cell-output .cell-output-stdout}\n```\nThe mean of the data is: 3.0\n```\n:::\n:::\n\n\n",
+    "supporting": [
+      "test_python_files"
+    ],
+    "filters": [],
+    "includes": {}
+  }
+}

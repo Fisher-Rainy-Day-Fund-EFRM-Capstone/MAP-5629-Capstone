@@ -46,3 +46,16 @@ po/*~
 rsconnect/
 
 /.quarto/
+
+# Quarto Output Folders
+_book/
+standalone-pdfs/
+docs/
+
+# Python Virtual Environments
+venv/
+.venv/
+env/
+
+# Jupyter Checkpoints
+.ipynb_checkpoints/
