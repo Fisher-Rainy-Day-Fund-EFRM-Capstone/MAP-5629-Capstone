@@ -3,41 +3,26 @@ project:
 
 book:
   title: "Capstone"
-  downloads: [pdf]
   author: "Team"
   date: today
+  downloads: [pdf]
   chapters:
     - index.qmd
     - chapters/github.qmd
     - chapters/proposal.qmd
     - chapters/test_python.qmd
-    
+    - chapters/downloads.qmd
+
   site-url: https://adyadyan.github.io/MAP-5629-Capstone/
   repo-url: https://github.com/adyadyan/MAP-5629-Capstone
   repo-actions: [edit, source, issue]
-  search: true
-  
-  sidebar:
-    style: "docked"
-    search: true
-    contents:
-      - index.qmd  # This is your 'Home' page
-      - section: "Chapters"
-        contents:
-          - chapters/github.qmd
-          - chapters/proposal.qmd
-          - chapters/test_python.qmd
-      - section: "Individual Downloads"
-        contents:
-          - text: "Browse Chapter PDFs"
-            href: standalone-pdfs/
-    
+
 format:
   html:
     theme: cosmo
     css: styles.css
   pdf:
     toc-depth: 2
-    
+
 execute:
   freeze: auto
