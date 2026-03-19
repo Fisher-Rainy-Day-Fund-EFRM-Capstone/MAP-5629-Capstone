@@ -1,11 +1,5 @@
 ---
 title: "Proposal"
-format:
-  pdf:
-    toc: true
-    toc-depth: 2
-    number-sections: true
-    shift-heading-level-by: -1
 ---
 
 ## Design and Pricing of a Fishable Days Index Derivative Incorporating Weather Risk and Regulatory Closures Using a Regime-Switching Model {.unnumbered}

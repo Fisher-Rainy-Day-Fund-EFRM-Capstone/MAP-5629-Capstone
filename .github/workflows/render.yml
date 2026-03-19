@@ -1,0 +1,45 @@
+name: Quarto Publish
+
+on:
+  push:
+    branches: [ main, master ]
+
+jobs:
+  build-deploy:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Quarto
+        uses: quarto-dev/quarto-actions/setup@v2
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+          cache: 'pip'
+
+      - name: Install Python Dependencies
+        run: |
+          pip install -r requirements.txt
+          # Ensure jupyter is installed for Quarto to use the jupyter engine
+          pip install jupyter
+
+      # (Optional) If you have R code, you'd add an R setup step here. 
+      # Because of 'freeze: true', the Action only needs R if you change an R file.
+
+      - name: Render Full Book (HTML and PDF)
+        run: quarto render --to all
+
+      - name: Move PDFs to Book Folder
+        run: cp -r standalone-pdfs _book/
+
+      - name: Publish to GitHub Pages
+        uses: quarto-dev/quarto-actions/publish@v2
+        with:
+          target: gh-pages
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
