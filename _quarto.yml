@@ -11,6 +11,11 @@ book:
     - chapters/github.qmd
     - chapters/proposal.qmd
     - chapters/test_python.qmd
+    - section: "Individual Downloads"
+        contents:
+          - text: "Browse Chapter PDFs"
+            href: standalone-pdfs/
+            icon: file-pdf
     
   site-url: https://adyadyan.github.io/MAP-5629-Capstone/
   repo-url: https://github.com/adyadyan/MAP-5629-Capstone
