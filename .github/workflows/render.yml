@@ -46,7 +46,7 @@ jobs:
           mkdir -p _book/standalone-pdfs
           
           # 2. Copy the rendered PDFs into that folder
-          cp -r standalone-pdfs/* _book/standalone-pdfs/
+          cp -r standalone-pdfs/chapters/*.pdf _book/standalone-pdfs/
           
           # 3. Ensure a .nojekyll file exists so GitHub doesn't hide the folder
           touch _book/.nojekyll
