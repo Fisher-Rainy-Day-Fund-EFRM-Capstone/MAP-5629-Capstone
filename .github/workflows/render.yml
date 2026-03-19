@@ -42,12 +42,21 @@ jobs:
 
       - name: Move PDFs to Book Folder
         run: |
+          # 1. Create the folder inside the web-ready directory
           mkdir -p _book/standalone-pdfs
+          
+          # 2. Copy the rendered PDFs into that folder
           cp -r standalone-pdfs/* _book/standalone-pdfs/
+          
+          # 3. Ensure a .nojekyll file exists so GitHub doesn't hide the folder
+          touch _book/.nojekyll
 
       - name: Publish to GitHub Pages
         uses: quarto-dev/quarto-actions/publish@v2
         with:
           target: gh-pages
+          # ADD THESE TWO LINES BELOW
+          render: false
+          path: _book
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
