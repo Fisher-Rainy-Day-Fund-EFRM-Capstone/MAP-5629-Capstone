@@ -44,3 +44,14 @@ d. Staged, committed, and pushed the new [github.qmd](https://github.com/adyadya
 ## Protected the main branch and required all future changes to be submitted via pull requests
 
 a. Configured required use of pull requests to prevent future merge conflicts by navigating to Settings > Branches > Add classic branch protection rule and then specifying the branch name pattern "main" along with selecting "Require a pull request before merging"
+
+## Prepare the repository to run python when engine is specified as jupyter
+
+a. Download python 
+b. Set a Default Python Interpreter in RStudio
+c. Install Jupyter Kernel and the PyYAML: `pip install PyYAML`
+d. Install Jupyter Kernel: `pip install jupyter`
+e. Install libraries: `pip install numpy pandas matplotlib`
+f. Create a test_python.qmd file: `engine: jupyter`
+
+## Set up a github action to automatically render the project's html and pdf files

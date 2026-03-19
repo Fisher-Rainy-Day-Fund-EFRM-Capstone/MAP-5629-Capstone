@@ -5,15 +5,6 @@ engine: jupyter
 
 This chapter demonstrates running Python code using the Jupyter engine.
 
-## Steps
-
-1. Download python 
-2. Set a Default Python Interpreter in RStudio
-3. Install Jupyter Kernel and the PyYAML: `pip install PyYAML`
-4. Install Jupyter Kernel: `pip install jupyter`
-5. Install libraries: `pip install numpy pandas matplotlib`
-6. Create a .qmd file: `engine: jupyter`
-
 ## Python Code Chunk
 
 The following code chunk calculates and prints a result.
