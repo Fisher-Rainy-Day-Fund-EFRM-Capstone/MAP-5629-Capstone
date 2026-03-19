@@ -198,5 +198,35 @@
     "crumbs": [
       "<span class='chapter-number'>3</span>  <span class='chapter-title'>Test Python</span>"
     ]
+  },
+  {
+    "objectID": "chapters/downloads.html",
+    "href": "chapters/downloads.html",
+    "title": "4  Downloads",
+    "section": "",
+    "text": "Downloads\nYou can download the full book or individual chapters as standalone PDF documents below.",
+    "crumbs": [
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Downloads</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/downloads.html#full-book",
+    "href": "chapters/downloads.html#full-book",
+    "title": "4  Downloads",
+    "section": "4.1 Full Book",
+    "text": "4.1 Full Book\nDownload Full Book (PDF)",
+    "crumbs": [
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Downloads</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/downloads.html#individual-chapters",
+    "href": "chapters/downloads.html#individual-chapters",
+    "title": "4  Downloads",
+    "section": "4.2 Individual Chapters",
+    "text": "4.2 Individual Chapters\nIf you only need a specific section, select a chapter below:\n\nGitHub Setup\nProject Proposal\nPython Testing\n\n\n\n\n\n\n\nNote\n\n\n\nThese standalone PDFs are automatically updated every time the team pushes new code to GitHub.",
+    "crumbs": [
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Downloads</span>"
+    ]
   }
 ]
