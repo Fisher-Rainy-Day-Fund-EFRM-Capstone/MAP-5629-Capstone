@@ -9,8 +9,9 @@ book:
   date: today
   chapters:
     - index.qmd
-    - github.qmd
-    - proposal.qmd
+    - chapters/github.qmd
+    - chapters/proposal.qmd
+    - chapters/test_python.qmd
     
   site-url: https://adyadyan.github.io/MAP-5629-Capstone/
   repo-url: https://github.com/adyadyan/MAP-5629-Capstone

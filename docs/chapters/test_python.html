@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>2&nbsp; Proposal – Capstone</title>
+<title>3&nbsp; Test Python – Capstone</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -20,26 +20,60 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
-<script src="site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="site_libs/quarto-nav/headroom.min.js"></script>
-<script src="site_libs/clipboard/clipboard.min.js"></script>
-<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="site_libs/quarto-search/fuse.min.js"></script>
-<script src="site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="./">
-<link href="./github.html" rel="prev">
-<script src="site_libs/quarto-html/quarto.js"></script>
-<script src="site_libs/quarto-html/popper.min.js"></script>
-<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="site_libs/quarto-html/anchor.min.js"></script>
-<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-2f5df379a58b258e96c21c0638c20c03.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-8da5b4427184b79ecddefad3d342027e.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<link href="../chapters/proposal.html" rel="prev">
+<script src="../site_libs/quarto-html/quarto.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-2f5df379a58b258e96c21c0638c20c03.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-8da5b4427184b79ecddefad3d342027e.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -81,7 +115,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./proposal.html"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Proposal</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../chapters/test_python.html"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Test Python</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -96,10 +130,10 @@ ul.task-list li input[type="checkbox"] {
   <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
     <div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
-      <a href="./">Capstone</a> 
+      <a href="../">Capstone</a> 
         <div class="sidebar-tools-main">
     <a href="https://github.com/adyadyan/MAP-5629-Capstone" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
-    <a href="./Capstone.pdf" title="Download PDF" class="quarto-navigation-tool px-1" aria-label="Download PDF"><i class="bi bi-file-pdf"></i></a>
+    <a href="../Capstone.pdf" title="Download PDF" class="quarto-navigation-tool px-1" aria-label="Download PDF"><i class="bi bi-file-pdf"></i></a>
 </div>
     </div>
       </div>
@@ -112,20 +146,26 @@ ul.task-list li input[type="checkbox"] {
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./index.html" class="sidebar-item-text sidebar-link">
+  <a href="../index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Introduction</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./github.html" class="sidebar-item-text sidebar-link">
+  <a href="../chapters/github.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">GitHub Setup</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./proposal.html" class="sidebar-item-text sidebar-link active">
+  <a href="../chapters/proposal.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Proposal</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/test_python.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Test Python</span></span></a>
   </div>
 </li>
     </ul>
@@ -138,23 +178,17 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#design-and-pricing-of-a-fishable-days-index-derivative-incorporating-weather-risk-and-regulatory-closures-using-a-regime-switching-model" id="toc-design-and-pricing-of-a-fishable-days-index-derivative-incorporating-weather-risk-and-regulatory-closures-using-a-regime-switching-model" class="nav-link active" data-scroll-target="#design-and-pricing-of-a-fishable-days-index-derivative-incorporating-weather-risk-and-regulatory-closures-using-a-regime-switching-model">Design and Pricing of a Fishable Days Index Derivative Incorporating Weather Risk and Regulatory Closures Using a Regime-Switching Model</a></li>
-  <li><a href="#introduction-and-objective" id="toc-introduction-and-objective" class="nav-link" data-scroll-target="#introduction-and-objective"><span class="header-section-number">2.1</span> Introduction and Objective</a></li>
-  <li><a href="#why-this-project-is-necessary" id="toc-why-this-project-is-necessary" class="nav-link" data-scroll-target="#why-this-project-is-necessary"><span class="header-section-number">2.2</span> Why This Project Is Necessary</a></li>
-  <li><a href="#fishable-days-index-with-environmental-and-regulatory-constraints" id="toc-fishable-days-index-with-environmental-and-regulatory-constraints" class="nav-link" data-scroll-target="#fishable-days-index-with-environmental-and-regulatory-constraints"><span class="header-section-number">2.3</span> Fishable Days Index with Environmental and Regulatory Constraints</a></li>
-  <li><a href="#derivative-contract-design" id="toc-derivative-contract-design" class="nav-link" data-scroll-target="#derivative-contract-design"><span class="header-section-number">2.4</span> Derivative Contract Design</a></li>
-  <li><a href="#model-choice-regime-switching-with-regulatory-closures" id="toc-model-choice-regime-switching-with-regulatory-closures" class="nav-link" data-scroll-target="#model-choice-regime-switching-with-regulatory-closures"><span class="header-section-number">2.5</span> Model Choice: Regime-Switching with Regulatory Closures</a></li>
-  <li><a href="#data-and-implementation-plan" id="toc-data-and-implementation-plan" class="nav-link" data-scroll-target="#data-and-implementation-plan"><span class="header-section-number">2.6</span> Data and Implementation Plan</a></li>
-  <li><a href="#expected-contribution" id="toc-expected-contribution" class="nav-link" data-scroll-target="#expected-contribution"><span class="header-section-number">2.7</span> Expected Contribution</a></li>
+  <li><a href="#steps" id="toc-steps" class="nav-link active" data-scroll-target="#steps"><span class="header-section-number">3.1</span> Steps</a></li>
+  <li><a href="#python-code-chunk" id="toc-python-code-chunk" class="nav-link" data-scroll-target="#python-code-chunk"><span class="header-section-number">3.2</span> Python Code Chunk</a></li>
   </ul>
-<div class="toc-actions"><ul><li><a href="https://github.com/adyadyan/MAP-5629-Capstone/edit/main/proposal.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/adyadyan/MAP-5629-Capstone/blob/main/proposal.qmd" class="toc-action"><i class="bi empty"></i>View source</a></li><li><a href="https://github.com/adyadyan/MAP-5629-Capstone/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
+<div class="toc-actions"><ul><li><a href="https://github.com/adyadyan/MAP-5629-Capstone/edit/main/chapters/test_python.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/adyadyan/MAP-5629-Capstone/blob/main/chapters/test_python.qmd" class="toc-action"><i class="bi empty"></i>View source</a></li><li><a href="https://github.com/adyadyan/MAP-5629-Capstone/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Proposal</span></h1>
+<h1 class="title"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Test Python</span></h1>
 </div>
 
 
@@ -171,37 +205,35 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<section id="design-and-pricing-of-a-fishable-days-index-derivative-incorporating-weather-risk-and-regulatory-closures-using-a-regime-switching-model" class="level2 unnumbered">
-<h2 class="unnumbered anchored" data-anchor-id="design-and-pricing-of-a-fishable-days-index-derivative-incorporating-weather-risk-and-regulatory-closures-using-a-regime-switching-model">Design and Pricing of a Fishable Days Index Derivative Incorporating Weather Risk and Regulatory Closures Using a Regime-Switching Model</h2>
-<p>Proposal Submitted Feb 2, 2026</p>
+<p>This chapter demonstrates running Python code using the Jupyter engine.</p>
+<section id="steps" class="level2" data-number="3.1">
+<h2 data-number="3.1" class="anchored" data-anchor-id="steps"><span class="header-section-number">3.1</span> Steps</h2>
+<ol type="1">
+<li>Download python</li>
+<li>Set a Default Python Interpreter in RStudio</li>
+<li>Install Jupyter Kernel and the PyYAML: <code>pip install PyYAML</code></li>
+<li>Install Jupyter Kernel: <code>pip install jupyter</code></li>
+<li>Install libraries: <code>pip install numpy pandas matplotlib</code></li>
+<li>Create a .qmd file: <code>engine: jupyter</code></li>
+</ol>
 </section>
-<section id="introduction-and-objective" class="level2" data-number="2.1">
-<h2 data-number="2.1" class="anchored" data-anchor-id="introduction-and-objective"><span class="header-section-number">2.1</span> Introduction and Objective</h2>
-<p>Fishermen often receive low income due to other reason beyond their control. Due to weather and ocean conditions, it will not be safe to fish. Additionally, fisheries are sometimes closed deliberately to allow marine ecosystems to recover, protect breeding times, and allow stocks to replenish. While environmentally necessary, these restrictions diminish short-term fishing opportunities and income. The aim of this project is to create and cost a parametric derivative agreement that provides financial protection when fishing days are lost due to negative environmental situation and regulatory closures. The Fishable Days Index (FDI) contract counts the days in a season when fishing is legally permitted and environmentally friendly. This project creates a quantitative framework with three objectives: (1) defines the fishable days using weather, ocean, and regulatory information, (2) models the stochastic behavior of fishable and unfishable days through a regime-switching approach, and (3) prices an index-based derivative by Monte Carlo simulation. The system is based on weather derivative pricing but altered slightly to fit the operational and regulatory realities of fisheries.</p>
-</section>
-<section id="why-this-project-is-necessary" class="level2" data-number="2.2">
-<h2 data-number="2.2" class="anchored" data-anchor-id="why-this-project-is-necessary"><span class="header-section-number">2.2</span> Why This Project Is Necessary</h2>
-<p>Income shocks have a big impact on small fisheries. The performance of traditional indemnity insurance in this sector is not up to the mark as it becomes difficult to verify losses and claims are settled slowly and controlling moral hazard is difficult. For this reason, many fishers are not insured. Parametric and index-based products provide clear and low-cost alternatives, as payouts depend on objective indices rather than observed losses (Skees, 2008). Apart from this, fisheries management depends on environmental regulations. Fish breeding closures are necessary to ensure sufficient aquatic animal breeding in nature during specific periods. These closures are expected and desired, but they still reduce short-term fishing income. Regulatory dimensions are rarely considered in current financial risk tools.</p>
-</section>
-<section id="fishable-days-index-with-environmental-and-regulatory-constraints" class="level2" data-number="2.3">
-<h2 data-number="2.3" class="anchored" data-anchor-id="fishable-days-index-with-environmental-and-regulatory-constraints"><span class="header-section-number">2.3</span> Fishable Days Index with Environmental and Regulatory Constraints</h2>
-<p>The Fishable Days Index is the core of the project.</p>
-</section>
-<section id="derivative-contract-design" class="level2" data-number="2.4">
-<h2 data-number="2.4" class="anchored" data-anchor-id="derivative-contract-design"><span class="header-section-number">2.4</span> Derivative Contract Design</h2>
-<p>The project will consider a put-style derivative written on the Fishable Days Index. The contract provides compensation when fishable days fall below the expected level (Turvey, 2001).</p>
-</section>
-<section id="model-choice-regime-switching-with-regulatory-closures" class="level2" data-number="2.5">
-<h2 data-number="2.5" class="anchored" data-anchor-id="model-choice-regime-switching-with-regulatory-closures"><span class="header-section-number">2.5</span> Model Choice: Regime-Switching with Regulatory Closures</h2>
-<p>This project will use a regime-switching model, also known as a Hidden Markov Model, to describe environmental conditions (Hardy, 2001; Frühwirth-Schnatter, 2006). This model will be combined with deterministic regulatory closures.</p>
-</section>
-<section id="data-and-implementation-plan" class="level2" data-number="2.6">
-<h2 data-number="2.6" class="anchored" data-anchor-id="data-and-implementation-plan"><span class="header-section-number">2.6</span> Data and Implementation Plan</h2>
-<p>Data on wind and waves have been taken daily and are available in the public domain such as that of NOAA. Regulatory closure calendars will be sourced from fishery management agencies. The Fishable Days Index will be validated using fishing activity data, when available.</p>
-</section>
-<section id="expected-contribution" class="level2" data-number="2.7">
-<h2 data-number="2.7" class="anchored" data-anchor-id="expected-contribution"><span class="header-section-number">2.7</span> Expected Contribution</h2>
-<p>This project would develop a new index-based risk management framework for environmental protection policies. It aids in creating transparent and fair parametric goods for small-scale fisheries.</p>
+<section id="python-code-chunk" class="level2" data-number="3.2">
+<h2 data-number="3.2" class="anchored" data-anchor-id="python-code-chunk"><span class="header-section-number">3.2</span> Python Code Chunk</h2>
+<p>The following code chunk calculates and prints a result.</p>
+<div id="dd8118d2" class="cell" data-execution_count="1">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Import a library and perform a calculation</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Create an array and calculate the mean</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> np.array([<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>])</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>data_mean <span class="op">=</span> np.mean(data)</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Print the result</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"The mean of the data is: </span><span class="sc">{</span>data_mean<span class="sc">}</span><span class="ss">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>The mean of the data is: 3.0</code></pre>
+</div>
+</div>
 
 
 </section>
@@ -626,8 +658,8 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./github.html" class="pagination-link" aria-label="GitHub Setup">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">GitHub Setup</span></span>
+      <a href="../chapters/proposal.html" class="pagination-link" aria-label="Proposal">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Proposal</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
@@ -638,4 +670,4 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 
 
 
-<footer class="footer"><div class="nav-footer"><div class="nav-footer-center"><div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/adyadyan/MAP-5629-Capstone/edit/main/proposal.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/adyadyan/MAP-5629-Capstone/blob/main/proposal.qmd" class="toc-action"><i class="bi empty"></i>View source</a></li><li><a href="https://github.com/adyadyan/MAP-5629-Capstone/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div></div></footer></body></html>
+<footer class="footer"><div class="nav-footer"><div class="nav-footer-center"><div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/adyadyan/MAP-5629-Capstone/edit/main/chapters/test_python.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/adyadyan/MAP-5629-Capstone/blob/main/chapters/test_python.qmd" class="toc-action"><i class="bi empty"></i>View source</a></li><li><a href="https://github.com/adyadyan/MAP-5629-Capstone/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div></div></footer></body></html>

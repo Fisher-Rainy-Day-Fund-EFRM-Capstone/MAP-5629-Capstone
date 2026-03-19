@@ -1,15 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://adyadyan.github.io/MAP-5629-Capstone/github.html</loc>
-    <lastmod>2026-03-17T17:54:03.928Z</lastmod>
+    <loc>https://adyadyan.github.io/MAP-5629-Capstone/chapters/github.html</loc>
+    <lastmod>2026-03-19T14:53:56.025Z</lastmod>
   </url>
   <url>
-    <loc>https://adyadyan.github.io/MAP-5629-Capstone/proposal.html</loc>
-    <lastmod>2026-03-17T18:41:48.191Z</lastmod>
+    <loc>https://adyadyan.github.io/MAP-5629-Capstone/chapters/proposal.html</loc>
+    <lastmod>2026-03-19T14:53:39.796Z</lastmod>
+  </url>
+  <url>
+    <loc>https://adyadyan.github.io/MAP-5629-Capstone/chapters/test_python.html</loc>
+    <lastmod>2026-03-19T14:53:48.534Z</lastmod>
   </url>
   <url>
     <loc>https://adyadyan.github.io/MAP-5629-Capstone/Capstone.pdf</loc>
-    <lastmod>2026-03-17T18:42:10.137Z</lastmod>
+    <lastmod>2026-03-19T14:58:45.670Z</lastmod>
   </url>
 </urlset>
