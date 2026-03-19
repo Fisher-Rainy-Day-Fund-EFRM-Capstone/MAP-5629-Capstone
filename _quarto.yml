@@ -1,6 +1,5 @@
 project:
   type: book
-  output-dir: docs
 
 book:
   title: "Capstone"
@@ -17,6 +16,20 @@ book:
   repo-url: https://github.com/adyadyan/MAP-5629-Capstone
   repo-actions: [edit, source, issue]
   search: true
+  sidebar:
+    style: "docked"
+    search: true
+    contents:
+      - section: "Chapters"
+        contents:
+          - index.qmd
+          - chapters/github.qmd
+          - chapters/proposal.qmd
+          - chapters/test_python.qmd
+      - section: "Downloads"
+        contents:
+          - text: "Individual Chapter PDFs"
+            href: standalone-pdfs/
     
 format:
   html:
@@ -24,3 +37,6 @@ format:
     css: styles.css
   pdf:
     toc-depth: 2
+    
+execute:
+  freeze: auto  # 'auto' only re-runs if the source file has changed

@@ -1,6 +1,6 @@
 project:
-  type: default # This overrides 'book' and treats files as independent
-  output-dir: _standalone_pdfs
+  type: default
+  output-dir: standalone-pdfs
 
 format:
   pdf:

@@ -1,0 +1,14 @@
+# Infrastructure for Quarto
+jupyter
+nbformat
+nbconvert
+
+# Data Analysis & Visualization
+pandas
+numpy
+matplotlib
+seaborn
+plotly
+
+# Optional: Add specific versions if you want to be extra safe
+# pandas==2.1.0
