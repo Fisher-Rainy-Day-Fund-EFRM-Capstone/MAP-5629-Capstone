@@ -8,10 +8,11 @@ book:
   downloads: [pdf]
   chapters:
     - index.qmd
-    - chapters/github.qmd
     - chapters/proposal.qmd
-    - chapters/test_python.qmd
+  appendices:
     - chapters/downloads.qmd
+    - chapters/github.qmd
+    - chapters/test_python.qmd
 
   site-url: https://adyadyan.github.io/MAP-5629-Capstone/
   repo-url: https://github.com/adyadyan/MAP-5629-Capstone
