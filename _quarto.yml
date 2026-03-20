@@ -1,25 +1,29 @@
 project:
   type: book
-  output-dir: docs
 
 book:
   title: "Capstone"
-  downloads: [pdf]
   author: "Team"
   date: today
+  downloads: [pdf]
   chapters:
     - index.qmd
-    - github.qmd
-    - proposal.qmd
-    
+    - chapters/proposal.qmd
+  appendices:
+    - chapters/downloads.qmd
+    - chapters/github.qmd
+    - chapters/test_python.qmd
+
   site-url: https://adyadyan.github.io/MAP-5629-Capstone/
   repo-url: https://github.com/adyadyan/MAP-5629-Capstone
   repo-actions: [edit, source, issue]
-  search: true
-    
+
 format:
   html:
     theme: cosmo
     css: styles.css
   pdf:
     toc-depth: 2
+
+execute:
+  freeze: auto

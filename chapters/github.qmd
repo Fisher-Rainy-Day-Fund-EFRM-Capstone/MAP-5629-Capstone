@@ -1,0 +1,57 @@
+---
+title: "GitHub Setup"
+---
+
+## Steps to setting up this GitHub Repository {.unnumbered}
+
+## Created a new repository on GitHub
+
+a. Logged into GitHub and clicked on the "Create new..." icon
+b. Selected "New repository" and specified owner, name, and description
+c. Chose public visibility, turned on README, and added the R .gitignore template 
+d. Clicked on Create new repository, then copied the repository URL
+
+## Cloned to a local directory and set up repository as an R project
+
+a. Cloned repository with RStudio to create an associated .Rproj file by navigating to File > New Project > Version Control > Git and then pasting the repository URL
+b. Staged, committed, and pushed the new .Rproj file
+
+## Prepared use of Quarto in the repository
+
+a. Added a new line for /.quarto/ to the [.gitignore](https://github.com/adyadyan/MAP-5629-Capstone/blob/main/.gitignore) to ignore temporary files generated during the rendering process and remove the line that ignores docs/
+b. Created a simple [_quarto.yml](https://github.com/adyadyan/MAP-5629-Capstone/blob/main/_quarto.yml) and [index.qmd](https://github.com/adyadyan/MAP-5629-Capstone/blob/main/index.qmd) files
+c. Staged, committed, and pushed the 2 new files and the changes to the [.gitignore](https://github.com/adyadyan/MAP-5629-Capstone/blob/main/.gitignore) file
+
+## Rendered html and pdf
+
+a. Restarted RStudio for the Build tab to appear
+b. In the build tab, selected Render Book > All Formats
+c. Staged, committed, and pushed the new docs folder  
+
+## Configured GitHub pages
+
+a. Navigated to Pages in the Repository settings on GitHub
+b. Selected and saved the main Branch and /docs folder as the source
+c. Refreshed the browser and copied the URL
+
+## Created a new chapter in the book
+
+a. Created a new quarto file called [github.qmd](https://github.com/adyadyan/MAP-5629-Capstone/blob/main/github.qmd) in the R Studio project
+b. Added the name of the new GitHub quarto file to the [_quarto.yml](https://github.com/adyadyan/MAP-5629-Capstone/blob/main/_quarto.yml) list of chapters
+c. In the build tab, selected Render Book > All Formats
+d. Staged, committed, and pushed the new [github.qmd](https://github.com/adyadyan/MAP-5629-Capstone/blob/main/github.qmd) file along with the updated /docs and [_quarto.yml](https://github.com/adyadyan/MAP-5629-Capstone/blob/main/_quarto.yml) file
+
+## Protected the main branch and required all future changes to be submitted via pull requests
+
+a. Configured required use of pull requests to prevent future merge conflicts by navigating to Settings > Branches > Add classic branch protection rule and then specifying the branch name pattern "main" along with selecting "Require a pull request before merging"
+
+## Prepare the repository to run python when engine is specified as jupyter
+
+a. Download python 
+b. Set a Default Python Interpreter in RStudio
+c. Install Jupyter Kernel and the PyYAML: `pip install PyYAML`
+d. Install Jupyter Kernel: `pip install jupyter`
+e. Install libraries: `pip install numpy pandas matplotlib`
+f. Create a test_python.qmd file: `engine: jupyter`
+
+## Set up a github action to automatically render the project's html and pdf files

@@ -1,0 +1,62 @@
+name: Quarto Publish
+
+on:
+  push:
+    branches: [ main, master ]
+
+env:
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+
+jobs:
+  build-deploy:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pages: write
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Quarto
+        uses: quarto-dev/quarto-actions/setup@v2
+
+      - name: Install TinyTeX
+        run: quarto install tinytex
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+          cache: 'pip'
+
+      - name: Install Python Dependencies
+        run: |
+          pip install -r requirements.txt
+          pip install jupyter
+
+      - name: Render Full Book
+        run: quarto render --to all
+
+      - name: Render Standalone Chapter PDFs
+        run: quarto render --profile individual --to pdf
+
+      - name: Move PDFs to Book Folder
+        run: |
+          # 1. Create the folder inside the web-ready directory
+          mkdir -p _book/standalone-pdfs
+          
+          # 2. Copy the rendered PDFs into that folder
+          cp -r standalone-pdfs/chapters/*.pdf _book/standalone-pdfs/
+          
+          # 3. Ensure a .nojekyll file exists so GitHub doesn't hide the folder
+          touch _book/.nojekyll
+
+      - name: Publish to GitHub Pages
+        uses: quarto-dev/quarto-actions/publish@v2
+        with:
+          target: gh-pages
+          # ADD THESE TWO LINES BELOW
+          render: false
+          path: _book
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

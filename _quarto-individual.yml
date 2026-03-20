@@ -1,0 +1,15 @@
+project:
+  type: default
+  output-dir: standalone-pdfs
+
+format:
+  pdf:
+     toc: true
+     toc-depth: 2
+     number-sections: true
+     shift-heading-level-by: -1
+     header-includes: |
+      \let\oldtableofcontents\tableofcontents
+      \renewcommand{\tableofcontents}{\oldtableofcontents\clearpage}
+      
+# quarto render --profile individual --to pdf

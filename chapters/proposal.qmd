@@ -1,0 +1,35 @@
+---
+title: "Proposal"
+---
+
+## Design and Pricing of a Fishable Days Index Derivative Incorporating Weather Risk and Regulatory Closures Using a Regime-Switching Model {.unnumbered}
+
+Proposal Submitted Feb 2, 2026 
+
+## Introduction and Objective
+
+Fishermen often receive low income due to other reason beyond their control. Due to weather and ocean conditions, it will not be safe to fish. Additionally, fisheries are sometimes closed deliberately to allow marine ecosystems to recover, protect breeding times, and allow stocks to replenish. While environmentally necessary, these restrictions diminish short-term fishing opportunities and income. The aim of this project is to create and cost a parametric derivative agreement that provides financial protection when fishing days are lost due to negative environmental situation and regulatory closures. The Fishable Days Index (FDI) contract counts the days in a season when fishing is legally permitted and environmentally friendly. This project creates a quantitative framework with three objectives: (1) defines the fishable days using weather, ocean, and regulatory information, (2) models the stochastic behavior of fishable and unfishable days through a regime-switching approach, and (3) prices an index-based derivative by Monte Carlo simulation. The system is based on weather derivative pricing but altered slightly to fit the operational and regulatory realities of fisheries.
+
+## Why This Project Is Necessary
+
+Income shocks have a big impact on small fisheries. The performance of traditional indemnity insurance in this sector is not up to the mark as it becomes difficult to verify losses and claims are settled slowly and controlling moral hazard is difficult. For this reason, many fishers are not insured. Parametric and index-based products provide clear and low-cost alternatives, as payouts depend on objective indices rather than observed losses (Skees, 2008). Apart from this, fisheries management depends on environmental regulations. Fish breeding closures are necessary to ensure sufficient aquatic animal breeding in nature during specific periods. These closures are expected and desired, but they still reduce short-term fishing income. Regulatory dimensions are rarely considered in current financial risk tools.
+
+## Fishable Days Index with Environmental and Regulatory Constraints
+
+The Fishable Days Index is the core of the project.
+
+## Derivative Contract Design
+
+The project will consider a put-style derivative written on the Fishable Days Index. The contract provides compensation when fishable days fall below the expected level (Turvey, 2001).
+
+## Model Choice: Regime-Switching with Regulatory Closures
+
+This project will use a regime-switching model, also known as a Hidden Markov Model, to describe environmental conditions (Hardy, 2001; Frühwirth-Schnatter, 2006). This model will be combined with deterministic regulatory closures.
+
+## Data and Implementation Plan
+
+Data on wind and waves have been taken daily and are available in the public domain such as that of NOAA. Regulatory closure calendars will be sourced from fishery management agencies. The Fishable Days Index will be validated using fishing activity data, when available.
+
+## Expected Contribution
+
+This project would develop a new index-based risk management framework for environmental protection policies. It aids in creating transparent and fair parametric goods for small-scale fisheries.
