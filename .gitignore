@@ -51,6 +51,8 @@ rsconnect/
 _book/
 standalone-pdfs/
 docs/
+README.html
+README_Files/
 
 # Python Virtual Environments
 venv/
