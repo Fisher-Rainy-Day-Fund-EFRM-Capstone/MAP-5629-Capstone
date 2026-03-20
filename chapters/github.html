@@ -161,6 +161,8 @@ ul.task-list li input[type="checkbox"] {
   <li><a href="#configured-github-pages" id="toc-configured-github-pages" class="nav-link" data-scroll-target="#configured-github-pages"><span class="header-section-number">1.5</span> Configured GitHub pages</a></li>
   <li><a href="#created-a-new-chapter-in-the-book" id="toc-created-a-new-chapter-in-the-book" class="nav-link" data-scroll-target="#created-a-new-chapter-in-the-book"><span class="header-section-number">1.6</span> Created a new chapter in the book</a></li>
   <li><a href="#protected-the-main-branch-and-required-all-future-changes-to-be-submitted-via-pull-requests" id="toc-protected-the-main-branch-and-required-all-future-changes-to-be-submitted-via-pull-requests" class="nav-link" data-scroll-target="#protected-the-main-branch-and-required-all-future-changes-to-be-submitted-via-pull-requests"><span class="header-section-number">1.7</span> Protected the main branch and required all future changes to be submitted via pull requests</a></li>
+  <li><a href="#prepare-the-repository-to-run-python-when-engine-is-specified-as-jupyter" id="toc-prepare-the-repository-to-run-python-when-engine-is-specified-as-jupyter" class="nav-link" data-scroll-target="#prepare-the-repository-to-run-python-when-engine-is-specified-as-jupyter"><span class="header-section-number">1.8</span> Prepare the repository to run python when engine is specified as jupyter</a></li>
+  <li><a href="#set-up-a-github-action-to-automatically-render-the-projects-html-and-pdf-files" id="toc-set-up-a-github-action-to-automatically-render-the-projects-html-and-pdf-files" class="nav-link" data-scroll-target="#set-up-a-github-action-to-automatically-render-the-projects-html-and-pdf-files"><span class="header-section-number">1.9</span> Set up a github action to automatically render the project’s html and pdf files</a></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/adyadyan/MAP-5629-Capstone/edit/main/chapters/github.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/adyadyan/MAP-5629-Capstone/blob/main/chapters/github.qmd" class="toc-action"><i class="bi empty"></i>View source</a></li><li><a href="https://github.com/adyadyan/MAP-5629-Capstone/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
     </div>
@@ -243,6 +245,20 @@ ul.task-list li input[type="checkbox"] {
 <ol type="a">
 <li>Configured required use of pull requests to prevent future merge conflicts by navigating to Settings &gt; Branches &gt; Add classic branch protection rule and then specifying the branch name pattern “main” along with selecting “Require a pull request before merging”</li>
 </ol>
+</section>
+<section id="prepare-the-repository-to-run-python-when-engine-is-specified-as-jupyter" class="level2" data-number="1.8">
+<h2 data-number="1.8" class="anchored" data-anchor-id="prepare-the-repository-to-run-python-when-engine-is-specified-as-jupyter"><span class="header-section-number">1.8</span> Prepare the repository to run python when engine is specified as jupyter</h2>
+<ol type="a">
+<li>Download python</li>
+<li>Set a Default Python Interpreter in RStudio</li>
+<li>Install Jupyter Kernel and the PyYAML: <code>pip install PyYAML</code></li>
+<li>Install Jupyter Kernel: <code>pip install jupyter</code></li>
+<li>Install libraries: <code>pip install numpy pandas matplotlib</code></li>
+<li>Create a test_python.qmd file: <code>engine: jupyter</code></li>
+</ol>
+</section>
+<section id="set-up-a-github-action-to-automatically-render-the-projects-html-and-pdf-files" class="level2" data-number="1.9">
+<h2 data-number="1.9" class="anchored" data-anchor-id="set-up-a-github-action-to-automatically-render-the-projects-html-and-pdf-files"><span class="header-section-number">1.9</span> Set up a github action to automatically render the project’s html and pdf files</h2>
 
 
 </section>

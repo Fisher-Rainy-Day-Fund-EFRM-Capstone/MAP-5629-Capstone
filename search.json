@@ -90,6 +90,26 @@
     ]
   },
   {
+    "objectID": "chapters/github.html#prepare-the-repository-to-run-python-when-engine-is-specified-as-jupyter",
+    "href": "chapters/github.html#prepare-the-repository-to-run-python-when-engine-is-specified-as-jupyter",
+    "title": "1  GitHub Setup",
+    "section": "1.8 Prepare the repository to run python when engine is specified as jupyter",
+    "text": "1.8 Prepare the repository to run python when engine is specified as jupyter\n\nDownload python\nSet a Default Python Interpreter in RStudio\nInstall Jupyter Kernel and the PyYAML: pip install PyYAML\nInstall Jupyter Kernel: pip install jupyter\nInstall libraries: pip install numpy pandas matplotlib\nCreate a test_python.qmd file: engine: jupyter",
+    "crumbs": [
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>GitHub Setup</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/github.html#set-up-a-github-action-to-automatically-render-the-projects-html-and-pdf-files",
+    "href": "chapters/github.html#set-up-a-github-action-to-automatically-render-the-projects-html-and-pdf-files",
+    "title": "1  GitHub Setup",
+    "section": "1.9 Set up a github action to automatically render the project’s html and pdf files",
+    "text": "1.9 Set up a github action to automatically render the project’s html and pdf files",
+    "crumbs": [
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>GitHub Setup</span>"
+    ]
+  },
+  {
     "objectID": "chapters/proposal.html",
     "href": "chapters/proposal.html",
     "title": "2  Proposal",
@@ -174,27 +194,7 @@
     "href": "chapters/test_python.html",
     "title": "3  Test Python",
     "section": "",
-    "text": "3.1 Steps\nThis chapter demonstrates running Python code using the Jupyter engine.",
-    "crumbs": [
-      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Test Python</span>"
-    ]
-  },
-  {
-    "objectID": "chapters/test_python.html#steps",
-    "href": "chapters/test_python.html#steps",
-    "title": "3  Test Python",
-    "section": "",
-    "text": "Download python\nSet a Default Python Interpreter in RStudio\nInstall Jupyter Kernel and the PyYAML: pip install PyYAML\nInstall Jupyter Kernel: pip install jupyter\nInstall libraries: pip install numpy pandas matplotlib\nCreate a .qmd file: engine: jupyter",
-    "crumbs": [
-      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Test Python</span>"
-    ]
-  },
-  {
-    "objectID": "chapters/test_python.html#python-code-chunk",
-    "href": "chapters/test_python.html#python-code-chunk",
-    "title": "3  Test Python",
-    "section": "3.2 Python Code Chunk",
-    "text": "3.2 Python Code Chunk\nThe following code chunk calculates and prints a result.\n\n# Import a library and perform a calculation\nimport numpy as np\n\n# Create an array and calculate the mean\ndata = np.array([1, 2, 3, 4, 5])\ndata_mean = np.mean(data)\n\n# Print the result\nprint(f\"The mean of the data is: {data_mean}\")\n\nThe mean of the data is: 3.0",
+    "text": "3.1 Python Code Chunk\nThis chapter demonstrates running Python code using the Jupyter engine.\nThe following code chunk calculates and prints a result.\n# Import a library and perform a calculation\nimport numpy as np\n\n# Create an array and calculate the mean\ndata = np.array([1, 2, 3, 4, 5])\ndata_mean = np.mean(data)\n\n# Print the result\nprint(f\"The mean of the data is: {data_mean}\")\n\nThe mean of the data is: 3.0",
     "crumbs": [
       "<span class='chapter-number'>3</span>  <span class='chapter-title'>Test Python</span>"
     ]
