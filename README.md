@@ -1,12 +1,7 @@
----
-title: "Project Overview: MAP-5629 Capstone"
----
 
-::: {.column-screen .bg-primary .text-white .p-5 .mb-5}
-# Welcome to the Rainy Day Fund Analysis
-This project explores the design and pricing of a Fish-able Days Index Derivative.
+# Project Overview: MAP-5629 Capstone
 
-:::
+Welcome to the Rainy Day Fund Analysis. This project explores the design and pricing of a fish-able days index derivative.
 
 ## Executive Summary
 
@@ -21,4 +16,4 @@ Veronica Prelaz, Tanvir Hossain,and Adyan Rios are graduate students at FIU work
 * **Automated Documentation:** Rendering HTML and PDFs via GitHub Actions.
 * **Collaborative research:** Documenting our journey building a reproducible and collaborative research pipeline.
 
-[Lern more in the Project Proposal](../chapters/proposal.qmd){.btn .btn-outline-primary .btn-lg role="button"}
+[Lern more in the Project Proposal](../chapters/proposal.qmd)
