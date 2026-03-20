@@ -10,223 +10,237 @@
     ]
   },
   {
-    "objectID": "chapters/github.html",
-    "href": "chapters/github.html",
-    "title": "1  GitHub Setup",
-    "section": "",
-    "text": "Steps to setting up this GitHub Repository",
-    "crumbs": [
-      "<span class='chapter-number'>1</span>  <span class='chapter-title'>GitHub Setup</span>"
-    ]
-  },
-  {
-    "objectID": "chapters/github.html#created-a-new-repository-on-github",
-    "href": "chapters/github.html#created-a-new-repository-on-github",
-    "title": "1  GitHub Setup",
-    "section": "1.1 Created a new repository on GitHub",
-    "text": "1.1 Created a new repository on GitHub\n\nLogged into GitHub and clicked on the “Create new…” icon\nSelected “New repository” and specified owner, name, and description\nChose public visibility, turned on README, and added the R .gitignore template\nClicked on Create new repository, then copied the repository URL",
-    "crumbs": [
-      "<span class='chapter-number'>1</span>  <span class='chapter-title'>GitHub Setup</span>"
-    ]
-  },
-  {
-    "objectID": "chapters/github.html#cloned-to-a-local-directory-and-set-up-repository-as-an-r-project",
-    "href": "chapters/github.html#cloned-to-a-local-directory-and-set-up-repository-as-an-r-project",
-    "title": "1  GitHub Setup",
-    "section": "1.2 Cloned to a local directory and set up repository as an R project",
-    "text": "1.2 Cloned to a local directory and set up repository as an R project\n\nCloned repository with RStudio to create an associated .Rproj file by navigating to File &gt; New Project &gt; Version Control &gt; Git and then pasting the repository URL\nStaged, committed, and pushed the new .Rproj file",
-    "crumbs": [
-      "<span class='chapter-number'>1</span>  <span class='chapter-title'>GitHub Setup</span>"
-    ]
-  },
-  {
-    "objectID": "chapters/github.html#prepared-use-of-quarto-in-the-repository",
-    "href": "chapters/github.html#prepared-use-of-quarto-in-the-repository",
-    "title": "1  GitHub Setup",
-    "section": "1.3 Prepared use of Quarto in the repository",
-    "text": "1.3 Prepared use of Quarto in the repository\n\nAdded a new line for /.quarto/ to the .gitignore to ignore temporary files generated during the rendering process and remove the line that ignores docs/\nCreated a simple _quarto.yml and index.qmd files\nStaged, committed, and pushed the 2 new files and the changes to the .gitignore file",
-    "crumbs": [
-      "<span class='chapter-number'>1</span>  <span class='chapter-title'>GitHub Setup</span>"
-    ]
-  },
-  {
-    "objectID": "chapters/github.html#rendered-html-and-pdf",
-    "href": "chapters/github.html#rendered-html-and-pdf",
-    "title": "1  GitHub Setup",
-    "section": "1.4 Rendered html and pdf",
-    "text": "1.4 Rendered html and pdf\n\nRestarted RStudio for the Build tab to appear\nIn the build tab, selected Render Book &gt; All Formats\nStaged, committed, and pushed the new docs folder",
-    "crumbs": [
-      "<span class='chapter-number'>1</span>  <span class='chapter-title'>GitHub Setup</span>"
-    ]
-  },
-  {
-    "objectID": "chapters/github.html#configured-github-pages",
-    "href": "chapters/github.html#configured-github-pages",
-    "title": "1  GitHub Setup",
-    "section": "1.5 Configured GitHub pages",
-    "text": "1.5 Configured GitHub pages\n\nNavigated to Pages in the Repository settings on GitHub\nSelected and saved the main Branch and /docs folder as the source\nRefreshed the browser and copied the URL",
-    "crumbs": [
-      "<span class='chapter-number'>1</span>  <span class='chapter-title'>GitHub Setup</span>"
-    ]
-  },
-  {
-    "objectID": "chapters/github.html#created-a-new-chapter-in-the-book",
-    "href": "chapters/github.html#created-a-new-chapter-in-the-book",
-    "title": "1  GitHub Setup",
-    "section": "1.6 Created a new chapter in the book",
-    "text": "1.6 Created a new chapter in the book\n\nCreated a new quarto file called github.qmd in the R Studio project\nAdded the name of the new GitHub quarto file to the _quarto.yml list of chapters\nIn the build tab, selected Render Book &gt; All Formats\nStaged, committed, and pushed the new github.qmd file along with the updated /docs and _quarto.yml file",
-    "crumbs": [
-      "<span class='chapter-number'>1</span>  <span class='chapter-title'>GitHub Setup</span>"
-    ]
-  },
-  {
-    "objectID": "chapters/github.html#protected-the-main-branch-and-required-all-future-changes-to-be-submitted-via-pull-requests",
-    "href": "chapters/github.html#protected-the-main-branch-and-required-all-future-changes-to-be-submitted-via-pull-requests",
-    "title": "1  GitHub Setup",
-    "section": "1.7 Protected the main branch and required all future changes to be submitted via pull requests",
-    "text": "1.7 Protected the main branch and required all future changes to be submitted via pull requests\n\nConfigured required use of pull requests to prevent future merge conflicts by navigating to Settings &gt; Branches &gt; Add classic branch protection rule and then specifying the branch name pattern “main” along with selecting “Require a pull request before merging”",
-    "crumbs": [
-      "<span class='chapter-number'>1</span>  <span class='chapter-title'>GitHub Setup</span>"
-    ]
-  },
-  {
-    "objectID": "chapters/github.html#prepare-the-repository-to-run-python-when-engine-is-specified-as-jupyter",
-    "href": "chapters/github.html#prepare-the-repository-to-run-python-when-engine-is-specified-as-jupyter",
-    "title": "1  GitHub Setup",
-    "section": "1.8 Prepare the repository to run python when engine is specified as jupyter",
-    "text": "1.8 Prepare the repository to run python when engine is specified as jupyter\n\nDownload python\nSet a Default Python Interpreter in RStudio\nInstall Jupyter Kernel and the PyYAML: pip install PyYAML\nInstall Jupyter Kernel: pip install jupyter\nInstall libraries: pip install numpy pandas matplotlib\nCreate a test_python.qmd file: engine: jupyter",
-    "crumbs": [
-      "<span class='chapter-number'>1</span>  <span class='chapter-title'>GitHub Setup</span>"
-    ]
-  },
-  {
-    "objectID": "chapters/github.html#set-up-a-github-action-to-automatically-render-the-projects-html-and-pdf-files",
-    "href": "chapters/github.html#set-up-a-github-action-to-automatically-render-the-projects-html-and-pdf-files",
-    "title": "1  GitHub Setup",
-    "section": "1.9 Set up a github action to automatically render the project’s html and pdf files",
-    "text": "1.9 Set up a github action to automatically render the project’s html and pdf files",
-    "crumbs": [
-      "<span class='chapter-number'>1</span>  <span class='chapter-title'>GitHub Setup</span>"
-    ]
-  },
-  {
     "objectID": "chapters/proposal.html",
     "href": "chapters/proposal.html",
-    "title": "2  Proposal",
+    "title": "1  Proposal",
     "section": "",
     "text": "Design and Pricing of a Fishable Days Index Derivative Incorporating Weather Risk and Regulatory Closures Using a Regime-Switching Model\nProposal Submitted Feb 2, 2026",
     "crumbs": [
-      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Proposal</span>"
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Proposal</span>"
     ]
   },
   {
     "objectID": "chapters/proposal.html#introduction-and-objective",
     "href": "chapters/proposal.html#introduction-and-objective",
-    "title": "2  Proposal",
-    "section": "2.1 Introduction and Objective",
-    "text": "2.1 Introduction and Objective\nFishermen often receive low income due to other reason beyond their control. Due to weather and ocean conditions, it will not be safe to fish. Additionally, fisheries are sometimes closed deliberately to allow marine ecosystems to recover, protect breeding times, and allow stocks to replenish. While environmentally necessary, these restrictions diminish short-term fishing opportunities and income. The aim of this project is to create and cost a parametric derivative agreement that provides financial protection when fishing days are lost due to negative environmental situation and regulatory closures. The Fishable Days Index (FDI) contract counts the days in a season when fishing is legally permitted and environmentally friendly. This project creates a quantitative framework with three objectives: (1) defines the fishable days using weather, ocean, and regulatory information, (2) models the stochastic behavior of fishable and unfishable days through a regime-switching approach, and (3) prices an index-based derivative by Monte Carlo simulation. The system is based on weather derivative pricing but altered slightly to fit the operational and regulatory realities of fisheries.",
+    "title": "1  Proposal",
+    "section": "1.1 Introduction and Objective",
+    "text": "1.1 Introduction and Objective\nFishermen often receive low income due to other reason beyond their control. Due to weather and ocean conditions, it will not be safe to fish. Additionally, fisheries are sometimes closed deliberately to allow marine ecosystems to recover, protect breeding times, and allow stocks to replenish. While environmentally necessary, these restrictions diminish short-term fishing opportunities and income. The aim of this project is to create and cost a parametric derivative agreement that provides financial protection when fishing days are lost due to negative environmental situation and regulatory closures. The Fishable Days Index (FDI) contract counts the days in a season when fishing is legally permitted and environmentally friendly. This project creates a quantitative framework with three objectives: (1) defines the fishable days using weather, ocean, and regulatory information, (2) models the stochastic behavior of fishable and unfishable days through a regime-switching approach, and (3) prices an index-based derivative by Monte Carlo simulation. The system is based on weather derivative pricing but altered slightly to fit the operational and regulatory realities of fisheries.",
     "crumbs": [
-      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Proposal</span>"
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Proposal</span>"
     ]
   },
   {
     "objectID": "chapters/proposal.html#why-this-project-is-necessary",
     "href": "chapters/proposal.html#why-this-project-is-necessary",
-    "title": "2  Proposal",
-    "section": "2.2 Why This Project Is Necessary",
-    "text": "2.2 Why This Project Is Necessary\nIncome shocks have a big impact on small fisheries. The performance of traditional indemnity insurance in this sector is not up to the mark as it becomes difficult to verify losses and claims are settled slowly and controlling moral hazard is difficult. For this reason, many fishers are not insured. Parametric and index-based products provide clear and low-cost alternatives, as payouts depend on objective indices rather than observed losses (Skees, 2008). Apart from this, fisheries management depends on environmental regulations. Fish breeding closures are necessary to ensure sufficient aquatic animal breeding in nature during specific periods. These closures are expected and desired, but they still reduce short-term fishing income. Regulatory dimensions are rarely considered in current financial risk tools.",
+    "title": "1  Proposal",
+    "section": "1.2 Why This Project Is Necessary",
+    "text": "1.2 Why This Project Is Necessary\nIncome shocks have a big impact on small fisheries. The performance of traditional indemnity insurance in this sector is not up to the mark as it becomes difficult to verify losses and claims are settled slowly and controlling moral hazard is difficult. For this reason, many fishers are not insured. Parametric and index-based products provide clear and low-cost alternatives, as payouts depend on objective indices rather than observed losses (Skees, 2008). Apart from this, fisheries management depends on environmental regulations. Fish breeding closures are necessary to ensure sufficient aquatic animal breeding in nature during specific periods. These closures are expected and desired, but they still reduce short-term fishing income. Regulatory dimensions are rarely considered in current financial risk tools.",
     "crumbs": [
-      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Proposal</span>"
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Proposal</span>"
     ]
   },
   {
     "objectID": "chapters/proposal.html#fishable-days-index-with-environmental-and-regulatory-constraints",
     "href": "chapters/proposal.html#fishable-days-index-with-environmental-and-regulatory-constraints",
-    "title": "2  Proposal",
-    "section": "2.3 Fishable Days Index with Environmental and Regulatory Constraints",
-    "text": "2.3 Fishable Days Index with Environmental and Regulatory Constraints\nThe Fishable Days Index is the core of the project.",
+    "title": "1  Proposal",
+    "section": "1.3 Fishable Days Index with Environmental and Regulatory Constraints",
+    "text": "1.3 Fishable Days Index with Environmental and Regulatory Constraints\nThe Fishable Days Index is the core of the project.",
     "crumbs": [
-      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Proposal</span>"
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Proposal</span>"
     ]
   },
   {
     "objectID": "chapters/proposal.html#derivative-contract-design",
     "href": "chapters/proposal.html#derivative-contract-design",
-    "title": "2  Proposal",
-    "section": "2.4 Derivative Contract Design",
-    "text": "2.4 Derivative Contract Design\nThe project will consider a put-style derivative written on the Fishable Days Index. The contract provides compensation when fishable days fall below the expected level (Turvey, 2001).",
+    "title": "1  Proposal",
+    "section": "1.4 Derivative Contract Design",
+    "text": "1.4 Derivative Contract Design\nThe project will consider a put-style derivative written on the Fishable Days Index. The contract provides compensation when fishable days fall below the expected level (Turvey, 2001).",
     "crumbs": [
-      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Proposal</span>"
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Proposal</span>"
     ]
   },
   {
     "objectID": "chapters/proposal.html#model-choice-regime-switching-with-regulatory-closures",
     "href": "chapters/proposal.html#model-choice-regime-switching-with-regulatory-closures",
-    "title": "2  Proposal",
-    "section": "2.5 Model Choice: Regime-Switching with Regulatory Closures",
-    "text": "2.5 Model Choice: Regime-Switching with Regulatory Closures\nThis project will use a regime-switching model, also known as a Hidden Markov Model, to describe environmental conditions (Hardy, 2001; Frühwirth-Schnatter, 2006). This model will be combined with deterministic regulatory closures.",
+    "title": "1  Proposal",
+    "section": "1.5 Model Choice: Regime-Switching with Regulatory Closures",
+    "text": "1.5 Model Choice: Regime-Switching with Regulatory Closures\nThis project will use a regime-switching model, also known as a Hidden Markov Model, to describe environmental conditions (Hardy, 2001; Frühwirth-Schnatter, 2006). This model will be combined with deterministic regulatory closures.",
     "crumbs": [
-      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Proposal</span>"
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Proposal</span>"
     ]
   },
   {
     "objectID": "chapters/proposal.html#data-and-implementation-plan",
     "href": "chapters/proposal.html#data-and-implementation-plan",
-    "title": "2  Proposal",
-    "section": "2.6 Data and Implementation Plan",
-    "text": "2.6 Data and Implementation Plan\nData on wind and waves have been taken daily and are available in the public domain such as that of NOAA. Regulatory closure calendars will be sourced from fishery management agencies. The Fishable Days Index will be validated using fishing activity data, when available.",
+    "title": "1  Proposal",
+    "section": "1.6 Data and Implementation Plan",
+    "text": "1.6 Data and Implementation Plan\nData on wind and waves have been taken daily and are available in the public domain such as that of NOAA. Regulatory closure calendars will be sourced from fishery management agencies. The Fishable Days Index will be validated using fishing activity data, when available.",
     "crumbs": [
-      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Proposal</span>"
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Proposal</span>"
     ]
   },
   {
     "objectID": "chapters/proposal.html#expected-contribution",
     "href": "chapters/proposal.html#expected-contribution",
-    "title": "2  Proposal",
-    "section": "2.7 Expected Contribution",
-    "text": "2.7 Expected Contribution\nThis project would develop a new index-based risk management framework for environmental protection policies. It aids in creating transparent and fair parametric goods for small-scale fisheries.",
+    "title": "1  Proposal",
+    "section": "1.7 Expected Contribution",
+    "text": "1.7 Expected Contribution\nThis project would develop a new index-based risk management framework for environmental protection policies. It aids in creating transparent and fair parametric goods for small-scale fisheries.",
     "crumbs": [
-      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Proposal</span>"
-    ]
-  },
-  {
-    "objectID": "chapters/test_python.html",
-    "href": "chapters/test_python.html",
-    "title": "3  Test Python",
-    "section": "",
-    "text": "3.1 Python Code Chunk\nThis chapter demonstrates running Python code using the Jupyter engine.\nThe following code chunk calculates and prints a result.\n# Import a library and perform a calculation\nimport numpy as np\n\n# Create an array and calculate the mean\ndata = np.array([1, 2, 3, 4, 5])\ndata_mean = np.mean(data)\n\n# Print the result\nprint(f\"The mean of the data is: {data_mean}\")\n\nThe mean of the data is: 3.0",
-    "crumbs": [
-      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Test Python</span>"
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Proposal</span>"
     ]
   },
   {
     "objectID": "chapters/downloads.html",
     "href": "chapters/downloads.html",
-    "title": "4  Downloads",
+    "title": "Appendix A — Downloads",
     "section": "",
     "text": "Downloads\nYou can download the full book or individual chapters as standalone PDF documents below.",
     "crumbs": [
-      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Downloads</span>"
+      "Appendices",
+      "<span class='chapter-number'>A</span>  <span class='chapter-title'>Downloads</span>"
     ]
   },
   {
     "objectID": "chapters/downloads.html#full-book",
     "href": "chapters/downloads.html#full-book",
-    "title": "4  Downloads",
-    "section": "4.1 Full Book",
-    "text": "4.1 Full Book\nDownload Full Book (PDF)",
+    "title": "Appendix A — Downloads",
+    "section": "A.1 Full Book",
+    "text": "A.1 Full Book\nDownload Full Book (PDF)",
     "crumbs": [
-      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Downloads</span>"
+      "Appendices",
+      "<span class='chapter-number'>A</span>  <span class='chapter-title'>Downloads</span>"
     ]
   },
   {
     "objectID": "chapters/downloads.html#individual-chapters",
     "href": "chapters/downloads.html#individual-chapters",
-    "title": "4  Downloads",
-    "section": "4.2 Individual Chapters",
-    "text": "4.2 Individual Chapters\nIf you only need a specific section, select a chapter below:\n\nGitHub Setup\nProject Proposal\nPython Testing\n\n\n\n\n\n\n\nNote\n\n\n\nThese standalone PDFs are automatically updated every time the team pushes new code to GitHub.",
+    "title": "Appendix A — Downloads",
+    "section": "A.2 Individual Chapters",
+    "text": "A.2 Individual Chapters\nIf you only need a specific section, select a chapter below:\n\nGitHub Setup\nProject Proposal\nPython Testing\n\n\n\n\n\n\n\nNote\n\n\n\nThese standalone PDFs are automatically updated every time the team pushes new code to GitHub.",
     "crumbs": [
-      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Downloads</span>"
+      "Appendices",
+      "<span class='chapter-number'>A</span>  <span class='chapter-title'>Downloads</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/github.html",
+    "href": "chapters/github.html",
+    "title": "Appendix B — GitHub Setup",
+    "section": "",
+    "text": "Steps to setting up this GitHub Repository",
+    "crumbs": [
+      "Appendices",
+      "<span class='chapter-number'>B</span>  <span class='chapter-title'>GitHub Setup</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/github.html#created-a-new-repository-on-github",
+    "href": "chapters/github.html#created-a-new-repository-on-github",
+    "title": "Appendix B — GitHub Setup",
+    "section": "B.1 Created a new repository on GitHub",
+    "text": "B.1 Created a new repository on GitHub\n\nLogged into GitHub and clicked on the “Create new…” icon\nSelected “New repository” and specified owner, name, and description\nChose public visibility, turned on README, and added the R .gitignore template\nClicked on Create new repository, then copied the repository URL",
+    "crumbs": [
+      "Appendices",
+      "<span class='chapter-number'>B</span>  <span class='chapter-title'>GitHub Setup</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/github.html#cloned-to-a-local-directory-and-set-up-repository-as-an-r-project",
+    "href": "chapters/github.html#cloned-to-a-local-directory-and-set-up-repository-as-an-r-project",
+    "title": "Appendix B — GitHub Setup",
+    "section": "B.2 Cloned to a local directory and set up repository as an R project",
+    "text": "B.2 Cloned to a local directory and set up repository as an R project\n\nCloned repository with RStudio to create an associated .Rproj file by navigating to File &gt; New Project &gt; Version Control &gt; Git and then pasting the repository URL\nStaged, committed, and pushed the new .Rproj file",
+    "crumbs": [
+      "Appendices",
+      "<span class='chapter-number'>B</span>  <span class='chapter-title'>GitHub Setup</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/github.html#prepared-use-of-quarto-in-the-repository",
+    "href": "chapters/github.html#prepared-use-of-quarto-in-the-repository",
+    "title": "Appendix B — GitHub Setup",
+    "section": "B.3 Prepared use of Quarto in the repository",
+    "text": "B.3 Prepared use of Quarto in the repository\n\nAdded a new line for /.quarto/ to the .gitignore to ignore temporary files generated during the rendering process and remove the line that ignores docs/\nCreated a simple _quarto.yml and index.qmd files\nStaged, committed, and pushed the 2 new files and the changes to the .gitignore file",
+    "crumbs": [
+      "Appendices",
+      "<span class='chapter-number'>B</span>  <span class='chapter-title'>GitHub Setup</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/github.html#rendered-html-and-pdf",
+    "href": "chapters/github.html#rendered-html-and-pdf",
+    "title": "Appendix B — GitHub Setup",
+    "section": "B.4 Rendered html and pdf",
+    "text": "B.4 Rendered html and pdf\n\nRestarted RStudio for the Build tab to appear\nIn the build tab, selected Render Book &gt; All Formats\nStaged, committed, and pushed the new docs folder",
+    "crumbs": [
+      "Appendices",
+      "<span class='chapter-number'>B</span>  <span class='chapter-title'>GitHub Setup</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/github.html#configured-github-pages",
+    "href": "chapters/github.html#configured-github-pages",
+    "title": "Appendix B — GitHub Setup",
+    "section": "B.5 Configured GitHub pages",
+    "text": "B.5 Configured GitHub pages\n\nNavigated to Pages in the Repository settings on GitHub\nSelected and saved the main Branch and /docs folder as the source\nRefreshed the browser and copied the URL",
+    "crumbs": [
+      "Appendices",
+      "<span class='chapter-number'>B</span>  <span class='chapter-title'>GitHub Setup</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/github.html#created-a-new-chapter-in-the-book",
+    "href": "chapters/github.html#created-a-new-chapter-in-the-book",
+    "title": "Appendix B — GitHub Setup",
+    "section": "B.6 Created a new chapter in the book",
+    "text": "B.6 Created a new chapter in the book\n\nCreated a new quarto file called github.qmd in the R Studio project\nAdded the name of the new GitHub quarto file to the _quarto.yml list of chapters\nIn the build tab, selected Render Book &gt; All Formats\nStaged, committed, and pushed the new github.qmd file along with the updated /docs and _quarto.yml file",
+    "crumbs": [
+      "Appendices",
+      "<span class='chapter-number'>B</span>  <span class='chapter-title'>GitHub Setup</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/github.html#protected-the-main-branch-and-required-all-future-changes-to-be-submitted-via-pull-requests",
+    "href": "chapters/github.html#protected-the-main-branch-and-required-all-future-changes-to-be-submitted-via-pull-requests",
+    "title": "Appendix B — GitHub Setup",
+    "section": "B.7 Protected the main branch and required all future changes to be submitted via pull requests",
+    "text": "B.7 Protected the main branch and required all future changes to be submitted via pull requests\n\nConfigured required use of pull requests to prevent future merge conflicts by navigating to Settings &gt; Branches &gt; Add classic branch protection rule and then specifying the branch name pattern “main” along with selecting “Require a pull request before merging”",
+    "crumbs": [
+      "Appendices",
+      "<span class='chapter-number'>B</span>  <span class='chapter-title'>GitHub Setup</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/github.html#prepare-the-repository-to-run-python-when-engine-is-specified-as-jupyter",
+    "href": "chapters/github.html#prepare-the-repository-to-run-python-when-engine-is-specified-as-jupyter",
+    "title": "Appendix B — GitHub Setup",
+    "section": "B.8 Prepare the repository to run python when engine is specified as jupyter",
+    "text": "B.8 Prepare the repository to run python when engine is specified as jupyter\n\nDownload python\nSet a Default Python Interpreter in RStudio\nInstall Jupyter Kernel and the PyYAML: pip install PyYAML\nInstall Jupyter Kernel: pip install jupyter\nInstall libraries: pip install numpy pandas matplotlib\nCreate a test_python.qmd file: engine: jupyter",
+    "crumbs": [
+      "Appendices",
+      "<span class='chapter-number'>B</span>  <span class='chapter-title'>GitHub Setup</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/github.html#set-up-a-github-action-to-automatically-render-the-projects-html-and-pdf-files",
+    "href": "chapters/github.html#set-up-a-github-action-to-automatically-render-the-projects-html-and-pdf-files",
+    "title": "Appendix B — GitHub Setup",
+    "section": "B.9 Set up a github action to automatically render the project’s html and pdf files",
+    "text": "B.9 Set up a github action to automatically render the project’s html and pdf files",
+    "crumbs": [
+      "Appendices",
+      "<span class='chapter-number'>B</span>  <span class='chapter-title'>GitHub Setup</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/test_python.html",
+    "href": "chapters/test_python.html",
+    "title": "Appendix C — Test Python",
+    "section": "",
+    "text": "C.1 Python Code Chunk\nThis chapter demonstrates running Python code using the Jupyter engine.\nThe following code chunk calculates and prints a result.\n# Import a library and perform a calculation\nimport numpy as np\n\n# Create an array and calculate the mean\ndata = np.array([1, 2, 3, 4, 5])\ndata_mean = np.mean(data)\n\n# Print the result\nprint(f\"The mean of the data is: {data_mean}\")\n\nThe mean of the data is: 3.0",
+    "crumbs": [
+      "Appendices",
+      "<span class='chapter-number'>C</span>  <span class='chapter-title'>Test Python</span>"
     ]
   }
 ]
