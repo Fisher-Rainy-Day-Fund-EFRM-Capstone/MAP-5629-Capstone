@@ -1,9 +1,11 @@
 ---
-title: "PART 1: Fishing and Climate Data Analysis & Construction of Fishable Days Index (FDI)"
+title: "Python Notebook Part 1"
 engine: jupyter
 ---
 
-# Import Packages & Set Constants
+## Part 1: Fishing and Climate Data Analysis & Construction of Fishable Days Index (FDI) {.unnumbered}
+
+## Import Packages & Set Constants
 
 ```{python}
 # Import packages
@@ -45,7 +47,11 @@ POP_SCALE = 1000 # rates per 1k people
 ```{python}
 
 # Fishing data: read daily fishing reports, parse date column to datetime
-df_fishing = pd.read_csv(FISHING_PATH, parse_dates=["date"])
+df_fishing = pd.read_csv(
+  FISHING_PATH, 
+  parse_dates=["date"],
+  date_format="%m/%d/%Y"
+  )
 
 # Keep only relevant columns
 df_fishing = df_fishing[["date", "weekday", "n_trips", "n_csl_trips",
@@ -87,6 +93,9 @@ print("Population rows:", len(df_pop)) # should be 40 rows, one per year
 all_dates = pd.DataFrame(
     {"date": pd.date_range(start=START_DATE, end=END_DATE, freq="D")}
 )
+
+all_dates["date"] = pd.to_datetime(all_dates["date"], format="%m/%d/%Y")
+df_fishing["date"] = pd.to_datetime(df_fishing["date"], format="%m/%d/%y")
 
 # Left join fishing data to full dataset structure: unreported  days become NaN
 df_calendar = all_dates.merge(df_fishing, on="date", how="left")
