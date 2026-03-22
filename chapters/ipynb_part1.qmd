@@ -474,12 +474,15 @@ df_seasonal = (
         mean_wind_ms      = ("max_wind_ms", "mean"),
         # annual mean of daily max wave height
         mean_wave_m       = ("max_swh_m",   "mean"),
-        # days with any lobster trips report
-        active_fishing_days = ("n_csl_trips", lambda x: (x > 0).sum()) ed
+        # days with any lobster trips reported
+        active_fishing_days = ("n_csl_trips", lambda x: (x > 0).sum()) 
     )
     .reset_index()
 )
+```
 
+
+```{python}
 # Added lobster activity rate on fishable vs all days
 fishable_active = (
     df_master[df_master["fdi"] == 1]
@@ -501,18 +504,27 @@ long_run_std  = df_seasonal["fishable_days"].std()
 strike_90     = long_run_mean * 0.90 # 90% of mean as indicative strike level
 strike_80     = long_run_mean * 0.80 # 80% of mean as indicative strike level
 
+```
+
+```{python}
 print(f"Long run mean fishable days:      {round(long_run_mean, 1)}")
 print(f"Long run std dev:                 {round(long_run_std, 1)}")
 print(f"Indicative strike at 90% of mean: {round(strike_90, 1)} days")
 print(f"Indicative strike at 80% of mean: {round(strike_80, 1)} days")
-print(f"\nYears below 90% strike: 
-  {(df_seasonal['fishable_days'] < strike_90).sum()}")
-print(f"Years below 80% strike: 
-  {(df_seasonal['fishable_days'] < strike_80).sum()}")
+print(
+  f"\nYears below 90% strike: {(
+    df_seasonal['fishable_days'] < strike_90).sum()}"
+    )
+print(
+  f"Years below 80% strike: {(
+    df_seasonal['fishable_days'] < strike_80).sum()}"
+    )
 print(f"\nSeasonal FDI Summary:")
 print(df_seasonal[["year", "fishable_days", "pct_fishable",
                     "mean_wind_ms", "mean_wave_m"]].to_string(index=False))
 
+```
+```{python}
 # Sublot 1: annual fishable days time series with 80/90 mean strike levels
 fig, ax = plt.subplots(figsize=(14, 5))
 
@@ -541,6 +553,9 @@ ax.yaxis.set_major_formatter(ticker.FormatStrFormatter("%.0f"))
 plt.tight_layout()
 plt.show()
 
+```
+
+```{python}
 # Subplot 2: FDI vs active lobster fishing days per year
 fig, ax = plt.subplots(figsize=(14, 5))
 ax.plot(df_seasonal["year"], df_seasonal["fishable_days"],
@@ -559,6 +574,9 @@ plt.tight_layout()
 plt.grid(True,alpha=0.5)
 plt.show()
 
+```
+
+```{python}
 # Subplot 3: distribution of annual fishable days
 fig, ax = plt.subplots(figsize=(8, 4))
 
@@ -583,15 +601,18 @@ plt.show()
 
 ```{python}
 # Export the full daily master table to 2 .csv files
-master_path   = "fdi_master_daily.csv"
-seasonal_path = "fdi_seasonal_summary.csv"
+master_path   = "../data/fdi_master_daily.csv"
+seasonal_path = "../data/fdi_seasonal_summary.csv"
 
 # save full daily table, no row index
 df_master.to_csv(master_path, index=False)  
 
 # save annual FDI summary, no row index
-df_seasonal.to_csv(seasonal_path, index=False)        
+df_seasonal.to_csv(seasonal_path, index=False)  
 
+```
+
+```{python}
 # Checks
 print(f"Daily master table exported:    {master_path}")
 print(f"  Rows: {len(df_master)}, Columns: {len(df_master.columns)}")
