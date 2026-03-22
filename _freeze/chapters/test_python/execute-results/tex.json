@@ -1,0 +1,11 @@
+{
+  "hash": "798e639d77733afa9fe096e43a474f24",
+  "result": {
+    "engine": "jupyter",
+    "markdown": "---\ntitle: \"Test Python\"\nengine: jupyter\n---\n\n\n\n\n\n\nThis chapter demonstrates running Python code using the Jupyter engine.\n\n## Python Code Chunk\n\nThe following code chunk calculates and prints a result.\n\n::: {.cell execution_count=1}\n``` {.python .cell-code}\n# Import a library and perform a calculation\nimport numpy as np\n\n# Create an array and calculate the mean\ndata = np.array([1, 2, 3, 4, 5])\ndata_mean = np.mean(data)\n\n# Print the result\nprint(f\"The mean of the data is: {data_mean}\")\n```\n\n::: {.cell-output .cell-output-stdout}\n```\nThe mean of the data is: 3.0\n```\n:::\n:::\n\n\n",
+    "supporting": [
+      "test_python_files\\figure-pdf"
+    ],
+    "filters": []
+  }
+}
