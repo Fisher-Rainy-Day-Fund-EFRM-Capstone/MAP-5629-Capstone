@@ -19,6 +19,7 @@ If you only need a specific section, select a chapter below:
 * [GitHub Setup](../standalone-pdfs/github.pdf)
 * [Project Proposal](../standalone-pdfs/proposal.pdf)
 * [Python Testing](../standalone-pdfs/test_python.pdf)
+* [Interactive Python Notebook Part 1](../standalone-pdfs/ipynb_part1.pdf)
 
 ::: {.callout-note}
 These standalone PDFs are automatically updated every time the team pushes new code to GitHub.
