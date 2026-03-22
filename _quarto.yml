@@ -13,6 +13,7 @@ book:
     - chapters/downloads.qmd
     - chapters/github.qmd
     - chapters/test_python.qmd
+    - chapters/ipynb_part1.qmd
 
   site-url: https://adyadyan.github.io/MAP-5629-Capstone/
   repo-url: https://github.com/adyadyan/MAP-5629-Capstone
