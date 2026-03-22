@@ -49,9 +49,9 @@ a. Configured required use of pull requests to prevent future merge conflicts by
 
 a. Download python 
 b. Set a Default Python Interpreter in RStudio
-c. Install Jupyter Kernel and the PyYAML: `pip install PyYAML`
-d. Install Jupyter Kernel: `pip install jupyter`
-e. Install libraries: `pip install numpy pandas matplotlib`
-f. Create a test_python.qmd file: `engine: jupyter`
+c. Install Jupyter Kernel and the PyYAML via terminal: `pip install PyYAML`
+d. Install Jupyter Kernel via termina: `pip install jupyter`
+e. Install libraries via termina: `pip install numpy pandas matplotlib seaborn`
+f. Create a test_python.qmd file, include: `engine: jupyter`
 
 ## Set up a github action to automatically render the project's html and pdf files
