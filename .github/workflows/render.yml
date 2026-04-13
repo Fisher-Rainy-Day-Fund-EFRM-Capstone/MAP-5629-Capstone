@@ -4,9 +4,6 @@ on:
   push:
     branches: [ main, master ]
 
-env:
-  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
-
 jobs:
   build-deploy:
     runs-on: ubuntu-latest
@@ -19,6 +16,8 @@ jobs:
 
       - name: Set up Quarto
         uses: quarto-dev/quarto-actions/setup@v2
+        with:
+          version: 1.5.56
 
       - name: Install TinyTeX
         run: quarto install tinytex
@@ -38,7 +37,17 @@ jobs:
         run: quarto render --to all
         
       - name: Render Dashboard
-        run: quarto render dashboard/dashboard.qmd --output-dir ../_book
+        run: |
+          # 1. Render the file (it will create dashboard/dashboard.html)
+          quarto render dashboard/dashboard.qmd
+          
+          # 2. Move the HTML and its supporting files to the _book folder
+          cp dashboard/dashboard.html _book/
+          
+          # 3. If the dashboard has a 'dashboard_files' folder, move that too
+          if [ -d "dashboard/dashboard_files" ]; then
+            cp -r dashboard/dashboard_files _book/
+          fi
 
       - name: Render Standalone Chapter PDFs
         run: quarto render --profile individual --to pdf
