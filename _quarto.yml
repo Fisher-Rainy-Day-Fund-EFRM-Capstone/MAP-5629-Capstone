@@ -6,6 +6,10 @@ book:
   author: "Team"
   date: today
   downloads: [pdf]
+  navbar:
+    right:
+      - text: "📊 Live Dashboard"
+        href: my-dashboard.qmd
   chapters:
     - index.qmd
     - chapters/proposal.qmd
