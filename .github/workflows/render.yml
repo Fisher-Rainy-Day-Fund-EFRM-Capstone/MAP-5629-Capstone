@@ -36,6 +36,9 @@ jobs:
 
       - name: Render Full Book
         run: quarto render --to all
+        
+      - name: Render Dashboard
+        run: quarto render dashboard/dashboard.qmd --output-dir ../_book
 
       - name: Render Standalone Chapter PDFs
         run: quarto render --profile individual --to pdf
