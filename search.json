@@ -237,7 +237,7 @@
     "href": "chapters/test_python.html",
     "title": "Appendix C — Test Python",
     "section": "",
-    "text": "C.1 Python Code Chunk\nThis chapter demonstrates running Python code using the Jupyter engine.\nThe following code chunk calculates and prints a result.\n# Import a library and perform a calculation\nimport numpy as np\n\n# Create an array and calculate the mean\ndata = np.array([1, 2, 3, 4, 5])\ndata_mean = np.mean(data)\n\n# Print the result\nprint(f\"The mean of the data is: {data_mean}\")\n\nThe mean of the data is: 3.0",
+    "text": "C.1 Python Code Chunk\nThe following code chunk calculates and prints a result.\n# Import a library and perform a calculation\nimport numpy as np\n\n# Create an array and calculate the mean\ndata = np.array([1, 2, 3, 4, 5])\ndata_mean = np.mean(data)\n\n# Print the result\nprint(f\"The mean of the data is: {data_mean}\")\n\nThe mean of the data is: 3.0",
     "crumbs": [
       "Appendices",
       "<span class='chapter-number'>C</span>  <span class='chapter-title'>Test Python</span>"
