@@ -1,0 +1,68 @@
+---
+title: "Comparison Dashboard"
+format: dashboard
+---
+
+```{python}
+#| output: false
+import pandas as pd
+import numpy as np
+
+data = pd.DataFrame({
+    'category': ['A', 'B', 'A', 'C', 'B', 'A', 'C', 'C'],
+    'value': [10, 25, 30, 45, 50, 65, 80, 95]
+})
+
+ojs_define(my_data = data)
+```
+
+## Row {height="60%"}
+
+### Column {width="50%"}
+
+```{ojs}
+//| title: "Scenario A: Controls & Table"
+// Left Side Logic
+viewof min_val_A = Inputs.range([0, 100], {value: 20, step: 5, label: "Min Value A:"})
+
+filtered_data_A = transpose(my_data).filter(d => d.value >= min_val_A)
+
+Inputs.table(filtered_data_A)
+```
+
+### Column {width="50%"}
+
+```{ojs}
+//| title: "Scenario B: Controls & Table"
+// Right Side Logic
+viewof min_val_B = Inputs.range([0, 100], {value: 50, step: 5, label: "Min Value B:"})
+
+filtered_data_B = transpose(my_data).filter(d => d.value >= min_val_B)
+
+Inputs.table(filtered_data_B)
+```
+
+## Row {height="40%"}
+
+### Column
+
+```{ojs}
+//| title: "Plot A"
+Plot.plot({
+  marks: [
+    Plot.barY(filtered_data_A, {x: "category", y: "value", fill: "category"})
+  ]
+})
+```
+
+### Column
+
+```{ojs}
+//| title: "Plot B"
+Plot.plot({
+  marks: [
+    Plot.barY(filtered_data_B, {x: "category", y: "value", fill: "category"})
+  ],
+  y: {domain: [0, 100]} // Fixing the axis makes comparison easier
+})
+```
