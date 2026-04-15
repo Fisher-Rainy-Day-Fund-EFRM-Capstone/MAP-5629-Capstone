@@ -39,14 +39,14 @@ jobs:
       - name: Render Dashboard
         run: |
           # 1. Render the file (it will create dashboard/dashboard.html)
-          quarto render dashboard/dashboard.qmd
+          quarto render dashboard/fdi_dashboard.qmd
           
           # 2. Move the HTML and its supporting files to the _book folder
-          cp dashboard/dashboard.html _book/
+          cp dashboard/fdi_dashboard.html _book/
           
           # 3. If the dashboard has a 'dashboard_files' folder, move that too
-          if [ -d "dashboard/dashboard_files" ]; then
-            cp -r dashboard/dashboard_files _book/
+          if [ -d "dashboard/fdi_dashboard_files" ]; then
+            cp -r dashboard/fdi_dashboard_files _book/
           fi
 
       - name: Render Standalone Chapter PDFs
