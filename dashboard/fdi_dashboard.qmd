@@ -5,12 +5,34 @@ format:
     orientation: rows
 ---
 
-```{r}
-#| output: false
-library(tidyverse)
-# Load the pre-calculated many-to-many data
-df_all_scenarios <- readRDS(here::here("data", "processed", "dashboard_data.rds"))
-ojs_define(all_data = df_all_scenarios)
+```{ojs}
+//| output: false
+
+// 1. Load data from the same folder to avoid path errors
+all_data = FileAttachment("dashboard_data.csv").csv({typed: true})
+
+// 2. Explicitly require D3
+d3 = require("d3@7")
+
+// 3. Centralized Filtering (Numeric comparison for stability)
+// Scenario A logic
+data_A_raw = all_data.filter(d => 
+  Number(d.wind_threshold) === Number(wind_A) && 
+  Number(d.wave_threshold) === Number(wave_A)
+)
+
+// Scenario B logic
+data_B_raw = all_data.filter(d => 
+  Number(d.wind_threshold) === Number(wind_B) && 
+  Number(d.wave_threshold) === Number(wave_B)
+)
+
+// 4. Shared Rollups (Used by both plots and tables)
+data_A_daily = Array.from(d3.rollup(data_A_raw, v => v[0], d => d.contract_day_index).values())
+data_B_daily = Array.from(d3.rollup(data_B_raw, v => v[0], d => d.contract_day_index).values())
+
+data_A_pricing = Array.from(d3.rollup(data_A_raw, v => v[0], d => d.strike_percent).values())
+data_B_pricing = Array.from(d3.rollup(data_B_raw, v => v[0], d => d.strike_percent).values())
 ```
 
 ## {.sidebar}
@@ -33,9 +55,7 @@ viewof wave_B = Inputs.select([1.5, 1.75, 2.0], {value: 1.75, label: "Waves (m)"
 
 ### Probability Curve A
 ```{ojs}
-data_A_raw = transpose(all_data).filter(d => d.wind_threshold == wind_A && d.wave_threshold == wave_A)
-data_A_daily = Array.from(d3.rollup(data_A_raw, v => v[0], d => d.contract_day_index).values())
-
+// No redundant filtering here, just the plot
 Plot.plot({
   y: {grid: true, domain: [0, 1]},
   marks: [
@@ -47,9 +67,6 @@ Plot.plot({
 
 ### Probability Curve B
 ```{ojs}
-data_B_raw = transpose(all_data).filter(d => d.wind_threshold == wind_B && d.wave_threshold == wave_B)
-data_B_daily = Array.from(d3.rollup(data_B_raw, v => v[0], d => d.contract_day_index).values())
-
 Plot.plot({
   y: {grid: true, domain: [0, 1]},
   marks: [
@@ -63,8 +80,6 @@ Plot.plot({
 
 ### Financial Table A
 ```{ojs}
-data_A_pricing = Array.from(d3.rollup(data_A_raw, v => v[0], d => d.strike_percent).values())
-
 Inputs.table(data_A_pricing, {
   columns: ["strike_percent", "strike_days", "trigger_prob", "weather_derivative_price"],
   header: {
@@ -83,8 +98,6 @@ Inputs.table(data_A_pricing, {
 
 ### Financial Table B
 ```{ojs}
-data_B_pricing = Array.from(d3.rollup(data_B_raw, v => v[0], d => d.strike_percent).values())
-
 Inputs.table(data_B_pricing, {
   columns: ["strike_percent", "strike_days", "trigger_prob", "weather_derivative_price"],
   header: {
