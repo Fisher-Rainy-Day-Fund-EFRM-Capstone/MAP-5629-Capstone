@@ -1,0 +1,415 @@
+---
+title: "poisson_binomial"
+engine: jupyter
+---
+
+## Poisson-binomial using daily historical 𝑃𝑗 (Strike in Percent) {.unnumbered}
+
+## Import Packages and Set File Paths
+
+```{python}
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+import seaborn as sns
+
+FISHING_PATH    = "../data/stx_com_csl_daily_8623.csv"
+WIND_PATH       = "../data/st_croix_wind_data.csv"
+WAVE_PATH       = "../data/st_croix_wave_data.csv"
+POPULATION_PATH = "../data/usvi_pop.csv"
+```
+
+## Historical Data Window and User Inputs
+
+```{python}
+START_DATE = "1985-01-01"
+END_DATE   = "2024-12-28"
+
+MS_TO_KNOTS = 1.94384449
+POP_SCALE = 1000
+
+RISK_FREE_RATE     = 0.037
+AVG_PROFIT_PER_DAY = 330.0
+
+# CHOSEN FDI THRESHOLDS
+WIND_THRESHOLD_MS = 8.5
+WAVE_THRESHOLD_M  = 1.75
+
+CONTRACT_START_MMDD = "01-01"
+CONTRACT_END_MMDD   = "12-31"
+
+# THRESHOLD SENSITIVITY GRID
+wind_thresholds = [7.5, 8.5, 10.0, 11.5, 13.0]
+wave_thresholds = [1.5, 1.75, 2.0, 2.25, 2.5]
+
+# STRIKE GRID
+STRIKE_PERCENTS = np.round(np.arange(0.80, 0.951, 0.01), 2)
+```
+
+## LOAD DATA AND SENSITIVITY ANALYSIS
+
+```{python}
+
+# LOAD DATA
+df_fishing = pd.read_csv(
+  FISHING_PATH, 
+  parse_dates=["date"],
+  date_format="%m/%d/%Y"
+  )
+df_fishing = df_fishing[["date", "weekday", "n_trips", "n_csl_trips", "all_all", "csl_all"]].copy()
+
+df_wind = pd.read_csv(WIND_PATH, parse_dates=["valid_time"])
+df_wind = df_wind[["valid_time", "u10", "v10", "fg10"]].copy()
+
+df_wave = pd.read_csv(WAVE_PATH, parse_dates=["valid_time"])
+df_wave = df_wave[["valid_time", "swh"]].copy()
+
+df_pop = pd.read_csv(POPULATION_PATH, parse_dates=["observation_date"])
+df_pop = df_pop.rename(columns={
+    "observation_date": "year",
+    "POPTOTVIA647NWDB": "population"
+})
+df_pop["year"] = df_pop["year"].dt.year
+
+```
+
+```{python}
+
+# BUILD DAILY MASTER TABLE
+dates = pd.date_range(start=START_DATE, end=END_DATE, freq="D")
+df_calendar = pd.DataFrame({"date": dates})
+
+df_calendar["year"] = df_calendar["date"].dt.year
+df_calendar["weekday"] = df_calendar["date"].dt.day_name()
+df_calendar["is_sunday"] = (df_calendar["weekday"] == "Sunday").astype(int)
+
+df_calendar["date"] = pd.to_datetime(df_calendar["date"], format="%m/%d/%Y")
+df_fishing["date"] = pd.to_datetime(df_fishing["date"], format="%m/%d/%y")
+
+df_master = df_calendar.merge(df_fishing, on=["date", "weekday"], how="left")
+
+for col in ["n_trips", "n_csl_trips", "all_all", "csl_all"]:
+    df_master[col] = df_master[col].fillna(0)
+```
+
+# PROCESS WIND
+
+```{python}
+df_wind["wind_speed_ms"] = np.sqrt(df_wind["u10"]**2 + df_wind["v10"]**2)
+df_wind["date"] = df_wind["valid_time"].dt.normalize()
+
+df_wind_daily = (
+    df_wind.groupby("date")
+    .agg(
+        max_wind_ms=("wind_speed_ms", "max"),
+        mean_wind_ms=("wind_speed_ms", "mean"),
+        max_gust_ms=("fg10", "max")
+    )
+    .reset_index()
+)
+
+```
+
+# PROCESS WAVE
+
+```{python}
+df_wave["date"] = df_wave["valid_time"].dt.normalize()
+
+df_wave_daily = (
+    df_wave.groupby("date")
+    .agg(
+        max_swh_m=("swh", "max"),
+        mean_swh_m=("swh", "mean")
+    )
+    .reset_index()
+)
+
+
+```
+
+# MERGE ALL
+
+```{python}
+df_master = df_master.merge(df_wind_daily, on="date", how="left")
+df_master = df_master.merge(df_wave_daily, on="date", how="left")
+df_master = df_master.merge(df_pop[["year", "population"]], on="year", how="left")
+
+df_master["csl_trips_per_1k"] = (
+  (df_master["n_csl_trips"] / df_master["population"]) * POP_SCALE
+  )
+  
+df_master["csl_lbs_per_1k"]   = (
+  (df_master["csl_all"]     / df_master["population"]) * POP_SCALE
+  )
+```
+
+```{python}
+# THRESHOLD SENSITIVITY
+
+sensitivity_rows = []
+
+for wnd in wind_thresholds:
+    for wav in wave_thresholds:
+        fdi_temp = ((df_master["max_wind_ms"] <= wnd) &
+                    (df_master["max_swh_m"]   <= wav)).astype(int)
+
+        annual_temp = (
+            pd.DataFrame({
+                "year": df_master["year"],
+                "fdi_temp": fdi_temp
+            })
+            .groupby("year")
+            .agg(
+                annual_fdi=("fdi_temp", "sum"),
+                pct_fishable=("fdi_temp", lambda x: x.mean() * 100)
+            )
+            .reset_index()
+        )
+
+        sensitivity_rows.append({
+            "wind_thresh_ms": wnd,
+            "wind_thresh_kt": wnd * MS_TO_KNOTS,
+            "wave_thresh_m": wav,
+            "pct_fishable_total": fdi_temp.mean() * 100,
+            "mean_annual_fdi": annual_temp["annual_fdi"].mean(),
+            "std_annual_fdi": annual_temp["annual_fdi"].std()
+        })
+
+df_sensitivity = pd.DataFrame(sensitivity_rows)
+
+print("\nThreshold Sensitivity Table:")
+print(df_sensitivity.round(2).to_string(index=False))
+
+```
+
+```{python}
+# BUILD FINAL FDI
+
+df_master["fdi"] = (
+    (df_master["max_wind_ms"] <= WIND_THRESHOLD_MS) &
+    (df_master["max_swh_m"]   <= WAVE_THRESHOLD_M)
+).astype(int)
+
+print("\nSelected Thresholds:")
+print(f"Wind threshold = {WIND_THRESHOLD_MS:.2f} m/s ({WIND_THRESHOLD_MS * MS_TO_KNOTS:.2f} knots)")
+print(f"Wave threshold = {WAVE_THRESHOLD_M:.2f} m")
+```
+
+
+# REMOVE FEB 29 FOR CALENDAR ALIGNMENT
+
+```{python}
+df_prob = df_master.copy()
+df_prob["date"] = pd.to_datetime(df_prob["date"])
+
+df_prob = df_prob[
+    ~((df_prob["date"].dt.month == 2) & (df_prob["date"].dt.day == 29))
+].copy()
+
+df_prob["month_day"] = df_prob["date"].dt.strftime("%m-%d")
+
+calendar_365 = pd.date_range("2001-01-01", "2001-12-31", freq="D")
+calendar_df = pd.DataFrame({
+    "contract_date_dummy": calendar_365,
+    "month_day": calendar_365.strftime("%m-%d"),
+    "day_of_year": np.arange(1, 366)
+})
+```
+
+# CONTRACT WINDOW
+```{python}
+start_dummy = pd.to_datetime(f"2001-{CONTRACT_START_MMDD}")
+end_dummy   = pd.to_datetime(f"2001-{CONTRACT_END_MMDD}")
+
+if start_dummy <= end_dummy:
+    contract_calendar = calendar_df[
+        (calendar_df["contract_date_dummy"] >= start_dummy) &
+        (calendar_df["contract_date_dummy"] <= end_dummy)
+    ].copy()
+else:
+    contract_calendar = calendar_df[
+        (calendar_df["contract_date_dummy"] >= start_dummy) |
+        (calendar_df["contract_date_dummy"] <= end_dummy)
+    ].copy()
+
+contract_calendar = contract_calendar.reset_index(drop=True)
+contract_calendar["contract_day_index"] = np.arange(1, len(contract_calendar) + 1)
+
+contract_days = len(contract_calendar)
+contract_years = contract_days / 365.0
+
+print("\nContract Window:")
+print(f"Start (MM-DD): {CONTRACT_START_MMDD}")
+print(f"End   (MM-DD): {CONTRACT_END_MMDD}")
+print(f"Contract length: {contract_days} days")
+print(f"Contract length: {contract_years:.6f} years")
+```
+
+# DAILY FISHABLE PROBABILITY FOR CONTRACT DAYS ONLY
+
+```{python}
+daily_prob_all = (
+    df_prob.groupby("month_day")
+    .agg(
+        p_fishable=("fdi", "mean"),
+        fishable_count=("fdi", "sum"),
+        n_years=("fdi", "count")
+    )
+    .reset_index()
+)
+
+daily_prob_contract = contract_calendar.merge(
+    daily_prob_all,
+    on="month_day",
+    how="left"
+)
+
+if daily_prob_contract["p_fishable"].isna().any():
+    raise ValueError("Some contract dates have missing fishable probabilities.")
+
+expected_fishable_days_contract = daily_prob_contract["p_fishable"].sum()
+
+print("\nContract Probability Summary:")
+print(f"Expected fishable days during contract = {expected_fishable_days_contract:.2f}")
+
+# CONTRACT-YEAR FDI FOR HISTORICAL YEARS
+
+contract_month_days = set(contract_calendar["month_day"])
+
+df_contract_only = df_prob[df_prob["month_day"].isin(contract_month_days)].copy()
+
+annual_contract_fdi = (
+    df_contract_only.groupby("year")
+    .agg(
+        contract_fdi=("fdi", "sum"),
+        contract_days=("fdi", "count"),
+        pct_fishable=("fdi", lambda x: x.mean() * 100)
+    )
+    .reset_index()
+)
+
+mean_contract_fdi = annual_contract_fdi["contract_fdi"].mean()
+std_contract_fdi  = annual_contract_fdi["contract_fdi"].std()
+
+print("\nContract FDI Summary:")
+print(f"Mean contract FDI = {mean_contract_fdi:.2f} days")
+print(f"Std contract FDI  = {std_contract_fdi:.2f} days")
+print(f"Average profit/day = ${AVG_PROFIT_PER_DAY:,.2f}")
+```
+
+# PLOT DAILY FISHABLE PROBABILITY
+
+```{python}
+plt.figure(figsize=(14, 4))
+plt.plot(
+    daily_prob_contract["contract_day_index"],
+    daily_prob_contract["p_fishable"],
+    linewidth=1.8
+)
+plt.title("Daily Probability of Fishable Day During Contract Window")
+plt.xlabel("Contract Day Index")
+plt.ylabel("P_j")
+plt.xlim(1, contract_days)
+plt.ylim(0, 1)
+plt.grid(True, alpha=0.3)
+plt.tight_layout()
+plt.show()
+```
+
+
+# POISSON-BINOMIAL PMF
+# ============================================================
+p = daily_prob_contract["p_fishable"].to_numpy()
+n = len(p)
+
+pmf = np.zeros(n + 1)
+pmf[0] = 1.0
+
+for pj in p:
+    new_pmf = np.zeros(n + 1)
+    new_pmf[0] = pmf[0] * (1 - pj)
+    for k in range(1, n + 1):
+        new_pmf[k] = pmf[k] * (1 - pj) + pmf[k - 1] * pj
+    pmf = new_pmf
+
+discount_factor = np.exp(-RISK_FREE_RATE * contract_years)
+
+# MULTI-STRIKE PRICING TABLE || Trigger rule: payout when N < K
+
+pricing_rows = []
+
+for strike_percent in STRIKE_PERCENTS:
+    strike_days = int(round(mean_contract_fdi * strike_percent))
+
+    # Fixed payout size based on strike shortfall from mean
+    loss_amount = max(mean_contract_fdi - strike_days, 0) * AVG_PROFIT_PER_DAY
+
+    # Correct trigger rule: fishable days strictly below strike
+    # P(N < K) = sum from 0 to K-1
+    if strike_days <= 0:
+        trigger_probability = 0.0
+    else:
+        trigger_probability = pmf[:strike_days].sum()
+
+    weather_derivative_price = discount_factor * loss_amount * trigger_probability
+
+    pricing_rows.append({
+        "strike_percent": strike_percent * 100,
+        "strike_days": strike_days,
+        "fixed_payout_L": loss_amount,
+        "trigger_probability_P_N_less_K": trigger_probability,
+        "weather_derivative_price": weather_derivative_price
+    })
+
+pricing_table = pd.DataFrame(pricing_rows)
+
+print("\nPricing Table for Strike Percent 80% to 95%:")
+print(
+    pricing_table.round({
+        "strike_percent": 0,
+        "strike_days": 0,
+        "fixed_payout_L": 2,
+        "trigger_probability_P_N_less_K": 6,
+        "weather_derivative_price": 2
+    }).to_string(index=False)
+)
+
+
+
+# PLOT - STRIKE % VS PRICE
+
+plt.figure(figsize=(10, 5))
+plt.plot(
+    pricing_table["strike_percent"],
+    pricing_table["weather_derivative_price"],
+    marker="o",
+    linewidth=1.8
+)
+plt.title("Weather Derivative Price vs Strike Percentage")
+plt.xlabel("Strike Percentage of Mean Fishable Days")
+plt.ylabel("Weather Derivative Price ($)")
+
+plt.xticks(STRIKE_PERCENTS * 100)
+
+plt.grid(True, alpha=0.3)
+plt.tight_layout()
+plt.show()
+
+# PLOT - STRIKE % VS TRIGGER PROBABILITY
+
+plt.figure(figsize=(10, 5))
+plt.plot(
+    pricing_table["strike_percent"],
+    pricing_table["trigger_probability_P_N_less_K"],
+    marker="o",
+    linewidth=1.8
+)
+plt.title("Trigger Probability vs Strike Percentage")
+plt.xlabel("Strike Percentage of Mean Fishable Days")
+plt.ylabel("Trigger Probability")
+
+plt.xticks(STRIKE_PERCENTS * 100)
+
+plt.grid(True, alpha=0.3)
+plt.tight_layout()
+plt.show()

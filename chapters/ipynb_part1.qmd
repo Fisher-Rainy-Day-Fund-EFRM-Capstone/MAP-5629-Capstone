@@ -232,6 +232,12 @@ df_master = df_master[["date", "year", "month", "weekday",
                        "max_gust_ms", "max_gust_kt",
                        "max_swh_m", "population"]]
 
+# Save as csv
+import os
+from pathlib import Path
+data_folder = Path(os.getcwd()).parent / "data"
+df_master.to_csv(data_folder / "df_master.csv", index=False)
+
 # Check
 print("\nMaster table shape:", df_master.shape) # should be (14608, 14)
 
