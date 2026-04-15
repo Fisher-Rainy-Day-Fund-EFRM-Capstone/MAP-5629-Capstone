@@ -9,7 +9,7 @@ book:
   navbar:
     right:
       - text: "📊 Live Dashboard"
-        href: dashboard.html
+        href: fdi_dashboard.html
   chapters:
     - index.qmd
     - chapters/proposal.qmd
