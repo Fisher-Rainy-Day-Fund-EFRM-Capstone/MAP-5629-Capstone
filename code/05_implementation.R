@@ -97,3 +97,4 @@ dashboard_data <- purrr::map2_dfr(
 
 # Save to Processed Folder
 saveRDS(dashboard_data, here::here("data", "processed", "dashboard_data.rds"))
+readr::write_csv(dashboard_data, here::here("dashboard", "dashboard_data.csv"))

@@ -38,7 +38,7 @@ jobs:
         
       - name: Render Dashboard
         run: |
-          # 1. Render the file (it will create dashboard/dashboard.html)
+          # 1. Render the file (it will create dashboard/fdi_dashboard.html)
           quarto render dashboard/fdi_dashboard.qmd
           
           # 2. Move the HTML and its supporting files to the _book folder
