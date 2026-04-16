@@ -1,0 +1,115 @@
+---
+title: "Fishery Weather Derivative Dashboard"
+format: 
+  dashboard:
+    orientation: rows
+---
+
+```{ojs}
+//| output: false
+
+// 1. Load data from the same folder to avoid path errors
+all_data = FileAttachment("dashboard_data.csv").csv({typed: true})
+
+// 2. Explicitly require D3
+d3 = require("d3@7")
+
+// 3. Centralized Filtering (Numeric comparison for stability)
+// Scenario A logic
+data_A_raw = all_data.filter(d => 
+  Number(d.wind_threshold) === Number(wind_A) && 
+  Number(d.wave_threshold) === Number(wave_A)
+)
+
+// Scenario B logic
+data_B_raw = all_data.filter(d => 
+  Number(d.wind_threshold) === Number(wind_B) && 
+  Number(d.wave_threshold) === Number(wave_B)
+)
+
+// 4. Shared Rollups (Used by both plots and tables)
+data_A_daily = Array.from(d3.rollup(data_A_raw, v => v[0], d => d.contract_day_index).values())
+data_B_daily = Array.from(d3.rollup(data_B_raw, v => v[0], d => d.contract_day_index).values())
+
+data_A_pricing = Array.from(d3.rollup(data_A_raw, v => v[0], d => d.strike_percent).values())
+data_B_pricing = Array.from(d3.rollup(data_B_raw, v => v[0], d => d.strike_percent).values())
+```
+
+## {.sidebar}
+
+### Scenario A (Blue)
+```{ojs}
+viewof wind_A = Inputs.select([8.5, 9.5, 10.5], {value: 8.5, label: "Wind (m/s)"})
+viewof wave_A = Inputs.select([1.5, 1.75, 2.0], {value: 1.5, label: "Waves (m)"})
+```
+
+***
+
+### Scenario B (Orange)
+```{ojs}
+viewof wind_B = Inputs.select([8.5, 9.5, 10.5], {value: 9.5, label: "Wind (m/s)"})
+viewof wave_B = Inputs.select([1.5, 1.75, 2.0], {value: 1.75, label: "Waves (m)"})
+```
+
+## Row {height="60%"}
+
+### Probability Curve A
+```{ojs}
+// No redundant filtering here, just the plot
+Plot.plot({
+  y: {grid: true, domain: [0, 1]},
+  marks: [
+    Plot.areaY(data_A_daily, {x: "contract_day_index", y: "p_fishable", fill: "steelblue", fillOpacity: 0.2}),
+    Plot.lineY(data_A_daily, {x: "contract_day_index", y: "p_fishable", stroke: "steelblue", strokeWidth: 2})
+  ]
+})
+```
+
+### Probability Curve B
+```{ojs}
+Plot.plot({
+  y: {grid: true, domain: [0, 1]},
+  marks: [
+    Plot.areaY(data_B_daily, {x: "contract_day_index", y: "p_fishable", fill: "darkorange", fillOpacity: 0.2}),
+    Plot.lineY(data_B_daily, {x: "contract_day_index", y: "p_fishable", stroke: "darkorange", strokeWidth: 2})
+  ]
+})
+```
+
+## Row {height="40%"}
+
+### Financial Table A
+```{ojs}
+Inputs.table(data_A_pricing, {
+  columns: ["strike_percent", "strike_days", "trigger_prob", "weather_derivative_price"],
+  header: {
+    strike_percent: "Strike %",
+    strike_days: "Days",
+    trigger_prob: "P(Trigger)",
+    weather_derivative_price: "Premium ($)"
+  },
+  format: {
+    strike_percent: d => (d * 100).toFixed(0) + "%",
+    trigger_prob: d => d.toFixed(4),
+    weather_derivative_price: d => "$" + d.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2})
+  }
+})
+```
+
+### Financial Table B
+```{ojs}
+Inputs.table(data_B_pricing, {
+  columns: ["strike_percent", "strike_days", "trigger_prob", "weather_derivative_price"],
+  header: {
+    strike_percent: "Strike %",
+    strike_days: "Days",
+    trigger_prob: "P(Trigger)",
+    weather_derivative_price: "Premium ($)"
+  },
+  format: {
+    strike_percent: d => (d * 100).toFixed(0) + "%",
+    trigger_prob: d => d.toFixed(4),
+    weather_derivative_price: d => "$" + d.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2})
+  }
+})
+```

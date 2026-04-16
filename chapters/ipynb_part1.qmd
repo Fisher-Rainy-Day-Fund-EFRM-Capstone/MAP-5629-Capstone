@@ -232,6 +232,12 @@ df_master = df_master[["date", "year", "month", "weekday",
                        "max_gust_ms", "max_gust_kt",
                        "max_swh_m", "population"]]
 
+# Save as csv
+import os
+from pathlib import Path
+data_folder = Path(os.getcwd()).parent / "data"
+df_master.to_csv(data_folder / "df_master.csv", index=False)
+
 # Check
 print("\nMaster table shape:", df_master.shape) # should be (14608, 14)
 
@@ -516,18 +522,19 @@ strike_80     = long_run_mean * 0.80 # 80% of mean as indicative strike level
 ```
 
 ```{python}
+# 1. Calculate the values first
+years_below_90 = (df_seasonal['fishable_days'] < strike_90).sum()
+years_below_80 = (df_seasonal['fishable_days'] < strike_80).sum()
+
+# 2. Print them using simple f-strings
 print(f"Long run mean fishable days:      {round(long_run_mean, 1)}")
 print(f"Long run std dev:                 {round(long_run_std, 1)}")
 print(f"Indicative strike at 90% of mean: {round(strike_90, 1)} days")
 print(f"Indicative strike at 80% of mean: {round(strike_80, 1)} days")
-print(
-  f"\nYears below 90% strike: {(
-    df_seasonal['fishable_days'] < strike_90).sum()}"
-    )
-print(
-  f"Years below 80% strike: {(
-    df_seasonal['fishable_days'] < strike_80).sum()}"
-    )
+
+print(f"\nYears below 90% strike: {years_below_90}")
+print(f"Years below 80% strike: {years_below_80}")
+
 print(f"\nSeasonal FDI Summary:")
 print(df_seasonal[["year", "fishable_days", "pct_fishable",
                     "mean_wind_ms", "mean_wave_m"]].to_string(index=False))
