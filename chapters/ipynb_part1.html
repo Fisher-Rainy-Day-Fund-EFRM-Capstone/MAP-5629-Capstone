@@ -64,6 +64,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../">
+<link href="../chapters/poisson_binomial.html" rel="next">
 <link href="../chapters/test_python.html" rel="prev">
 <script src="../site_libs/quarto-html/quarto.js"></script>
 <script src="../site_libs/quarto-html/popper.min.js"></script>
@@ -197,6 +198,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
  <span class="menu-text"><span class="chapter-number">D</span>&nbsp; <span class="chapter-title">Python Notebook Part 1</span></span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/poisson_binomial.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">E</span>&nbsp; <span class="chapter-title">poisson_binomial</span></span></a>
+  </div>
+</li>
       </ul>
   </li>
     </ul>
@@ -251,7 +258,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="import-packages-set-constants" class="level2" data-number="D.1">
 <h2 data-number="D.1" class="anchored" data-anchor-id="import-packages-set-constants"><span class="header-section-number">D.1</span> Import Packages &amp; Set Constants</h2>
-<div id="10301063" class="cell" data-execution_count="1">
+<div id="86686427" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Import packages</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
@@ -288,7 +295,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="load-raw-climate-and-fishing-data" class="level2" data-number="D.2">
 <h2 data-number="D.2" class="anchored" data-anchor-id="load-raw-climate-and-fishing-data"><span class="header-section-number">D.2</span> Load Raw Climate and Fishing Data</h2>
-<div id="7f938f70" class="cell" data-execution_count="2">
+<div id="0df2e576" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Fishing data: read daily fishing reports, parse date column to datetime</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>df_fishing <span class="op">=</span> pd.read_csv(</span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  FISHING_PATH, </span>
@@ -337,7 +344,7 @@ Population rows: 40</code></pre>
 </section>
 <section id="construct-completed-time-series-to-fill-non-reported-dates-from-fishing-dataset" class="level2" data-number="D.3">
 <h2 data-number="D.3" class="anchored" data-anchor-id="construct-completed-time-series-to-fill-non-reported-dates-from-fishing-dataset"><span class="header-section-number">D.3</span> Construct Completed Time-Series to Fill Non-Reported Dates From Fishing Dataset</h2>
-<div id="de6df5bf" class="cell" data-execution_count="3">
+<div id="c2149523" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Build full dataset structure filling fishing days not reported: 1 row per day</span></span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>all_dates <span class="op">=</span> pd.DataFrame(</span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    {<span class="st">"date"</span>: pd.date_range(start<span class="op">=</span>START_DATE, end<span class="op">=</span>END_DATE, freq<span class="op">=</span><span class="st">"D"</span>)}</span>
@@ -383,7 +390,7 @@ Silent days (no trips reported): 1773
 </section>
 <section id="process-wind-dataset" class="level2" data-number="D.4">
 <h2 data-number="D.4" class="anchored" data-anchor-id="process-wind-dataset"><span class="header-section-number">D.4</span> Process Wind Dataset</h2>
-<div id="65f5a6e5" class="cell" data-execution_count="4">
+<div id="a29aa413" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate scalar wind speed from U and V components in m/s; (u^2 + v^2)^(1/2)</span></span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>df_wind[<span class="st">"wind_speed_ms"</span>] <span class="op">=</span> np.sqrt(df_wind[<span class="st">"u10"</span>]<span class="op">**</span><span class="dv">2</span> <span class="op">+</span> df_wind[<span class="st">"v10"</span>]<span class="op">**</span><span class="dv">2</span>) </span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -435,7 +442,7 @@ Max wind speed recorded (kt): 55.67097679275083 3
 </section>
 <section id="process-wave-dataset" class="level2" data-number="D.5">
 <h2 data-number="D.5" class="anchored" data-anchor-id="process-wave-dataset"><span class="header-section-number">D.5</span> Process Wave Dataset</h2>
-<div id="c1ebdf43" class="cell" data-execution_count="5">
+<div id="6e559d8a" class="cell" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Extract date from hourly timestamp column for grouping: strip time component</span></span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>df_wave[<span class="st">"date"</span>] <span class="op">=</span> df_wave[<span class="st">"valid_time"</span>].dt.normalize()</span>
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -472,7 +479,7 @@ Min wave height recorded (m): 0.539
 </section>
 <section id="merge-windwavepopulation-datasets-into-fishing-dataset" class="level2" data-number="D.6">
 <h2 data-number="D.6" class="anchored" data-anchor-id="merge-windwavepopulation-datasets-into-fishing-dataset"><span class="header-section-number">D.6</span> Merge Wind/Wave/Population Datasets into Fishing Dataset</h2>
-<div id="2d75a4a7" class="cell" data-execution_count="6">
+<div id="b927f68b" class="cell" data-execution_count="6">
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Join wind into completed dates frame: left join kept all &gt;14k calendar days</span></span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>df_master <span class="op">=</span> df_calendar.merge(df_wind_daily, on<span class="op">=</span><span class="st">"date"</span>, how<span class="op">=</span><span class="st">"left"</span>)</span>
 <span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -542,7 +549,7 @@ Master table shape: (14607, 14)
 </section>
 <section id="population-adjustment-per-1k-people" class="level2" data-number="D.7">
 <h2 data-number="D.7" class="anchored" data-anchor-id="population-adjustment-per-1k-people"><span class="header-section-number">D.7</span> Population Adjustment (per 1k people)</h2>
-<div id="27195475" class="cell" data-execution_count="7">
+<div id="ea3b4513" class="cell" data-execution_count="7">
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Lobster trips per 1k people: normalized lobster trip rate</span></span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>df_master[<span class="st">"csl_trips_per_1k"</span>] <span class="op">=</span> (</span>
 <span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>  (df_master[<span class="st">"n_csl_trips"</span>] <span class="op">/</span> df_master[<span class="st">"population"</span>]) <span class="op">*</span> POP_SCALE</span>
@@ -590,7 +597,7 @@ Days with zero csl trips: 6423
 </section>
 <section id="check-for-weekday-bias-in-fishing-trips" class="level2" data-number="D.8">
 <h2 data-number="D.8" class="anchored" data-anchor-id="check-for-weekday-bias-in-fishing-trips"><span class="header-section-number">D.8</span> Check for Weekday Bias in Fishing Trips</h2>
-<div id="08afd8d5" class="cell" data-execution_count="8">
+<div id="49266d0e" class="cell" data-execution_count="8">
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Define an ordered weekday list for consistent plotting</span></span>
 <span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>weekday_order <span class="op">=</span> [<span class="st">"Monday"</span>, <span class="st">"Tuesday"</span>, <span class="st">"Wednesday"</span>, <span class="st">"Thursday"</span>, </span>
 <span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>                  <span class="st">"Friday"</span>, <span class="st">"Saturday"</span>, <span class="st">"Sunday"</span>]</span>
@@ -624,7 +631,7 @@ Wednesday               0.045011             1.642619            62.721610
    Sunday               0.016240             0.549767            32.118888</code></pre>
 </div>
 </div>
-<div id="3bbd87e6" class="cell" data-execution_count="9">
+<div id="aca33090" class="cell" data-execution_count="9">
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Subplot 1: mean lobster trips per 1k ppl by weekday</span></span>
 <span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>fig, axes <span class="op">=</span> plt.subplots(<span class="dv">1</span>, <span class="dv">2</span>, figsize<span class="op">=</span>(<span class="dv">12</span>, <span class="dv">4</span>))</span>
 <span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -655,7 +662,7 @@ Wednesday               0.045011             1.642619            62.721610
 </div>
 </div>
 </div>
-<div id="e462383b" class="cell" data-execution_count="10">
+<div id="b17118c2" class="cell" data-execution_count="10">
 <div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Flag Sundays for exclusion from climate threshold validation</span></span>
 <span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>df_master[<span class="st">"is_sunday"</span>] <span class="op">=</span> (df_master[<span class="st">"weekday"</span>] <span class="op">==</span> <span class="st">"Sunday"</span>).astype(<span class="bu">int</span>)  </span>
 <span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Sunday days flagged:"</span>, df_master[<span class="st">"is_sunday"</span>].<span class="bu">sum</span>()) <span class="co"># should be ~2,087</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -666,7 +673,7 @@ Wednesday               0.045011             1.642619            62.721610
 </section>
 <section id="defining-the-fishable-day-index-fdi" class="level2" data-number="D.9">
 <h2 data-number="D.9" class="anchored" data-anchor-id="defining-the-fishable-day-index-fdi"><span class="header-section-number">D.9</span> Defining the Fishable Day Index (FDI)</h2>
-<div id="b0fa3016" class="cell" data-execution_count="11">
+<div id="38e0e837" class="cell" data-execution_count="11">
 <div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Apply climate thresholds defining fishable days: 1 if wind below threshold</span></span>
 <span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>df_master[<span class="st">"wind_ok"</span>] <span class="op">=</span> (</span>
 <span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>  (df_master[<span class="st">"max_wind_ms"</span>] <span class="op">&lt;=</span> WIND_THRESHOLD_MS).astype(<span class="bu">int</span>)</span>
@@ -775,7 +782,7 @@ Threshold Sensitivity Analysis:
            13.0          25.270           2.50          14384         98.47</code></pre>
 </div>
 </div>
-<div id="c0ed6f32" class="cell" data-execution_count="12">
+<div id="c7b10c49" class="cell" data-execution_count="12">
 <div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Subplot 1: FDI daily time series (annual rolling average for readability)</span></span>
 <span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>df_master[<span class="st">"fdi_rolling"</span>] <span class="op">=</span> (</span>
 <span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>  df_master[<span class="st">"fdi"</span>].rolling(window<span class="op">=</span><span class="dv">365</span>, min_periods<span class="op">=</span><span class="dv">180</span>).mean() <span class="op">*</span> <span class="dv">365</span></span>
@@ -853,7 +860,7 @@ Threshold Sensitivity Analysis:
 </section>
 <section id="summary-of-seasonal-fdi" class="level2" data-number="D.10">
 <h2 data-number="D.10" class="anchored" data-anchor-id="summary-of-seasonal-fdi"><span class="header-section-number">D.10</span> Summary of Seasonal FDI</h2>
-<div id="ae993ac9" class="cell" data-execution_count="13">
+<div id="27b4b75a" class="cell" data-execution_count="13">
 <div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Aggregated daily FDI to the annual fishable day count</span></span>
 <span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>df_seasonal <span class="op">=</span> (</span>
 <span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>    df_master.groupby(<span class="st">"year"</span>)</span>
@@ -876,7 +883,7 @@ Threshold Sensitivity Analysis:
 <span id="cb22-20"><a href="#cb22-20" aria-hidden="true" tabindex="-1"></a>    .reset_index()</span>
 <span id="cb22-21"><a href="#cb22-21" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="5ecb60bd" class="cell" data-execution_count="14">
+<div id="68068ddd" class="cell" data-execution_count="14">
 <div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Added lobster activity rate on fishable vs all days</span></span>
 <span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>fishable_active <span class="op">=</span> (</span>
 <span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>    df_master[df_master[<span class="st">"fdi"</span>] <span class="op">==</span> <span class="dv">1</span>]</span>
@@ -898,7 +905,7 @@ Threshold Sensitivity Analysis:
 <span id="cb23-19"><a href="#cb23-19" aria-hidden="true" tabindex="-1"></a>strike_90     <span class="op">=</span> long_run_mean <span class="op">*</span> <span class="fl">0.90</span> <span class="co"># 90% of mean as indicative strike level</span></span>
 <span id="cb23-20"><a href="#cb23-20" aria-hidden="true" tabindex="-1"></a>strike_80     <span class="op">=</span> long_run_mean <span class="op">*</span> <span class="fl">0.80</span> <span class="co"># 80% of mean as indicative strike level</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="97364836" class="cell" data-execution_count="15">
+<div id="e4f01973" class="cell" data-execution_count="15">
 <div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 1. Calculate the values first</span></span>
 <span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>years_below_90 <span class="op">=</span> (df_seasonal[<span class="st">'fishable_days'</span>] <span class="op">&lt;</span> strike_90).<span class="bu">sum</span>()</span>
 <span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>years_below_80 <span class="op">=</span> (df_seasonal[<span class="st">'fishable_days'</span>] <span class="op">&lt;</span> strike_80).<span class="bu">sum</span>()</span>
@@ -968,7 +975,7 @@ Seasonal FDI Summary:
  2024            247         68.04      7.617995     1.333671</code></pre>
 </div>
 </div>
-<div id="7b504e2b" class="cell" data-execution_count="16">
+<div id="3ca11bc9" class="cell" data-execution_count="16">
 <div class="sourceCode cell-code" id="cb26"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Sublot 1: annual fishable days time series with 80/90 mean strike levels</span></span>
 <span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots(figsize<span class="op">=</span>(<span class="dv">14</span>, <span class="dv">5</span>))</span>
 <span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -1004,7 +1011,7 @@ Seasonal FDI Summary:
 </div>
 </div>
 </div>
-<div id="8fa79f1f" class="cell" data-execution_count="17">
+<div id="b39f5e00" class="cell" data-execution_count="17">
 <div class="sourceCode cell-code" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Subplot 2: FDI vs active lobster fishing days per year</span></span>
 <span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots(figsize<span class="op">=</span>(<span class="dv">14</span>, <span class="dv">5</span>))</span>
 <span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>ax.plot(df_seasonal[<span class="st">"year"</span>], df_seasonal[<span class="st">"fishable_days"</span>],</span>
@@ -1030,7 +1037,7 @@ Seasonal FDI Summary:
 </div>
 </div>
 </div>
-<div id="1c5c1d09" class="cell" data-execution_count="18">
+<div id="172cd625" class="cell" data-execution_count="18">
 <div class="sourceCode cell-code" id="cb28"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Subplot 3: distribution of annual fishable days</span></span>
 <span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots(figsize<span class="op">=</span>(<span class="dv">8</span>, <span class="dv">4</span>))</span>
 <span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -1060,7 +1067,7 @@ Seasonal FDI Summary:
 </section>
 <section id="exporting-the-outputs" class="level2" data-number="D.11">
 <h2 data-number="D.11" class="anchored" data-anchor-id="exporting-the-outputs"><span class="header-section-number">D.11</span> Exporting the Outputs</h2>
-<div id="7237cbb6" class="cell" data-execution_count="19">
+<div id="4e83aec1" class="cell" data-execution_count="19">
 <div class="sourceCode cell-code" id="cb29"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Export the full daily master table to 2 .csv files</span></span>
 <span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>master_path   <span class="op">=</span> <span class="st">"../data/fdi_master_daily.csv"</span></span>
 <span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>seasonal_path <span class="op">=</span> <span class="st">"../data/fdi_seasonal_summary.csv"</span></span>
@@ -1071,7 +1078,7 @@ Seasonal FDI Summary:
 <span id="cb29-8"><a href="#cb29-8" aria-hidden="true" tabindex="-1"></a><span class="co"># save annual FDI summary, no row index</span></span>
 <span id="cb29-9"><a href="#cb29-9" aria-hidden="true" tabindex="-1"></a>df_seasonal.to_csv(seasonal_path, index<span class="op">=</span><span class="va">False</span>)  </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="69cd2de5" class="cell" data-execution_count="20">
+<div id="a67f4de4" class="cell" data-execution_count="20">
 <div class="sourceCode cell-code" id="cb30"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Checks</span></span>
 <span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Daily master table exported:    </span><span class="sc">{</span>master_path<span class="sc">}</span><span class="ss">"</span>)</span>
 <span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"  Rows: </span><span class="sc">{</span><span class="bu">len</span>(df_master)<span class="sc">}</span><span class="ss">, Columns: </span><span class="sc">{</span><span class="bu">len</span>(df_master.columns)<span class="sc">}</span><span class="ss">"</span>)</span>
@@ -1562,6 +1569,9 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       </a>          
   </div>
   <div class="nav-page nav-page-next">
+      <a href="../chapters/poisson_binomial.html" class="pagination-link" aria-label="poisson_binomial">
+        <span class="nav-page-text"><span class="chapter-number">E</span>&nbsp; <span class="chapter-title">poisson_binomial</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
   </div>
 </nav>
 </div> <!-- /content -->

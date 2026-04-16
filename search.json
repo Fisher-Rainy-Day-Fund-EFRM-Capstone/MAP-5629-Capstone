@@ -374,5 +374,49 @@
       "Appendices",
       "<span class='chapter-number'>D</span>  <span class='chapter-title'>Python Notebook Part 1</span>"
     ]
+  },
+  {
+    "objectID": "chapters/poisson_binomial.html",
+    "href": "chapters/poisson_binomial.html",
+    "title": "Appendix E — poisson_binomial",
+    "section": "",
+    "text": "Poisson-binomial using daily historical 𝑃𝑗 (Strike in Percent)",
+    "crumbs": [
+      "Appendices",
+      "<span class='chapter-number'>E</span>  <span class='chapter-title'>poisson_binomial</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/poisson_binomial.html#import-packages-and-set-file-paths",
+    "href": "chapters/poisson_binomial.html#import-packages-and-set-file-paths",
+    "title": "Appendix E — poisson_binomial",
+    "section": "E.1 Import Packages and Set File Paths",
+    "text": "E.1 Import Packages and Set File Paths\n\nimport pandas as pd\nimport numpy as np\nimport matplotlib.pyplot as plt\nimport seaborn as sns\n\nFISHING_PATH    = \"../data/stx_com_csl_daily_8623.csv\"\nWIND_PATH       = \"../data/st_croix_wind_data.csv\"\nWAVE_PATH       = \"../data/st_croix_wave_data.csv\"\nPOPULATION_PATH = \"../data/usvi_pop.csv\"",
+    "crumbs": [
+      "Appendices",
+      "<span class='chapter-number'>E</span>  <span class='chapter-title'>poisson_binomial</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/poisson_binomial.html#historical-data-window-and-user-inputs",
+    "href": "chapters/poisson_binomial.html#historical-data-window-and-user-inputs",
+    "title": "Appendix E — poisson_binomial",
+    "section": "E.2 Historical Data Window and User Inputs",
+    "text": "E.2 Historical Data Window and User Inputs\n\nSTART_DATE = \"1985-01-01\"\nEND_DATE   = \"2024-12-28\"\n\nMS_TO_KNOTS = 1.94384449\nPOP_SCALE = 1000\n\nRISK_FREE_RATE     = 0.037\nAVG_PROFIT_PER_DAY = 330.0\n\n# CHOSEN FDI THRESHOLDS\nWIND_THRESHOLD_MS = 8.5\nWAVE_THRESHOLD_M  = 1.75\n\nCONTRACT_START_MMDD = \"01-01\"\nCONTRACT_END_MMDD   = \"12-31\"\n\n# THRESHOLD SENSITIVITY GRID\nwind_thresholds = [7.5, 8.5, 10.0, 11.5, 13.0]\nwave_thresholds = [1.5, 1.75, 2.0, 2.25, 2.5]\n\n# STRIKE GRID\nSTRIKE_PERCENTS = np.round(np.arange(0.80, 0.951, 0.01), 2)",
+    "crumbs": [
+      "Appendices",
+      "<span class='chapter-number'>E</span>  <span class='chapter-title'>poisson_binomial</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/poisson_binomial.html#load-data-and-sensitivity-analysis",
+    "href": "chapters/poisson_binomial.html#load-data-and-sensitivity-analysis",
+    "title": "Appendix E — poisson_binomial",
+    "section": "E.3 LOAD DATA AND SENSITIVITY ANALYSIS",
+    "text": "E.3 LOAD DATA AND SENSITIVITY ANALYSIS\n\n# LOAD DATA\ndf_fishing = pd.read_csv(\n  FISHING_PATH, \n  parse_dates=[\"date\"],\n  date_format=\"%m/%d/%Y\"\n  )\ndf_fishing = df_fishing[[\"date\", \"weekday\", \"n_trips\", \"n_csl_trips\", \"all_all\", \"csl_all\"]].copy()\n\ndf_wind = pd.read_csv(WIND_PATH, parse_dates=[\"valid_time\"])\ndf_wind = df_wind[[\"valid_time\", \"u10\", \"v10\", \"fg10\"]].copy()\n\ndf_wave = pd.read_csv(WAVE_PATH, parse_dates=[\"valid_time\"])\ndf_wave = df_wave[[\"valid_time\", \"swh\"]].copy()\n\ndf_pop = pd.read_csv(POPULATION_PATH, parse_dates=[\"observation_date\"])\ndf_pop = df_pop.rename(columns={\n    \"observation_date\": \"year\",\n    \"POPTOTVIA647NWDB\": \"population\"\n})\ndf_pop[\"year\"] = df_pop[\"year\"].dt.year\n\n\n# BUILD DAILY MASTER TABLE\ndates = pd.date_range(start=START_DATE, end=END_DATE, freq=\"D\")\ndf_calendar = pd.DataFrame({\"date\": dates})\n\ndf_calendar[\"year\"] = df_calendar[\"date\"].dt.year\ndf_calendar[\"weekday\"] = df_calendar[\"date\"].dt.day_name()\ndf_calendar[\"is_sunday\"] = (df_calendar[\"weekday\"] == \"Sunday\").astype(int)\n\ndf_calendar[\"date\"] = pd.to_datetime(df_calendar[\"date\"], format=\"%m/%d/%Y\")\ndf_fishing[\"date\"] = pd.to_datetime(df_fishing[\"date\"], format=\"%m/%d/%y\")\n\ndf_master = df_calendar.merge(df_fishing, on=[\"date\", \"weekday\"], how=\"left\")\n\nfor col in [\"n_trips\", \"n_csl_trips\", \"all_all\", \"csl_all\"]:\n    df_master[col] = df_master[col].fillna(0)",
+    "crumbs": [
+      "Appendices",
+      "<span class='chapter-number'>E</span>  <span class='chapter-title'>poisson_binomial</span>"
+    ]
   }
 ]
