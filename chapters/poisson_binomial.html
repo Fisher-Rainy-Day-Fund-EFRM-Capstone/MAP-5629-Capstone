@@ -258,7 +258,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="import-packages-and-set-file-paths" class="level2" data-number="E.1">
 <h2 data-number="E.1" class="anchored" data-anchor-id="import-packages-and-set-file-paths"><span class="header-section-number">E.1</span> Import Packages and Set File Paths</h2>
-<div id="6be8020c" class="cell" data-execution_count="1">
+<div id="f831f18f" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
@@ -272,7 +272,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="historical-data-window-and-user-inputs" class="level2" data-number="E.2">
 <h2 data-number="E.2" class="anchored" data-anchor-id="historical-data-window-and-user-inputs"><span class="header-section-number">E.2</span> Historical Data Window and User Inputs</h2>
-<div id="7bf9a7c1" class="cell" data-execution_count="2">
+<div id="6a94f5b6" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>START_DATE <span class="op">=</span> <span class="st">"1985-01-01"</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>END_DATE   <span class="op">=</span> <span class="st">"2024-12-28"</span></span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -299,7 +299,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="load-data-and-sensitivity-analysis" class="level2" data-number="E.3">
 <h2 data-number="E.3" class="anchored" data-anchor-id="load-data-and-sensitivity-analysis"><span class="header-section-number">E.3</span> LOAD DATA AND SENSITIVITY ANALYSIS</h2>
-<div id="a91af2d0" class="cell" data-execution_count="3">
+<div id="9daf04d0" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># LOAD DATA</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>df_fishing <span class="op">=</span> pd.read_csv(</span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  FISHING_PATH, </span>
@@ -321,7 +321,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a>})</span>
 <span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a>df_pop[<span class="st">"year"</span>] <span class="op">=</span> df_pop[<span class="st">"year"</span>].dt.year</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="27758b72" class="cell" data-execution_count="4">
+<div id="226643dc" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># BUILD DAILY MASTER TABLE</span></span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>dates <span class="op">=</span> pd.date_range(start<span class="op">=</span>START_DATE, end<span class="op">=</span>END_DATE, freq<span class="op">=</span><span class="st">"D"</span>)</span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>df_calendar <span class="op">=</span> pd.DataFrame({<span class="st">"date"</span>: dates})</span>
@@ -341,7 +341,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="process-wind" class="level1" data-number="F">
 <h1 data-number="F"><span class="header-section-number">F</span> PROCESS WIND</h1>
-<div id="53ab7245" class="cell" data-execution_count="5">
+<div id="6a35e060" class="cell" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>df_wind[<span class="st">"wind_speed_ms"</span>] <span class="op">=</span> np.sqrt(df_wind[<span class="st">"u10"</span>]<span class="op">**</span><span class="dv">2</span> <span class="op">+</span> df_wind[<span class="st">"v10"</span>]<span class="op">**</span><span class="dv">2</span>)</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>df_wind[<span class="st">"date"</span>] <span class="op">=</span> df_wind[<span class="st">"valid_time"</span>].dt.normalize()</span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -358,7 +358,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="process-wave" class="level1" data-number="G">
 <h1 data-number="G"><span class="header-section-number">G</span> PROCESS WAVE</h1>
-<div id="bbd92869" class="cell" data-execution_count="6">
+<div id="c918ad19" class="cell" data-execution_count="6">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>df_wave[<span class="st">"date"</span>] <span class="op">=</span> df_wave[<span class="st">"valid_time"</span>].dt.normalize()</span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>df_wave_daily <span class="op">=</span> (</span>
@@ -373,7 +373,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="merge-all" class="level1" data-number="H">
 <h1 data-number="H"><span class="header-section-number">H</span> MERGE ALL</h1>
-<div id="f9350c7b" class="cell" data-execution_count="7">
+<div id="78e7fb33" class="cell" data-execution_count="7">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>df_master <span class="op">=</span> df_master.merge(df_wind_daily, on<span class="op">=</span><span class="st">"date"</span>, how<span class="op">=</span><span class="st">"left"</span>)</span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>df_master <span class="op">=</span> df_master.merge(df_wave_daily, on<span class="op">=</span><span class="st">"date"</span>, how<span class="op">=</span><span class="st">"left"</span>)</span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>df_master <span class="op">=</span> df_master.merge(df_pop[[<span class="st">"year"</span>, <span class="st">"population"</span>]], on<span class="op">=</span><span class="st">"year"</span>, how<span class="op">=</span><span class="st">"left"</span>)</span>
@@ -386,7 +386,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>  (df_master[<span class="st">"csl_all"</span>]     <span class="op">/</span> df_master[<span class="st">"population"</span>]) <span class="op">*</span> POP_SCALE</span>
 <span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="55959f05" class="cell" data-execution_count="8">
+<div id="2a40cad8" class="cell" data-execution_count="8">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># THRESHOLD SENSITIVITY</span></span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>sensitivity_rows <span class="op">=</span> []</span>
@@ -453,7 +453,7 @@ Threshold Sensitivity Table:
            13.0           25.27           2.50               98.47           359.60            3.96</code></pre>
 </div>
 </div>
-<div id="3b58c18e" class="cell" data-execution_count="9">
+<div id="efc6001b" class="cell" data-execution_count="9">
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># BUILD FINAL FDI</span></span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>df_master[<span class="st">"fdi"</span>] <span class="op">=</span> (</span>
@@ -474,7 +474,7 @@ Wave threshold = 1.75 m</code></pre>
 </section>
 <section id="remove-feb-29-for-calendar-alignment" class="level1" data-number="I">
 <h1 data-number="I"><span class="header-section-number">I</span> REMOVE FEB 29 FOR CALENDAR ALIGNMENT</h1>
-<div id="4d0732d1" class="cell" data-execution_count="10">
+<div id="369e5a0b" class="cell" data-execution_count="10">
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>df_prob <span class="op">=</span> df_master.copy()</span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>df_prob[<span class="st">"date"</span>] <span class="op">=</span> pd.to_datetime(df_prob[<span class="st">"date"</span>])</span>
 <span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -494,7 +494,7 @@ Wave threshold = 1.75 m</code></pre>
 </section>
 <section id="contract-window" class="level1" data-number="J">
 <h1 data-number="J"><span class="header-section-number">J</span> CONTRACT WINDOW</h1>
-<div id="6c4880e8" class="cell" data-execution_count="11">
+<div id="87371226" class="cell" data-execution_count="11">
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>start_dummy <span class="op">=</span> pd.to_datetime(<span class="ss">f"2001-</span><span class="sc">{</span>CONTRACT_START_MMDD<span class="sc">}</span><span class="ss">"</span>)</span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>end_dummy   <span class="op">=</span> pd.to_datetime(<span class="ss">f"2001-</span><span class="sc">{</span>CONTRACT_END_MMDD<span class="sc">}</span><span class="ss">"</span>)</span>
 <span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -532,7 +532,7 @@ Contract length: 1.000000 years</code></pre>
 </section>
 <section id="daily-fishable-probability-for-contract-days-only" class="level1" data-number="K">
 <h1 data-number="K"><span class="header-section-number">K</span> DAILY FISHABLE PROBABILITY FOR CONTRACT DAYS ONLY</h1>
-<div id="bf93dd7d" class="cell" data-execution_count="12">
+<div id="857137ed" class="cell" data-execution_count="12">
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>daily_prob_all <span class="op">=</span> (</span>
 <span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>    df_prob.groupby(<span class="st">"month_day"</span>)</span>
 <span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>    .agg(</span>
@@ -594,7 +594,7 @@ Average profit/day = $330.00</code></pre>
 </section>
 <section id="plot-daily-fishable-probability" class="level1" data-number="L">
 <h1 data-number="L"><span class="header-section-number">L</span> PLOT DAILY FISHABLE PROBABILITY</h1>
-<div id="5a80d24f" class="cell" data-execution_count="13">
+<div id="35d86889" class="cell" data-execution_count="13">
 <div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">14</span>, <span class="dv">4</span>))</span>
 <span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>plt.plot(</span>
 <span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>    daily_prob_contract[<span class="st">"contract_day_index"</span>],</span>
@@ -623,7 +623,7 @@ Average profit/day = $330.00</code></pre>
 </section>
 <section id="section" class="level1" data-number="N">
 <h1 data-number="N"><span class="header-section-number">N</span> ============================================================</h1>
-<div id="c5d9e366" class="cell" data-execution_count="14">
+<div id="89c61a07" class="cell" data-execution_count="14">
 <div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>p <span class="op">=</span> daily_prob_contract[<span class="st">"p_fishable"</span>].to_numpy()</span>
 <span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>n <span class="op">=</span> <span class="bu">len</span>(p)</span>
 <span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a></span>
