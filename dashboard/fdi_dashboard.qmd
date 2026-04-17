@@ -14,17 +14,21 @@ all_data = FileAttachment("dashboard_data.csv").csv({typed: true})
 // 2. Explicitly require D3
 d3 = require("d3@7")
 
+priceFloor = 1.0
+
 // 3. Centralized Filtering (Numeric comparison for stability)
 // Scenario A logic
 data_A_raw = all_data.filter(d => 
   Number(d.wind_threshold) === Number(wind_A) && 
-  Number(d.wave_threshold) === Number(wave_A)
+  Number(d.wave_threshold) === Number(wave_A) &&
+  d.weather_derivative_price >= priceFloor
 )
 
 // Scenario B logic
 data_B_raw = all_data.filter(d => 
   Number(d.wind_threshold) === Number(wind_B) && 
-  Number(d.wave_threshold) === Number(wave_B)
+  Number(d.wave_threshold) === Number(wave_B) &&
+  d.weather_derivative_price >= priceFloor
 )
 
 // 4. Shared Rollups (Used by both plots and tables)
@@ -39,16 +43,16 @@ data_B_pricing = Array.from(d3.rollup(data_B_raw, v => v[0], d => d.strike_perce
 
 ### Scenario A (Blue)
 ```{ojs}
-viewof wind_A = Inputs.select([8.5, 9.5, 10.5], {value: 8.5, label: "Wind (m/s)"})
-viewof wave_A = Inputs.select([1.5, 1.75, 2.0], {value: 1.5, label: "Waves (m)"})
+viewof wind_A = Inputs.select([7.5, 8.5, 9.5, 10.5], {value: 8.5, label: "Wind (m/s)"})
+viewof wave_A = Inputs.select([1.25, 1.5, 1.75, 2.0], {value: 1.75, label: "Waves (m)"})
 ```
 
 ***
 
 ### Scenario B (Orange)
 ```{ojs}
-viewof wind_B = Inputs.select([8.5, 9.5, 10.5], {value: 9.5, label: "Wind (m/s)"})
-viewof wave_B = Inputs.select([1.5, 1.75, 2.0], {value: 1.75, label: "Waves (m)"})
+viewof wind_B = Inputs.select([7.5, 8.5, 9.5, 10.5], {value: 9.5, label: "Wind (m/s)"})
+viewof wave_B = Inputs.select([1.25, 1.5, 1.75, 2.0], {value: 1.75, label: "Waves (m)"})
 ```
 
 ## Row {height="60%"}
