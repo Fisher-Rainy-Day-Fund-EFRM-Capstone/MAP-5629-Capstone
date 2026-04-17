@@ -1,17 +1,26 @@
 # --- PARAMETERS ---
 contract_start <- "01-01"
 contract_end   <- "12-31"
-strike_percents <- seq(0.80, 0.95, by = 0.05)
+strike_percents <- seq(0.80, 0.95, by = 0.025)
 avg_daily_profit <- 330
 risk_free_rate <- 0.05
 
 # Generate sequences based on the actual observed range
 # We round to 1 decimal place to keep the table readable
-wind_thresholds <- c(8.5, 9.5, 10.5)
-wave_thresholds <- c(1.5, 1.75, 2)
+wind_thresholds <- c(7.5, 8.5, 9.5, 10.5)
+wave_thresholds <- c(1.25, 1.5, 1.75, 2)
 
 source(here::here("code", "03_contract_probability_prep.R"))
 source(here::here("code", "04_pricing_engine.R"))
+
+# Define the file name
+filein <- "st_croix_daily.csv"
+
+# Load the main data
+df_main <- readr::read_csv(
+  here::here("data", "processed", filein),
+  show_col_types = FALSE
+) 
 
 # Example of Prep Calendar
 df_contract_calendar <- prep_contract_calendar(
