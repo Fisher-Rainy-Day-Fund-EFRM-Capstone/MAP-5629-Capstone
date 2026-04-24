@@ -6,7 +6,6 @@ author:
   - name: Veronica Prelaz
   - name: Adyan Rios
 date: "April 24, 2026"
-bibliography: references.bib
 ---
 
 ## Fisher Rainy Day Fund – A Parametric Insurance Policy {.unnumbered}
