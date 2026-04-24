@@ -263,7 +263,6 @@ window.Quarto = {
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
 <h1 class="title"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Fisher Rainy Day Fund – A Parametric Insurance Policy</span></h1>
-<p class="subtitle lead">MAP 5629: Quantitative Capstone in Environmental Finance</p>
 </div>
 
 
@@ -313,7 +312,8 @@ window.Quarto = {
 <div>
   <div class="abstract">
     <div class="block-title">Abstract</div>
-    <p>Dr.&nbsp;Pablo Olivares</p>
+    <p>MAP 5629: Quantitative Capstone in Environmental Finance<br>
+    Dr.&nbsp;Pablo Olivares</p>
   </div>
 </div>
 
@@ -464,7 +464,17 @@ Figure&nbsp;2.1: Heatmap of threshold sensitivity analysis for varying fishable 
 </section>
 <section id="seasonal-pattern-in-daily-fishability-probability" class="level4" data-number="2.3.4.13">
 <h4 data-number="2.3.4.13" class="anchored" data-anchor-id="seasonal-pattern-in-daily-fishability-probability"><span class="header-section-number">2.3.4.13</span> Seasonal pattern in daily fishability probability</h4>
-<p>The daily probability plot shows a clear seasonal pattern within the year. It follows from the methodology section that the model estimates probability 𝑃𝑗 separately for each contract day, pooling the same month-day over years. The curve in the plot does not remain flat. It demonstrates a strong seasonal structure instead. In the early season, the probabilities of being able to fish daily are around 0.35 to 0.50. Those probabilities rise during late winter and spring, sharply dip around mid-contract year, and then rise again towards a second high-probability period later in the year (Figure 2).</p>
+<p>The daily probability plot shows a clear seasonal pattern within the year. It follows from the methodology section that the model estimates probability 𝑃𝑗 separately for each contract day, pooling the same month-day over years. The curve in the plot does not remain flat. It demonstrates a strong seasonal structure instead. In the early season, the probabilities of being able to fish daily are around 0.35 to 0.50. Those probabilities rise during late winter and spring, sharply dip around mid-contract year, and then rise again towards a second high-probability period later in the year (<a href="#fig-2" class="quarto-xref">Figure&nbsp;<span>2.2</span></a>).</p>
+<div id="fig-2" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="figures/fig2.png" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;2.2: Daily probability of a fishable day during the contract window
+</figcaption>
+</figure>
+</div>
 <p>This trend comes with two important repercussions. In the first place, the contract index does not follow a stationary Bernoulli process with a daily constant probability. The Poisson-binomial framework implemented in the methodology is justified by that result which allows unequal probability. Seasonal structure shows that risk is not spread evenly over the year, but has months dedicated to risk. A concentrated risk window with additional non-fishable days is marked by a mid-year dip. This period at the end of the year is under a high probability window. The seasonal variation influences the annual fishable days distribution of annual fishable days and the lower-tail trigger probability. The findings thus confirm that we were right to not homogenize all days into one average probability and preserve calendar-day heterogeneity.</p>
 <p>According to the plot, it is observed that during the least favorable periods, many daily probabilities are well below 0.5, while during the most favorable periods, probabilities rise above 0.8. This range shows a strong seasonal contrast. The contrasting elements enhance the substance of the index. Furthermore, it upholds the pricing logic as seasonal structure contracts can capture real operational exposure better than those based on constant average hazard contracts.</p>
 </section>
@@ -479,12 +489,32 @@ Figure&nbsp;2.1: Heatmap of threshold sensitivity analysis for varying fishable 
 <h4 data-number="2.3.4.15" class="anchored" data-anchor-id="derivative-price-profile-across-strike-levels"><span class="header-section-number">2.3.4.15</span> Derivative price profile across strike levels</h4>
 <p>The continuously rising weather derivative price with respect to strike percentage faces a steep change with respect to strike. The fixed-payout pricing formula, 𝑉0=𝑒−𝑟𝑡𝐿Ψ(𝐾), directly leads to this pattern. As the strike rises, the gap between the expected fishable days and the strike narrows, causing the fixed payout to decline in the current implementation. However, the payout falls faster than the trigger probability rises. This probability effect dominates the price function.</p>
 <p>The price is practically nonexistent for low strikes. At 80% the amount is $0.02, at 81% the amount is $0.06, at 82% it is $0.23 and at 83% it is $0.54 (Table 3). Even at 86%, it costs under $5.58. The values indicate that lower strike regions generate a very low expected protection value. The contract rarely activates to warrant a significant premium, according to the experts.</p>
-<p>The price then increases quickly once the strike enters the low-90% range (Figure 3). It climbs to $20.52 at 88%, $36.45 at 89%, $61.46 at 90%, $98.28 at 91%, $148.81 at 92%, $212.86 at 93%, $286.64 at 94%, $361.38 at 95%. As a result, the price curve is convex. The derivative becomes markedly more costly as the strike nears the expected annual total fishable days.</p>
-<p>This shape is economically viable. A higher strike position triggers nearer to the midpoint of the annual fishable-day distribution. While the fixed payout amount falls, the payout frequency increases with that move. It can be observed from the results that the rise in trigger probability surpasses the decrease in a benefit size (Figure 3). That collaboration leads to a sudden rise in the premium curve. As per the model, it is not the fixed payout size but rather triggers probability that drives price over the tested range.</p>
+<p>The price then increases quickly once the strike enters the low-90% range (<a href="#fig-3" class="quarto-xref">Figure&nbsp;<span>2.3</span></a>). It climbs to $20.52 at 88%, $36.45 at 89%, $61.46 at 90%, $98.28 at 91%, $148.81 at 92%, $212.86 at 93%, $286.64 at 94%, $361.38 at 95%. As a result, the price curve is convex. The derivative becomes markedly more costly as the strike nears the expected annual total fishable days.</p>
+<div id="fig-3" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-3-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="figures/fig3.png" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-3-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;2.3: Trigger probability across strike percentages
+</figcaption>
+</figure>
+</div>
+<p>This shape is economically viable. A higher strike position triggers nearer to the midpoint of the annual fishable-day distribution. While the fixed payout amount falls, the payout frequency increases with that move. It can be observed from the results that the rise in trigger probability surpasses the decrease in a benefit size (<a href="#fig-3" class="quarto-xref">Figure&nbsp;<span>2.3</span></a>). That collaboration leads to a sudden rise in the premium curve. As per the model, it is not the fixed payout size but rather triggers probability that drives price over the tested range.</p>
 </section>
 <section id="joint-interpretation-of-trigger-probability-and-premium" class="level4" data-number="2.3.4.16">
 <h4 data-number="2.3.4.16" class="anchored" data-anchor-id="joint-interpretation-of-trigger-probability-and-premium"><span class="header-section-number">2.3.4.16</span> Joint interpretation of trigger probability and premium</h4>
-<p>The trigger probability curve and the premium curve both show positive exponential patterns but with different rates. The difference is due to the pricing formula. The premiums reflect the low tail probability and the fixed payout level. In the design under test, the payout decreases as the strike percentage increases. However, the effect of lower tail probability has a stronger influence. The interaction generates a curve for the price per number of fishable days that initially rises smoothly and then increases at a faster rate (Figure 3 &amp; Figure 4).</p>
+<p>The trigger probability curve and the premium curve both show positive exponential patterns but with different rates. The difference is due to the pricing formula. The premiums reflect the low tail probability and the fixed payout level. In the design under test, the payout decreases as the strike percentage increases. However, the effect of lower tail probability has a stronger influence. The interaction generates a curve for the price per number of fishable days that initially rises smoothly and then increases at a faster rate (<a href="#fig-3" class="quarto-xref">Figure&nbsp;<span>2.3</span></a>; <a href="#fig-4" class="quarto-xref">Figure&nbsp;<span>2.4</span></a>).</p>
+<div id="fig-4" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-4-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="figures/fig4.png" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-4-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;2.4: Weather derivative Price across strike percentages
+</figcaption>
+</figure>
+</div>
 </section>
 </section>
 </section>
