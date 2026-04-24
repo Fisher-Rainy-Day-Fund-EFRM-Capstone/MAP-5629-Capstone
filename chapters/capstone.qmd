@@ -3,17 +3,21 @@ title: "Fisher Rainy Day Fund – A Parametric Insurance Policy"
 subtitle: "MAP 5629: Quantitative Capstone in Environmental Finance"
 author:
   - name: Md Tanvir Hossain
-  affiliations:
-      - id: fiu
-        name: Florida International University
+    affiliations:
+      - ref: fiu
         department: Institute of Environment
   - name: Veronica Prelaz
-  affiliations:
-      - id: fiu
+    affiliations:
+      - ref: fiu
   - name: Adyan Rios
-  affiliations:
-      - id: fiu
-date: "April 24, 2026"
+    affiliations:
+      - ref: fiu
+affiliations:
+  - id: fiu
+    name: Florida International University
+abstract: |
+  Dr. Pablo Olivares 
+date: "2026-04-24"
 bibliography: references.bib
 ---
 
@@ -61,7 +65,7 @@ The analysis revealed a pronounced decline in fishing activity on Sunday relativ
 
 The Fishable Days Index (*FDI*) is defined as a binary daily indicator equal to one (*FDI = 1* on safe days) on days when environmental conditions are consistent with safe small-vessel lobster fishing operations, otherwise FDI is equal to zero (*FDI = 0* on unsafe days). For the St. Croix CSL fishery, the index is determined by two simultaneous climate conditions: daily maximum wind speed must not exceed a specified limit, and daily maximum significant wave height must not exceed a separate specified limit. Since lobster fishing in St. Croix is open year-round with no regulatory seasonal closure, the FDI contains no regulatory component and is determined entirely by the environmental conditions. Therefore, the annual FDI for any given season is the sum of daily FDI values over a 365-day calendar year.
 
-![Heatmap of threshold sensitivity analysis for varying fishable day weather conditions](figures/fig1.png)
+![Heatmap of threshold sensitivity analysis for varying fishable day weather conditions](figures/fig1.png){#fig-1}
 
 Initial threshold values were drawn from the small vessel operability literature. Wind speeds at or above 20 knots (approximately 10.3 m/s) are widely cited as the threshold above which small craft advisories apply in United States coastal waters, and significant wave heights above 2.0 to 2.5 meters are considered the upper operational limit for vessels typically used in St. Croix lobster fisheries. These values were used initially as starting parameters and evaluated against observed fishing activity data.
 
