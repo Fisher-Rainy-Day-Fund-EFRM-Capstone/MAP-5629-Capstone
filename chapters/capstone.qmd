@@ -1,13 +1,14 @@
 ---
 title: "Fisher Rainy Day Fund – A Parametric Insurance Policy"
-subtitle: "MAP 5629: Quantitative Capstone in Environmental Finance"
+subtitle: |
+  "MAP 5629: Quantitative Capstone in Environmental Finance"
+   "Prepared for Dr. Pablo Olivares"
 author:
   - name: Md Tanvir Hossain
   - name: Veronica Prelaz
   - name: Adyan Rios
 date: "April 24, 2026"
-abstract: |
-  Prepared for Dr. Pablo Olivares.
+bibliography: references.bib
 ---
 
 ## Fisher Rainy Day Fund – A Parametric Insurance Policy {.unnumbered}
@@ -16,13 +17,13 @@ Submitted April 24, 2026
 
 ## Introduction
 
-Fishermen are often unable to produce income due to other reason beyond their control. For example, weather and ocean conditions can make it unsafe to go fishing. Additionally, fisheries are sometimes closed deliberately to protect spawning times, ensure sustainable harvest rates, and allow over exploited stocks to replenish. While environmentally necessary, these restrictions diminish short-term fishing opportunities and income. The aim of this project is to create and cost a parametric derivative agreement that provides financial protection when fishing days are lost due to objectively defined negative environmental conditions. 
+Fishermen are often unable to produce income due to other reason beyond their control. For example, weather and ocean conditions can make it unsafe to go fishing. Additionally, fisheries are sometimes closed deliberately to protect spawning times, ensure sustainable harvest rates, and allow over exploited stocks to replenish. While environmentally necessary, these restrictions diminish short-term fishing opportunities and income. The aim of this project is to create and cost a parametric derivative agreement that provides financial protection when fishing days are lost due to objectively defined negative environmental conditions.
 
 The proposed Fisher Rainy Day Fund is a parametric insurance policy that is based on a Fishable Days Index (FDI). The contract counts the days in a season when fishing is legally permitted and environmentally feasible. This project uses a quantitative framework with three objectives: (1) define the fishable days using wind and wave meteorological conditions, (2) model the stochastic behavior of fishable and unfishable days through a Poisson-binomial distribution, and (3) price an index-based derivative. The system is based on weather derivative pricing but altered slightly to fit the operational realities of a small-scale island-based fisheries.
 
 ## Background
 
-Income shocks have a big impact on small fisheries. The performance of traditional indemnity insurance in this sector is not up to the mark as it becomes difficult to verify losses and claims are settled slowly. Furthermore, controlling moral hazard is difficult. For this reason, many fishers are not insured. Parametric and index-based products provide clear and low-cost alternatives, as payouts depend on objective indices rather than observed losses (Skees, 2008).
+Income shocks have a big impact on small fisheries. The performance of traditional indemnity insurance in this sector is not up to the mark as it becomes difficult to verify losses and claims are settled slowly. Furthermore, controlling moral hazard is difficult. For this reason, many fishers are not insured. Parametric and index-based products provide clear and low-cost alternatives, as payouts depend on objective indices rather than observed losses ([@skees2008]).
 
 ## Methods
 
@@ -40,8 +41,7 @@ The fourth dataset consists of annual total population estimates for the United 
 
 A complete daily calendar skeleton was constructed spanning the full study period using pandas date_range functionality, producing a main data frame of exactly 14,607 rows. The limited fishing report file was left-joined onto this skeleton so that days absent from the original file became explicit rows with zero values for all fishing activity columns rather than structural absences. This distinction is significant: a day with zero reported trips carries different analytical meaning depending on whether it reflects true fishing trip inactivity, privacy-based censoring of low-report days, or adverse weather conditions. The calendar join method makes all three types of zero-day observable within the same framework.
 
-Hourly ERA5 wind data were processed by first computing the scalar wind speed from the u and v vector components as the Euclidean magnitude, expressed formally as 
-$|W| = \sqrt{u_{10}^2 + v_{10}^2}$ with units of meters per second $(m/s)$. Wind speeds were additionally converted to knots using the exact conversion factor of $1 m/s = 1.9438449 knots$. Both scalar wind speed and gust speed were then transformed from hourly to daily frequency by taking the maximum of the daily values. The choice of daily maximum rather than daily mean reflects the operational reality that a single period of dangerous wind or wave conditions within a day is sufficient to prevent fishing activity regardless of conditions during other hours. This process was replicated to transform hourly significant wave heights to daily maximum values.
+Hourly ERA5 wind data were processed by first computing the scalar wind speed from the u and v vector components as the Euclidean magnitude, expressed formally as $|W| = \sqrt{u_{10}^2 + v_{10}^2}$ with units of meters per second $(m/s)$. Wind speeds were additionally converted to knots using the exact conversion factor of $1 m/s = 1.9438449 knots$. Both scalar wind speed and gust speed were then transformed from hourly to daily frequency by taking the maximum of the daily values. The choice of daily maximum rather than daily mean reflects the operational reality that a single period of dangerous wind or wave conditions within a day is sufficient to prevent fishing activity regardless of conditions during other hours. This process was replicated to transform hourly significant wave heights to daily maximum values.
 
 To isolate climate-driven variation in lobster fishing activity from background trends driven by changes in the island's population and fishing fleet capacity, all fishing activity metrics used in the threshold validation were normalized by annual population. Specifically, CSL trip rates were expressed as the number of lobster trips per 1,000 residents, and CSL catch rates were expressed as pounds of lobster caught per 1,000 residents per day. This normalization process allows for using the activity rates of fishing rather than raw counts, ensuring that this signal reflects responses to environmental conditions rather than changes driven by population demands.
 
@@ -94,11 +94,12 @@ Instead of imposing a single probability common to every day, we allow every day
 The Poisson-binomial distribution signifies the total of independent Bernoulli variables that need not share the same success probability. It harmonizes with the contractual weather-based index in a natural fashion as there’s a predefined conditions that define total fishable days. Every day has its own historical fishability probability $p_j$. After considering the daily indicators, the model considered daily probabilities as independent and treats them as Bernoulli variables (Fishable or Non-fishable). The seasonal count $N$ was made to follow a Poisson-binomial distribution. Research in statistics on this distribution has established the theory, computation and use of a distribution with a trial probability that varies (Chen & Liu, 1997; Hong, 2013). Formally, $X_j\sim\text{Bernoulli}(p_j), \quad j=1,2,\dots, T$ and assume independence across days, $N=\sum\limits_{j=1}^{T} X_j \sim \text{Poisson-Binomial}(p_1,  p_2, \dots, p_T)$. The expected number of fishable days follows, $E[N]=\sum\limits_{j=1}^{T}p_j$. The variance follows, $Var(N)=\sum\limits_{j=1}^T(1-p_j)$.These moments summarize the center and spread of the seasonal fishable-day distribution under the independence assumption.
 
 #### Probability of mass function
+
 The exact probability that the season ends with exactly 𝑛 fishable days equals $$P(N=n)=\sum\limits_{A\epsilon F_n} \prod\limits_{j\epsilon Ap_j}(1-p_j), \quad n=1,2,\dots, T$$
 
 Where $F_n$ denotes the collection of all subsets of $\{1, \dots, T\}$ that contain exactly $n$ elements. This equation sums up the probability of every possible path that produces exactly $n$ fishable days. The equation gives the full probability mass function of the contract index. It also provides the foundation for trigger probability and price calculations (Chen & Liu, 1997; Fernandez & Williams, 2010; Hong, 2013).
 
-This report does not enumerate all subsets directly because that route grows expensive when 𝑇becomes large. Instead, the code uses recursive convolution, which updates the distribution one day at a time. Let $f_m(n)$ denote the probability of obtaining $n$ fishable days after the first $m$ contract days. Start with $f_0(0)=1, f_0(n) = 0, \text{ for } n>0$. Then update with $f_m(n)=(1-p_m)f_{m-1}(n) + p_mf_{m-1}(n-1), \text{ for } m=1,2,\dots, T$ and admissible $n$. After the last update, $f_T(n)=P(N=n). Statistical studies show that recursive and Fourier-based methods provide exact or highly efficient ways to compute the Poisson-binomial distribution in applied work (Biscarri et al., 2018; Chen & Liu, 1997; Fernandez & Williams, 2010; Hong, 2013).
+This report does not enumerate all subsets directly because that route grows expensive when 𝑇becomes large. Instead, the code uses recursive convolution, which updates the distribution one day at a time. Let $f_m(n)$ denote the probability of obtaining $n$ fishable days after the first $m$ contract days. Start with $f_0(0)=1, f_0(n) = 0, \text{ for } n>0$. Then update with $f_m(n)=(1-p_m)f_{m-1}(n) + p_mf_{m-1}(n-1), \text{ for } m=1,2,\dots, T$ and admissible $n$. After the last update, \$f_T(n)=P(N=n). Statistical studies show that recursive and Fourier-based methods provide exact or highly efficient ways to compute the Poisson-binomial distribution in applied work (Biscarri et al., 2018; Chen & Liu, 1997; Fernandez & Williams, 2010; Hong, 2013).
 
 ### Limiting Probability Equation
 
@@ -114,8 +115,7 @@ where the value of strike percentage is explored from 0.80 to 0.99 The strike pe
 
 #### General payoff function
 
-A weather derivative price starts with the payoff function. Let $G(N)$ denote the contract payoff at expiration as a function of the seasonal fishable-day count $N$. The most general actuarial pricing equation then discounts the expected payoff back to the pricing date: $$V_0=e^{-r\tau}E[G(N)]=e^{-r\tau}\sum\limits_{n=0}^TG(n)P(N=n)$$.
-Where $r$ denotes the continuously compounded risk-free rate and $\tau$ denotes the contract length in years. This expected-payoff structure sits at the center of actuarial and burn-analysis pricing for weather-index products (Alaton et al., 2002; Jewson & Brix, 2005; Taib & Benth, 2012; World Bank, 2023).
+A weather derivative price starts with the payoff function. Let $G(N)$ denote the contract payoff at expiration as a function of the seasonal fishable-day count $N$. The most general actuarial pricing equation then discounts the expected payoff back to the pricing date: $$V_0=e^{-r\tau}E[G(N)]=e^{-r\tau}\sum\limits_{n=0}^TG(n)P(N=n)$$. Where $r$ denotes the continuously compounded risk-free rate and $\tau$ denotes the contract length in years. This expected-payoff structure sits at the center of actuarial and burn-analysis pricing for weather-index products (Alaton et al., 2002; Jewson & Brix, 2005; Taib & Benth, 2012; World Bank, 2023).
 
 #### Fixed-payout contract used in the code
 
@@ -141,10 +141,9 @@ Once $p_j$ values have been estimated for the model, the full Poisson-binomial p
 
 #### Interpretation of the Price
 
-This price represents the current worth of the expected contract payoff calculated using the historical probability model. The price omits transaction costs, profit loading, administrative charges, or a market price of weather risk. Research  on weather derivatives indicates that incomplete-market settings can justify alternative pricing rules, including the use of equilibrium or indifference methods when traders demand compensation for non-hedge able weather risk. However, our Poisson-binomial price based on actuarial technique is suitably transparent and represents a fair-value benchmark (Alaton et al., 2002; Cao & Wei, 2004; Richards et al., 2004; Xu et al., 2008).
+This price represents the current worth of the expected contract payoff calculated using the historical probability model. The price omits transaction costs, profit loading, administrative charges, or a market price of weather risk. Research on weather derivatives indicates that incomplete-market settings can justify alternative pricing rules, including the use of equilibrium or indifference methods when traders demand compensation for non-hedge able weather risk. However, our Poisson-binomial price based on actuarial technique is suitably transparent and represents a fair-value benchmark (Alaton et al., 2002; Cao & Wei, 2004; Richards et al., 2004; Xu et al., 2008).
 
-As the strike percentage increases, the contract is triggered more easily because the season must meet a higher target for fishable days. Hence, the lower tail cumulative probability increases. Beneath a fixed payout design, the premium increase since the contract pays the same amount more often. With a shortfall design, the premium usually rises even faster as the contract pays out
-more often and can pay larger amounts. The upward pattern is what standard derivative and insurance intuition suggests: more coverage costs more (Kath et al., 2018; Taib & Benth, 2012; World Bank, 2023).
+As the strike percentage increases, the contract is triggered more easily because the season must meet a higher target for fishable days. Hence, the lower tail cumulative probability increases. Beneath a fixed payout design, the premium increase since the contract pays the same amount more often. With a shortfall design, the premium usually rises even faster as the contract pays out more often and can pay larger amounts. The upward pattern is what standard derivative and insurance intuition suggests: more coverage costs more (Kath et al., 2018; Taib & Benth, 2012; World Bank, 2023).
 
 #### Results and Findings
 
@@ -160,10 +159,9 @@ The contract is for the full calendar year, January 1 to December 31. This desig
 
 The 207 fishable days mean the selected threshold, supports fishing on roughly 57% of the days in a normal year (Table 2). An inter-annual variability of around 24 days is suggested by the standard deviation. This amount is relevant for pricing. A derivative contract must ensure sufficient dispersion in the index to create a meaningful lower- tail trigger probability. Here, the yearly difference facilitates the need. Simultaneously, the spread does not appear to be so large as to indicate an unstable index or poorly defined index. Consequently, this measure assesses fishable days and can be used as an underlying contract variable.
 
-#### Seasonal pattern in daily fishability probability 
+#### Seasonal pattern in daily fishability probability
 
-The daily probability plot shows a clear seasonal pattern within the year. It follows from the methodology section that the model estimates probability 𝑃𝑗 separately for each contract day,
-pooling the same month-day over years. The curve in the plot does not remain flat. It demonstrates a strong seasonal structure instead. In the early season, the probabilities of being able to fish daily are around 0.35 to 0.50. Those probabilities rise during late winter and spring, sharply dip around mid-contract year, and then rise again towards a second high-probability period later in the year (Figure 2).
+The daily probability plot shows a clear seasonal pattern within the year. It follows from the methodology section that the model estimates probability 𝑃𝑗 separately for each contract day, pooling the same month-day over years. The curve in the plot does not remain flat. It demonstrates a strong seasonal structure instead. In the early season, the probabilities of being able to fish daily are around 0.35 to 0.50. Those probabilities rise during late winter and spring, sharply dip around mid-contract year, and then rise again towards a second high-probability period later in the year (Figure 2).
 
 This trend comes with two important repercussions. In the first place, the contract index does not follow a stationary Bernoulli process with a daily constant probability. The Poisson-binomial framework implemented in the methodology is justified by that result which allows unequal probability. Seasonal structure shows that risk is not spread evenly over the year, but has months dedicated to risk. A concentrated risk window with additional non-fishable days is marked by a mid-year dip. This period at the end of the year is under a high probability window. The seasonal variation influences the annual fishable days distribution of annual fishable days and the lower-tail trigger probability. The findings thus confirm that we were right to not homogenize all days into one average probability and preserve calendar-day heterogeneity.
 
@@ -173,8 +171,7 @@ According to the plot, it is observed that during the least favorable periods, m
 
 The pricing analysis assesses strike levels between 80% and 95% of the expected average number of fishable days calculated over a one-year contract period. This design directly ties the available data to user-specified percentage of expected contract fishable days. The subsequent periods between strikes vary from 165 to 196 days (Table 3). With increasing strike percentage, the trigger threshold moves towards 207 days, which is the expected annual fishing days. This change raises the chances of payout due to increased low-event odds, but results in a lower payout since fewer days are factored into the losses.
 
-The probabilities of triggers indicate a strong non-linearity response. The contract gets triggered rarely at lower levels. The prospect of a trigger only has a probability of 0.000002 at 80% strike. Further, it is 0.000004 at 81% and 0.000019 at 82%. These values suggest a nearly dormant contract. Even a very adverse weather year would have to fall well below the long-run mean
-before the payout condition trigger. As a result, the contract guarantees minimal practical protection in this strike range.
+The probabilities of triggers indicate a strong non-linearity response. The contract gets triggered rarely at lower levels. The prospect of a trigger only has a probability of 0.000002 at 80% strike. Further, it is 0.000004 at 81% and 0.000019 at 82%. These values suggest a nearly dormant contract. Even a very adverse weather year would have to fall well below the long-run mean before the payout condition trigger. As a result, the contract guarantees minimal practical protection in this strike range.
 
 Once the strike crosses above the upper-80% level, the sensitivity of the trigger probability begins to move. It goes up to 0.001289 at 87%, 0.002605 at 88%, and 0.005032 at 89% (Table 3). The likelihood then quickly rises in the region of 90% to 95%. At 90%, it reaches 0.009303; at 91%, 0.016460; at 92%, 0.027895; at 93% it reaches 0.045302; at 94%, 0.070555; finally, at 95%, it reaches 0.105465. This pattern is non linear. The upper strike range penetrates further into the core of the annual fishable-day distribution. A slight adjustment in the strike rate, thus, has a larger impact on trigger frequency.
 
@@ -184,9 +181,9 @@ It holds practical significance. A designer who accepts strikes under 88% would 
 
 The continuously rising weather derivative price with respect to strike percentage faces a steep change with respect to strike. The fixed-payout pricing formula, 𝑉0=𝑒−𝑟𝑡𝐿Ψ(𝐾), directly leads to this pattern. As the strike rises, the gap between the expected fishable days and the strike narrows, causing the fixed payout to decline in the current implementation. However, the payout falls faster than the trigger probability rises. This probability effect dominates the price function.
 
-The price is practically nonexistent for low strikes. At 80% the amount is $0.02, at 81% the amount is $0.06, at 82% it is $0.23 and at 83% it is $0.54 (Table 3). Even at 86%, it costs under $5.58. The values indicate that lower strike regions generate a very low expected protection value. The contract rarely activates to warrant a significant premium, according to the experts.
+The price is practically nonexistent for low strikes. At 80% the amount is \$0.02, at 81% the amount is \$0.06, at 82% it is \$0.23 and at 83% it is \$0.54 (Table 3). Even at 86%, it costs under \$5.58. The values indicate that lower strike regions generate a very low expected protection value. The contract rarely activates to warrant a significant premium, according to the experts.
 
-The price then increases quickly once the strike enters the low-90% range (Figure 3). It climbs to $20.52 at 88%, $36.45 at 89%, $61.46 at 90%, $98.28 at 91%, $148.81 at 92%, $212.86 at 93%, $286.64 at 94%, $361.38 at 95%. As a result, the price curve is convex. The derivative becomes markedly more costly as the strike nears the expected annual total fishable days.
+The price then increases quickly once the strike enters the low-90% range (Figure 3). It climbs to \$20.52 at 88%, \$36.45 at 89%, \$61.46 at 90%, \$98.28 at 91%, \$148.81 at 92%, \$212.86 at 93%, \$286.64 at 94%, \$361.38 at 95%. As a result, the price curve is convex. The derivative becomes markedly more costly as the strike nears the expected annual total fishable days.
 
 This shape is economically viable. A higher strike position triggers nearer to the midpoint of the annual fishable-day distribution. While the fixed payout amount falls, the payout frequency increases with that move. It can be observed from the results that the rise in trigger probability surpasses the decrease in a benefit size (Figure 3). That collaboration leads to a sudden rise in the premium curve. As per the model, it is not the fixed payout size but rather triggers probability that drives price over the tested range.
 
@@ -211,3 +208,6 @@ Currently, we still have limited information that we can use to independently de
 This study proposes the fishable-day index for developing parametric insurance contracts for fishers. The procedure creates a daily index based on either wind speed or wave height. It then estimates day-specific probabilities and applies to a Poisson-binomial model for seasonality. The findings indicate that selection of thresholds strongly governs index behavior. Highly restrictive parameters significantly decrease fishing days. Loosening limitations removes risk. The chosen thresholds of 8.5 m/s for wind and 1.75 m for wave height create a balanced set of criteria. It generates approximately 207 fishable days annually and sustains enough variance for pricing. The validation confirms that fishable days correspond with a peak fishing activity, thus justifying the practical relevance of the index. The seasonal probability pattern bolsters the choice of model since it shows real changes in fishing conditions during the year, allowing us to avoid an assumption of constant risk. The pricing results have important economic consequences. Strike levels that are too low mean almost zero trigger probability, which also does not offer much protection. Increasing the strike levels increases the chances of triggering and the premium. The range from 93% to 95% offers the most suitable balance of cost and coverage. The contract can respond to conditions that are only moderate or worse rather than only extreme events. The convex price pattern indicates that pricing is driven more by trigger probability than by payout size. The paper also identifies major limitations. Operational costs, reinsurance, and market risk loading are not included. It is also dependent on limited data of fishing activity that may mask true behavior because of reporting limitations. In the future, we must improve the quality of data, including fisher feedback, and further refine the threshold conditions. Broadening the framework to other regions or sectors would allow risk pooling. The research provides a well-defined and pragmatic framework for constructing a weather-based insurance apparatus beneficial to fishers under uncertain conditions of the sea.
 
 ## References
+
+::: {#refs}
+:::
