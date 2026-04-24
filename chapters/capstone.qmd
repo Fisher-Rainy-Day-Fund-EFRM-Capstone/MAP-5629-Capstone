@@ -1,19 +1,15 @@
 ---
 title: "Fisher Rainy Day Fund – A Parametric Insurance Policy"
-subtitle: |
-  "MAP 5629: Quantitative Capstone in Environmental Finance"
-   "Prepared for Dr. Pablo Olivares"
+subtitle: "MAP 5629: Quantitative Capstone in Environmental Finance"
 author:
   - name: Md Tanvir Hossain
   - name: Veronica Prelaz
   - name: Adyan Rios
 date: "April 24, 2026"
-bibliography: chapters/references.bib
+bibliography: references.bib
 ---
 
 ## Fisher Rainy Day Fund – A Parametric Insurance Policy {.unnumbered}
-
-Submitted April 24, 2026
 
 ## Introduction
 
@@ -33,7 +29,7 @@ This study integrates four primary datasets to construct and validate the Fishab
 
 The first dataset consists of daily commercial catch reports from individual fishers (Southeast Fisheries Science Center, 2026). Each observation records information for every fishing trip made by vessels fishing in St. Croix. The important variables utilized for this analysis were the date, total number of trips, number of trips specifically for the Caribbean Spiny Lobster (CSL), and total pounds of all species caught alongside pounds of solely CSL. The dataset is a limited event log: rows are present only on days when at least three fishers filed a self-reported logbook. Days with fewer than three individual reports are suppressed to zero to protect fisher privacy, meaning that missing continuous-date rows represent a mix of truly inactive days and days with only one or two reported trips.
 
-The second and third datasets of wind speed and wave height respectively, are derived from the ERA5 reanalysis product produced by the European Centre for Medium-Range Weather Forecasts (ECMWF). ERA5 provides hourly estimates of atmospheric and oceanic variables at a grid resolution of 31 km from 1940 onwards, reconstructed from historical observations and numerical weather prediction models (Hersbach et al., 2020). The wind dataset provides hourly eastward, u10, and northward, v10, wind components from 10 meters above the surface, as well as the instantaneous wind gust speed, fg10, for a single grid point representative of the St. Croix region (17.75°N, 64.75°W). The wave dataset provides hourly significant wave height, swh, at a nearby grid point (18.0°N, 64.5°W), defined as the average height of the greatest one-third of waves.
+The second and third datasets of wind speed and wave height respectively, are derived from the ERA5 reanalysis product produced by the European Centre for Medium-Range Weather Forecasts (ECMWF). ERA5 provides hourly estimates of atmospheric and oceanic variables at a grid resolution of 31 km from 1940 onwards, reconstructed from historical observations and numerical weather prediction models [@hersbach2020]. The wind dataset provides hourly eastward, u10, and northward, v10, wind components from 10 meters above the surface, as well as the instantaneous wind gust speed, fg10, for a single grid point representative of the St. Croix region (17.75°N, 64.75°W). The wave dataset provides hourly significant wave height, swh, at a nearby grid point (18.0°N, 64.5°W), defined as the average height of the greatest one-third of waves.
 
 The fourth dataset consists of annual total population estimates for the United States Virgin Islands sourced from the World Bank, series POPTOTVIA647NWDB. Population data are used solely to normalize fishing activity metrics and remove secular trends in fleet capacity from the validation analysis, as described further below.
 
