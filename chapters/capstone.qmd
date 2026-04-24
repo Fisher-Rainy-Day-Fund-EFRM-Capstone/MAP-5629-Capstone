@@ -3,18 +3,8 @@ title: "Fisher Rainy Day Fund – A Parametric Insurance Policy"
 subtitle: "MAP 5629: Quantitative Capstone in Environmental Finance"
 author:
   - name: Md Tanvir Hossain
-  affiliations:
-      - ref: fiu
   - name: Veronica Prelaz
-  affiliations:
-      - ref: fiu
   - name: Adyan Rios
-  affiliations:
-      - ref: fiu
-affiliations:
-  - id: ufl
-    name: Florida International University
-    department: Institute of Environment
 date: "April 24, 2026"
 abstract: |
   Prepared for Dr. Pablo Olivares.
@@ -40,7 +30,7 @@ Income shocks have a big impact on small fisheries. The performance of tradition
 
 This study integrates four primary datasets to construct and validate the Fishable Days Index (FDI) for the St. Croix commercial fishery that targets Caribbean Spiny Lobster. Each dataset spans a study period from January 1, 1985, to December 28, 2024, resulting in a daily time series of 14,607 observations. All data loading, merging, and transformation were performed with the programming language “Python” to ensure full reproducibility and to avoid manual manipulation of the four source files.
 
-The first dataset consists of daily commercial catch reports from individual fishers (Southeast Fisheries Science Center, 2026). Each observation records information for every fishing trip made by vessels fishing in St. Croix. The important variables utilized for this analysis were the date, total number of trips, number of trips specifically for the Caribbean Spiny Lobster (CSL), and total pounds of all species caught alongside pounds of solely CSL. Critically, the dataset is a limited event log: rows are present only on days when at least three fishers filed a self-reported logbook. Days with fewer than three individual reports are suppressed to zero to protect fisher privacy, meaning that missing continuous-date rows represent a mix of truly inactive days and days with only one or two reported trips.
+The first dataset consists of daily commercial catch reports from individual fishers (Southeast Fisheries Science Center, 2026). Each observation records information for every fishing trip made by vessels fishing in St. Croix. The important variables utilized for this analysis were the date, total number of trips, number of trips specifically for the Caribbean Spiny Lobster (CSL), and total pounds of all species caught alongside pounds of solely CSL. The dataset is a limited event log: rows are present only on days when at least three fishers filed a self-reported logbook. Days with fewer than three individual reports are suppressed to zero to protect fisher privacy, meaning that missing continuous-date rows represent a mix of truly inactive days and days with only one or two reported trips.
 
 The second and third datasets of wind speed and wave height respectively, are derived from the ERA5 reanalysis product produced by the European Centre for Medium-Range Weather Forecasts (ECMWF). ERA5 provides hourly estimates of atmospheric and oceanic variables at a grid resolution of 31 km from 1940 onwards, reconstructed from historical observations and numerical weather prediction models (Hersbach et al., 2020). The wind dataset provides hourly eastward, u10, and northward, v10, wind components from 10 meters above the surface, as well as the instantaneous wind gust speed, fg10, for a single grid point representative of the St. Croix region (17.75°N, 64.75°W). The wave dataset provides hourly significant wave height, swh, at a nearby grid point (18.0°N, 64.5°W), defined as the average height of the greatest one-third of waves.
 
@@ -71,7 +61,7 @@ Initial threshold values were drawn from the small vessel operability literature
 
 #### Threshold Validation
 
-The selected thresholds were validated by testing whether days classified as fishable demonstrated higher population-adjusted lobster fishing activity than days classified as unfishable and validated with the fishing report data. Sunday observations were excluded from this analysis as described in Section 1.34. This validation compared mean CSL trip rates per 1,000 people and the proportion of days with any reported lobster activity between the two FDI categories.
+The selected thresholds were validated by testing whether days classified as fishable demonstrated higher population-adjusted lobster fishing activity than days classified as unfishable and validated with the fishing report data. Sunday observations were excluded from this analysis as described previously. This validation compared mean CSL trip rates per 1,000 people and the proportion of days with any reported lobster activity between the two FDI categories.
 
 Using the final thresholds (8.5 m/s and 1.75 m), fishable days had an average CSL trip rate of 0.044 trips per 1,000 people compared to 0.039 on unfishable days, and an active-day rate of 62.5% in contrast to 56.8% on unfishable days. This difference is understood to be conservative relative to what the true climate signal likely produces. The privacy-based censoring rule applied to the fishing report data suppresses observations to zero on any day with fewer than three individual fisher reports. This censoring feature disproportionately affects days near the threshold boundary, where marginal fishing conditions may motivate only one or two fishers to go out, which are the most informative observations for threshold calibration. Therefore, the true separation between fishable and unfishable days is likely greater than these validation statistics suggest.
 
