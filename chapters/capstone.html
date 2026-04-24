@@ -24,7 +24,27 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-</style>
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
 
 
 <script src="../site_libs/quarto-nav/quarto-nav.js"></script>
@@ -269,12 +289,6 @@ window.Quarto = {
     
   </div>
   
-<div>
-  <div class="abstract">
-    <div class="block-title">Abstract</div>
-    <p>Prepared for Dr.&nbsp;Pablo Olivares.</p>
-  </div>
-</div>
 
 
 </header>
@@ -282,7 +296,6 @@ window.Quarto = {
 
 <section id="fisher-rainy-day-fund-a-parametric-insurance-policy" class="level2 unnumbered">
 <h2 class="unnumbered anchored" data-anchor-id="fisher-rainy-day-fund-a-parametric-insurance-policy">Fisher Rainy Day Fund – A Parametric Insurance Policy</h2>
-<p>Submitted April 24, 2026</p>
 </section>
 <section id="introduction" class="level2" data-number="2.1">
 <h2 data-number="2.1" class="anchored" data-anchor-id="introduction"><span class="header-section-number">2.1</span> Introduction</h2>
@@ -291,7 +304,7 @@ window.Quarto = {
 </section>
 <section id="background" class="level2" data-number="2.2">
 <h2 data-number="2.2" class="anchored" data-anchor-id="background"><span class="header-section-number">2.2</span> Background</h2>
-<p>Income shocks have a big impact on small fisheries. The performance of traditional indemnity insurance in this sector is not up to the mark as it becomes difficult to verify losses and claims are settled slowly. Furthermore, controlling moral hazard is difficult. For this reason, many fishers are not insured. Parametric and index-based products provide clear and low-cost alternatives, as payouts depend on objective indices rather than observed losses (Skees, 2008).</p>
+<p>Income shocks have a big impact on small fisheries. The performance of traditional indemnity insurance in this sector is not up to the mark as it becomes difficult to verify losses and claims are settled slowly. Furthermore, controlling moral hazard is difficult. For this reason, many fishers are not insured. Parametric and index-based products provide clear and low-cost alternatives, as payouts depend on objective indices rather than observed losses <span class="citation" data-cites="skees2008">(<a href="capstone.html#ref-skees2008" role="doc-biblioref">Skees 2008</a>)</span>.</p>
 </section>
 <section id="methods" class="level2" data-number="2.3">
 <h2 data-number="2.3" class="anchored" data-anchor-id="methods"><span class="header-section-number">2.3</span> Methods</h2>
@@ -299,7 +312,7 @@ window.Quarto = {
 <h3 data-number="2.3.1" class="anchored" data-anchor-id="sources-of-data"><span class="header-section-number">2.3.1</span> Sources of Data</h3>
 <p>This study integrates four primary datasets to construct and validate the Fishable Days Index (FDI) for the St.&nbsp;Croix commercial fishery that targets Caribbean Spiny Lobster. Each dataset spans a study period from January 1, 1985, to December 28, 2024, resulting in a daily time series of 14,607 observations. All data loading, merging, and transformation were performed with the programming language “Python” to ensure full reproducibility and to avoid manual manipulation of the four source files.</p>
 <p>The first dataset consists of daily commercial catch reports from individual fishers (Southeast Fisheries Science Center, 2026). Each observation records information for every fishing trip made by vessels fishing in St.&nbsp;Croix. The important variables utilized for this analysis were the date, total number of trips, number of trips specifically for the Caribbean Spiny Lobster (CSL), and total pounds of all species caught alongside pounds of solely CSL. The dataset is a limited event log: rows are present only on days when at least three fishers filed a self-reported logbook. Days with fewer than three individual reports are suppressed to zero to protect fisher privacy, meaning that missing continuous-date rows represent a mix of truly inactive days and days with only one or two reported trips.</p>
-<p>The second and third datasets of wind speed and wave height respectively, are derived from the ERA5 reanalysis product produced by the European Centre for Medium-Range Weather Forecasts (ECMWF). ERA5 provides hourly estimates of atmospheric and oceanic variables at a grid resolution of 31 km from 1940 onwards, reconstructed from historical observations and numerical weather prediction models (Hersbach et al., 2020). The wind dataset provides hourly eastward, u10, and northward, v10, wind components from 10 meters above the surface, as well as the instantaneous wind gust speed, fg10, for a single grid point representative of the St.&nbsp;Croix region (17.75°N, 64.75°W). The wave dataset provides hourly significant wave height, swh, at a nearby grid point (18.0°N, 64.5°W), defined as the average height of the greatest one-third of waves.</p>
+<p>The second and third datasets of wind speed and wave height respectively, are derived from the ERA5 reanalysis product produced by the European Centre for Medium-Range Weather Forecasts (ECMWF). ERA5 provides hourly estimates of atmospheric and oceanic variables at a grid resolution of 31 km from 1940 onwards, reconstructed from historical observations and numerical weather prediction models <span class="citation" data-cites="hersbach2020">(<a href="capstone.html#ref-hersbach2020" role="doc-biblioref">Hersbach et al. 2020</a>)</span>. The wind dataset provides hourly eastward, u10, and northward, v10, wind components from 10 meters above the surface, as well as the instantaneous wind gust speed, fg10, for a single grid point representative of the St.&nbsp;Croix region (17.75°N, 64.75°W). The wave dataset provides hourly significant wave height, swh, at a nearby grid point (18.0°N, 64.5°W), defined as the average height of the greatest one-third of waves.</p>
 <p>The fourth dataset consists of annual total population estimates for the United States Virgin Islands sourced from the World Bank, series POPTOTVIA647NWDB. Population data are used solely to normalize fishing activity metrics and remove secular trends in fleet capacity from the validation analysis, as described further below.</p>
 <section id="daily-calendar-framework-construction" class="level4" data-number="2.3.1.1">
 <h4 data-number="2.3.1.1" class="anchored" data-anchor-id="daily-calendar-framework-construction"><span class="header-section-number">2.3.1.1</span> Daily Calendar Framework Construction</h4>
@@ -450,6 +463,19 @@ window.Quarto = {
 </section>
 <section id="references" class="level2" data-number="2.6">
 <h2 data-number="2.6" class="anchored" data-anchor-id="references"><span class="header-section-number">2.6</span> References</h2>
+<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
+<div id="ref-hersbach2020" class="csl-entry" role="listitem">
+Hersbach, Hans, Bill Bell, Paul Berrisford, Shoji Hirahara, András
+Horányi, Joaquín Muñoz-Sabater, Julien Nicolas, et al. 2020. <span>“The
+ERA5 Global Reanalysis.”</span> <em>Quarterly Journal of the Royal
+Meteorological Society</em> 146 (730): 1999–2049. <a href="https://doi.org/10.1002/qj.3803">https://doi.org/10.1002/qj.3803</a>.
+</div>
+<div id="ref-skees2008" class="csl-entry" role="listitem">
+Skees, Jerry R. 2008. <span>“Innovations in Index Insurance for the Poor
+in Lower Income Countries.”</span> <em>Agricultural and Resource
+Economics Review</em> 37 (1): 1–15. <a href="https://doi.org/10.1017/s1068280500002094">https://doi.org/10.1017/s1068280500002094</a>.
+</div>
+</div>
 
 
 </section>
