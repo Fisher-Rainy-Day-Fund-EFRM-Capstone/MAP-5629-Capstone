@@ -3,8 +3,16 @@ title: "Fisher Rainy Day Fund – A Parametric Insurance Policy"
 subtitle: "MAP 5629: Quantitative Capstone in Environmental Finance"
 author:
   - name: Md Tanvir Hossain
+  affiliations:
+      - id: fiu
+        name: Florida International University
+        department: Institute of Environment
   - name: Veronica Prelaz
+  affiliations:
+      - id: fiu
   - name: Adyan Rios
+  affiliations:
+      - id: fiu
 date: "April 24, 2026"
 bibliography: references.bib
 ---
@@ -95,7 +103,9 @@ The exact probability that the season ends with exactly 𝑛 fishable days equal
 
 Where $F_n$ denotes the collection of all subsets of $\{1, \dots, T\}$ that contain exactly $n$ elements. This equation sums up the probability of every possible path that produces exactly $n$ fishable days. The equation gives the full probability mass function of the contract index. It also provides the foundation for trigger probability and price calculations [@chen1997; @fernandez2010; @hong2013].
 
-This report does not enumerate all subsets directly because that route grows expensive when 𝑇becomes large. Instead, the code uses recursive convolution, which updates the distribution one day at a time. Let $f_m(n)$ denote the probability of obtaining $n$ fishable days after the first $m$ contract days. Start with $f_0(0)=1, f_0(n) = 0, \text{ for } n>0$. Then update with $f_m(n)=(1-p_m)f_{m-1}(n) + p_mf_{m-1}(n-1), \text{ for } m=1,2,\dots, T$ and admissible $n$. After the last update, \$f_T(n)=P(N=n). Statistical studies show that recursive and Fourier-based methods provide exact or highly efficient ways to compute the Poisson-binomial distribution in applied work [@biscarri2018; @chen1997; @fernandez2010; @hong2013].
+This report does not enumerate all subsets directly because that route grows expensive when 𝑇becomes large. Instead, the code uses recursive convolution, which updates the distribution one day at a time. Let $f_m(n)$ denote the probability of obtaining $n$ fishable days after the first $m$ contract days. Start with $f_0(0)=1, f_0(n) = 0, \text{ for } n>0$.
+
+Then update with $f_m(n)=(1-p_m)f_{m-1}(n) + p_mf_{m-1}(n-1), \text{ for } m=1,2,\dots, T$ and admissible $n$. After the last update, \$f_T(n)=P(N=n). Statistical studies show that recursive and Fourier-based methods provide exact or highly efficient ways to compute the Poisson-binomial distribution in applied work [@biscarri2018; @chen1997; @fernandez2010; @hong2013].
 
 ### Limiting Probability Equation
 
