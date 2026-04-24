@@ -1,6 +1,5 @@
 ---
 title: "Fisher Rainy Day Fund – A Parametric Insurance Policy"
-subtitle: "MAP 5629: Quantitative Capstone in Environmental Finance"
 author:
   - name: Md Tanvir Hossain
     affiliations:
@@ -16,6 +15,7 @@ affiliations:
   - id: fiu
     name: Florida International University
 abstract: |
+  MAP 5629: Quantitative Capstone in Environmental Finance \
   Dr. Pablo Olivares 
 date: "2026-04-24"
 bibliography: references.bib
@@ -175,7 +175,9 @@ The 207 fishable days mean the selected threshold, supports fishing on roughly 5
 
 #### Seasonal pattern in daily fishability probability
 
-The daily probability plot shows a clear seasonal pattern within the year. It follows from the methodology section that the model estimates probability 𝑃𝑗 separately for each contract day, pooling the same month-day over years. The curve in the plot does not remain flat. It demonstrates a strong seasonal structure instead. In the early season, the probabilities of being able to fish daily are around 0.35 to 0.50. Those probabilities rise during late winter and spring, sharply dip around mid-contract year, and then rise again towards a second high-probability period later in the year (Figure 2).
+The daily probability plot shows a clear seasonal pattern within the year. It follows from the methodology section that the model estimates probability 𝑃𝑗 separately for each contract day, pooling the same month-day over years. The curve in the plot does not remain flat. It demonstrates a strong seasonal structure instead. In the early season, the probabilities of being able to fish daily are around 0.35 to 0.50. Those probabilities rise during late winter and spring, sharply dip around mid-contract year, and then rise again towards a second high-probability period later in the year (@fig-2).
+
+![Daily probability of a fishable day during the contract window](figures/fig2.png){#fig-2}
 
 This trend comes with two important repercussions. In the first place, the contract index does not follow a stationary Bernoulli process with a daily constant probability. The Poisson-binomial framework implemented in the methodology is justified by that result which allows unequal probability. Seasonal structure shows that risk is not spread evenly over the year, but has months dedicated to risk. A concentrated risk window with additional non-fishable days is marked by a mid-year dip. This period at the end of the year is under a high probability window. The seasonal variation influences the annual fishable days distribution of annual fishable days and the lower-tail trigger probability. The findings thus confirm that we were right to not homogenize all days into one average probability and preserve calendar-day heterogeneity.
 
@@ -197,13 +199,17 @@ The continuously rising weather derivative price with respect to strike percenta
 
 The price is practically nonexistent for low strikes. At 80% the amount is \$0.02, at 81% the amount is \$0.06, at 82% it is \$0.23 and at 83% it is \$0.54 (Table 3). Even at 86%, it costs under \$5.58. The values indicate that lower strike regions generate a very low expected protection value. The contract rarely activates to warrant a significant premium, according to the experts.
 
-The price then increases quickly once the strike enters the low-90% range (Figure 3). It climbs to \$20.52 at 88%, \$36.45 at 89%, \$61.46 at 90%, \$98.28 at 91%, \$148.81 at 92%, \$212.86 at 93%, \$286.64 at 94%, \$361.38 at 95%. As a result, the price curve is convex. The derivative becomes markedly more costly as the strike nears the expected annual total fishable days.
+The price then increases quickly once the strike enters the low-90% range (@fig-3). It climbs to \$20.52 at 88%, \$36.45 at 89%, \$61.46 at 90%, \$98.28 at 91%, \$148.81 at 92%, \$212.86 at 93%, \$286.64 at 94%, \$361.38 at 95%. As a result, the price curve is convex. The derivative becomes markedly more costly as the strike nears the expected annual total fishable days.
 
-This shape is economically viable. A higher strike position triggers nearer to the midpoint of the annual fishable-day distribution. While the fixed payout amount falls, the payout frequency increases with that move. It can be observed from the results that the rise in trigger probability surpasses the decrease in a benefit size (Figure 3). That collaboration leads to a sudden rise in the premium curve. As per the model, it is not the fixed payout size but rather triggers probability that drives price over the tested range.
+![Trigger probability across strike percentages](figures/fig3.png){#fig-3}
+
+This shape is economically viable. A higher strike position triggers nearer to the midpoint of the annual fishable-day distribution. While the fixed payout amount falls, the payout frequency increases with that move. It can be observed from the results that the rise in trigger probability surpasses the decrease in a benefit size (@fig-3). That collaboration leads to a sudden rise in the premium curve. As per the model, it is not the fixed payout size but rather triggers probability that drives price over the tested range.
 
 #### Joint interpretation of trigger probability and premium
 
-The trigger probability curve and the premium curve both show positive exponential patterns but with different rates. The difference is due to the pricing formula. The premiums reflect the low tail probability and the fixed payout level. In the design under test, the payout decreases as the strike percentage increases. However, the effect of lower tail probability has a stronger influence. The interaction generates a curve for the price per number of fishable days that initially rises smoothly and then increases at a faster rate (Figure 3 & Figure 4).
+The trigger probability curve and the premium curve both show positive exponential patterns but with different rates. The difference is due to the pricing formula. The premiums reflect the low tail probability and the fixed payout level. In the design under test, the payout decreases as the strike percentage increases. However, the effect of lower tail probability has a stronger influence. The interaction generates a curve for the price per number of fishable days that initially rises smoothly and then increases at a faster rate (@fig-3; @fig-4).
+
+![Weather derivative Price across strike percentages](figures/fig4.png){#fig-4}
 
 ## Discussion
 
