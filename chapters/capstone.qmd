@@ -244,7 +244,6 @@ According to the plot, it is observed that during the least favorable periods, m
 
 The pricing analysis assesses strike levels between 80% and 95% of the expected average number of fishable days calculated over a one-year contract period. This design directly ties the available data to user-specified percentage of expected contract fishable days. The subsequent periods between strikes vary from 165 to 196 days (@tbl-3). With increasing strike percentage, the trigger threshold moves towards 207 days, which is the expected annual fishing days. This change raises the chances of payout due to increased low-event odds, but results in a lower payout since fewer days are factored into the losses.
 
-\newpage
 ```{r}
 #| label: tbl-3
 #| tbl-cap: "Weather derivative pricing results across strike levels"
@@ -270,12 +269,14 @@ ft_price <- flextable(df_price) %>%
     price    = "Derivative Price ($)"
   ) %>%
   theme_booktabs() %>%
-  autofit() %>%
+  
+  # REPLACE autofit() with these two lines:
+  autofit() %>% 
+  set_table_properties(layout = "autofit", width = 1) %>% 
+  
   fontsize(size = 9, part = "all") %>%
   align(align = "center", part = "all") %>%
-  # Format currency with commas
   colformat_double(j = c("payout", "price"), digits = 2, big.mark = ",") %>%
-  # Show full precision for the small trigger probabilities
   colformat_double(j = "prob", digits = 6) %>%
   hline(part = "all", border = fp_border(color = "black", width = 0.75))
 
