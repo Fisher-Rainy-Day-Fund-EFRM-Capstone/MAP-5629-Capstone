@@ -45,11 +45,11 @@ The second and third datasets of wind speed and wave height, respectively, are d
 
 The fourth dataset consists of annual total population estimates for the United States Virgin Islands sourced from the World Bank, series POPTOTVIA647NWDB. Population data are used solely to normalize fishing activity metrics and remove secular trends in fleet capacity from the validation analysis, as described further below.
 
-#### Daily Calendar Framework Construction 
+#### Daily Calendar Framework Construction
 
 A complete daily calendar skeleton was constructed spanning the full study period using pandas date_range functionality, producing a main data frame of explicitly 14,607 rows. The limited fishing report file was left-joined onto this skeleton so that days absent from the original file became explicit rows with zero values for all fishing activity columns rather than structural absences. This distinction is significant: a day with zero reported trips carries different analytical meaning depending on whether it reflects true fishing trip inactivity, privacy-based censoring of low-report days, or adverse weather conditions. The calendar join method makes all three types of zero-day observable within the same framework.
 
-Hourly ERA5 wind data were processed by first computing the scalar wind speed from the u and v vector components as the Euclidean magnitude, expressed formally as $|W| = \sqrt{u_{10}^2 + v_{10}^2}$ with units of meters per second $(m/s)$. Wind speeds were additionally converted to knots using the exact conversion factor of $1 m/s = 1.9438449$   knots. Both scalar wind speed and gust speed were then transformed from hourly to daily frequency by taking the maximum of the daily values. The choice of daily maximum rather than daily mean reflects the operational reality that a single period of dangerous wind or wave conditions within a day is sufficient to prevent fishing activity regardless of conditions during other hours. This process was replicated to transform hourly significant wave heights to daily maximum values.
+Hourly ERA5 wind data were processed by first computing the scalar wind speed from the u and v vector components as the Euclidean magnitude, expressed formally as $|W| = \sqrt{u_{10}^2 + v_{10}^2}$ with units of meters per second $(m/s)$. Wind speeds were additionally converted to knots using the exact conversion factor of $1 m/s = 1.9438449$ knots. Both scalar wind speed and gust speed were then transformed from hourly to daily frequency by taking the maximum of the daily values. The choice of daily maximum rather than daily mean reflects the operational reality that a single period of dangerous wind or wave conditions within a day is sufficient to prevent fishing activity regardless of conditions during other hours. This process was replicated to transform hourly significant wave heights to daily maximum values.
 
 To isolate climate-driven variation in lobster fishing activity from background trends driven by changes in the island's population and fishing fleet capacity, all fishing activity metrics used in the threshold validation were normalized by annual population. Specifically, CSL trip rates were expressed as the number of lobster trips per 1,000 residents, and CSL catch rates were expressed as pounds of lobster caught per 1,000 residents per day. This normalization process allows for using the activity rates of fishing rather than raw counts, ensuring that this signal reflects responses to environmental conditions rather than changes driven by population demands.
 
@@ -165,13 +165,70 @@ As the strike percentage increases, the contract is triggered more easily becaus
 
 The threshold sensitivity analysis demonstrates (Table 1) that the fishable-day index is quite responsive to the chosen wind and wave cutoffs. Reduced thresholds yield a significantly more limiting index, where most days are classified as non-fishable. A higher threshold was identified as more permissive (classifying most and almost all days as fishable). That methodology section states that the daily fishability indicator is determined by whether both the wind speed and the wave height do not exceed the cutoffs chosen. The sensitivity table indicates that for the strictest threshold pair, the percent of fishable days is around 33.35% (7.5 $m/s$, 1.5 $m$). However, for the loosest threshold pair, the percent of fishable days is around 98.47% (13.0 $m/s$, 2.5 $m$). The average yearly fishable day index moves in the same manner. It increases from roughly 121.80 days to 359.60 days. The yearly deviation does not monotonically shift throughout all threshold pairs, but it does drop when the threshold becomes very loose and ends up with the index approaching the ceiling of the annual calendar, leaving less room for interannual fluctuation.
 
+\newpage
+
+```{r}
+#| label: tbl-1
+#| tbl-cap: "Threshold sensitivity analysis for fishable-day index construction"
+#| echo: false
+#| message: false
+#| warning: false
+
+library(flextable)
+library(dplyr)
+library(officer)
+
+# Standard read.csv now that the file is 'pure' data
+df <- read.csv("figures/tbl-1.csv", check.names = FALSE, stringsAsFactors = FALSE)
+
+# Professional flextable build
+ft <- flextable(df) %>%
+  # Map your CSV shorthand to professional display names
+  set_header_labels(
+    w_ms   = "Wind (m/s)",
+    w_kt   = "Wind (kts)",
+    wv_m   = "Wave (m)",
+    f_pct  = "Fishable (%)",
+    m_fdi  = "Mean FDI",
+    sd_fdi = "SD FDI"
+  ) %>%
+  theme_booktabs() %>%
+  autofit() %>%
+  fontsize(size = 9, part = "all") %>%
+  align(align = "center", part = "all") %>%
+  
+  # Highlight the key 8.5/1.75 threshold
+  bold(i = ~ abs(w_ms - 8.5) < 0.01 & abs(wv_m - 1.75) < 0.01) %>%
+  bg(i = ~ abs(w_ms - 8.5) < 0.01 & abs(wv_m - 1.75) < 0.01, bg = "#F2F2F2") %>%
+  
+  # Ensure numbers look consistent
+  colformat_double(digits = 2) %>%
+  hline(part = "all", border = fp_border(color = "black", width = 0.75))
+
+ft
+
+```
+
 The pair of 8.50 $m/s$ for wind and 1.75 m for wave height selected provides a balanced index (Table 1). This configuration results in 56.67% fishable days, a mean annual fishable day count of 206.95, and an annual standard deviation of 23.95 over the total historical record. This selection bypasses the two weak extremes. If the threshold is very strict, it will classify too many days as non-fishable and compress the commercial meaning of the index. A highly lenient threshold would deem nearly every day suitable for fishing, weakening the derivative trigger itself. The chosen threshold thus conserves enough non-fishable days to generate variation in risk, and nevertheless, incurs plausible operating conditions. The chosen approach has a methodological objective of developing a weather-based index that accounts for actual fishing access rather than merely the meteorological variation directly.
 
 #### Contract window summary and annual fishable-day distribution
 
-The contract is for the full calendar year, January 1 to December 31. This design gives a 365-day window of exposure that covers the entire seasonal cycle in marine weather. The probability summary reveals that the range over the contract period is likely 206.80 fishable days. According to the annual contract FDI summary (Table 2), the mean is 206.78 days with a standard deviation of 23.94 days. The two values are nearly equal. This close agreement suggests that the daily empirical probabilities correspond well to the historical annual counts. Essentially, the methodology’s historical daily-probability construction produces the long-run average fishable day within a year with little error.
+The contract is for the full calendar year, January 1 to December 31. This design gives a 365-day window of exposure that covers the entire seasonal cycle in marine weather. The probability summary reveals that the range over the contract period is likely 206.80 fishable days. According to the annual contract FDI summary (@tbl-2), the mean is 206.78 days with a standard deviation of 23.94 days. The two values are nearly equal. This close agreement suggests that the daily empirical probabilities correspond well to the historical annual counts. Essentially, the methodology’s historical daily-probability construction produces the long-run average fishable day within a year with little error.
 
-The 207 fishable days mean the selected threshold, supports fishing on roughly 57% of the days in a normal year (Table 2). An inter-annual variability of around 24 days is suggested by the standard deviation. This amount is relevant for pricing. A derivative contract must ensure sufficient dispersion in the index to create a meaningful lower- tail trigger probability. Here, the yearly difference facilitates the need. Simultaneously, the spread does not appear to be so large as to indicate an unstable index or poorly defined index. Consequently, this measure assesses fishable days and can be used as an underlying contract variable.
+| Item                                      | Value  |
+|:------------------------------------------|:-------|
+| Contract start date                       | 01-01  |
+| Contract end date                         | 12-31  |
+| Contract length (days)                    | 365    |
+| Contract length (years)                   | 1      |
+| Expected fishable days during contract    | 206.80 |
+| Mean contract FDI (days)                  | 206.78 |
+| Standard deviation of contract FDI (days) | 23.94  |
+| Average profit per fishable day (\$)      | 330.00 |
+
+: Contract design and summary statistics for the annual fishable-day derivative {#tbl-2}
+
+The 207 fishable days mean the selected threshold, supports fishing on roughly 57% of the days in a normal year (@tbl-2). An inter-annual variability of around 24 days is suggested by the standard deviation. This amount is relevant for pricing. A derivative contract must ensure sufficient dispersion in the index to create a meaningful lower- tail trigger probability. Here, the yearly difference facilitates the need. Simultaneously, the spread does not appear to be so large as to indicate an unstable index or poorly defined index. Consequently, this measure assesses fishable days and can be used as an underlying contract variable.
 
 #### Seasonal pattern in daily fishability probability
 
@@ -185,11 +242,50 @@ According to the plot, it is observed that during the least favorable periods, m
 
 #### Strike design and trigger behavior
 
-The pricing analysis assesses strike levels between 80% and 95% of the expected average number of fishable days calculated over a one-year contract period. This design directly ties the available data to user-specified percentage of expected contract fishable days. The subsequent periods between strikes vary from 165 to 196 days (Table 3). With increasing strike percentage, the trigger threshold moves towards 207 days, which is the expected annual fishing days. This change raises the chances of payout due to increased low-event odds, but results in a lower payout since fewer days are factored into the losses.
+The pricing analysis assesses strike levels between 80% and 95% of the expected average number of fishable days calculated over a one-year contract period. This design directly ties the available data to user-specified percentage of expected contract fishable days. The subsequent periods between strikes vary from 165 to 196 days (@tbl-3). With increasing strike percentage, the trigger threshold moves towards 207 days, which is the expected annual fishing days. This change raises the chances of payout due to increased low-event odds, but results in a lower payout since fewer days are factored into the losses.
+
+\newpage
+```{r}
+#| label: tbl-3
+#| tbl-cap: "Weather derivative pricing results across strike levels"
+#| echo: false
+#| message: false
+#| warning: false
+
+library(flextable)
+library(dplyr)
+library(officer)
+
+# Standard read.csv now that the file is 'pure' data
+df_price <- read.csv("figures/tbl-2.csv", check.names = FALSE, stringsAsFactors = FALSE)
+
+# Professional flextable build
+# Build the professional table
+ft_price <- flextable(df_price) %>%
+  set_header_labels(
+    strike_p = "Strike (%)",
+    strike_d = "Strike (days)",
+    payout   = "Fixed Payout ($)",
+    prob     = "Trigger Prob.",
+    price    = "Derivative Price ($)"
+  ) %>%
+  theme_booktabs() %>%
+  autofit() %>%
+  fontsize(size = 9, part = "all") %>%
+  align(align = "center", part = "all") %>%
+  # Format currency with commas
+  colformat_double(j = c("payout", "price"), digits = 2, big.mark = ",") %>%
+  # Show full precision for the small trigger probabilities
+  colformat_double(j = "prob", digits = 6) %>%
+  hline(part = "all", border = fp_border(color = "black", width = 0.75))
+
+ft_price
+
+```
 
 The probabilities of triggers indicate a strong non-linearity response. The contract gets triggered rarely at lower levels. The prospect of a trigger only has a probability of 0.000002 at 80% strike. Further, it is 0.000004 at 81% and 0.000019 at 82%. These values suggest a nearly dormant contract. Even a very adverse weather year would have to fall well below the long-run mean before the payout condition trigger. As a result, the contract guarantees minimal practical protection in this strike range.
 
-Once the strike crosses above the upper-80% level, the sensitivity of the trigger probability begins to move. It goes up to 0.001289 at 87%, 0.002605 at 88%, and 0.005032 at 89% (Table 3). The likelihood then quickly rises in the region of 90% to 95%. At 90%, it reaches 0.009303; at 91%, 0.016460; at 92%, 0.027895; at 93% it reaches 0.045302; at 94%, 0.070555; finally, at 95%, it reaches 0.105465. This pattern is non linear. The upper strike range penetrates further into the core of the annual fishable-day distribution. A slight adjustment in the strike rate, thus, has a larger impact on trigger frequency.
+Once the strike crosses above the upper-80% level, the sensitivity of the trigger probability begins to move. It goes up to 0.001289 at 87%, 0.002605 at 88%, and 0.005032 at 89% (@tbl-3). The likelihood then quickly rises in the region of 90% to 95%. At 90%, it reaches 0.009303; at 91%, 0.016460; at 92%, 0.027895; at 93% it reaches 0.045302; at 94%, 0.070555; finally, at 95%, it reaches 0.105465. This pattern is non linear. The upper strike range penetrates further into the core of the annual fishable-day distribution. A slight adjustment in the strike rate, thus, has a larger impact on trigger frequency.
 
 It holds practical significance. A designer who accepts strikes under 88% would probably be selling a product that has no economic relevance as the trigger probably never fires. An option that settles at the money or strikes near 93% to 95% will create a much more active hedging tool. Even at that range, an event-based contract would remain in place, no annual transfer. Consequently, the findings suggest that the upper strike range is the most defensible area for meaningful hedging.
 
@@ -197,7 +293,7 @@ It holds practical significance. A designer who accepts strikes under 88% would 
 
 The continuously rising weather derivative price with respect to strike percentage faces a steep change with respect to strike. The fixed-payout pricing formula, 𝑉0=𝑒−𝑟𝑡𝐿Ψ(𝐾), directly leads to this pattern. As the strike rises, the gap between the expected fishable days and the strike narrows, causing the fixed payout to decline in the current implementation. However, the payout falls faster than the trigger probability rises. This probability effect dominates the price function.
 
-The price is practically nonexistent for low strikes. At 80% the amount is \$0.02, at 81% the amount is \$0.06, at 82% it is \$0.23 and at 83% it is \$0.54 (Table 3). Even at 86%, it costs under \$5.58. The values indicate that lower strike regions generate a very low expected protection value. The contract rarely activates to warrant a significant premium, according to the experts.
+The price is practically nonexistent for low strikes. At 80% the amount is \$0.02, at 81% the amount is \$0.06, at 82% it is \$0.23 and at 83% it is \$0.54 (@tbl-3). Even at 86%, it costs under \$5.58. The values indicate that lower strike regions generate a very low expected protection value. The contract rarely activates to warrant a significant premium, according to the experts.
 
 The price then increases quickly once the strike enters the low-90% range (@fig-3). It climbs to \$20.52 at 88%, \$36.45 at 89%, \$61.46 at 90%, \$98.28 at 91%, \$148.81 at 92%, \$212.86 at 93%, \$286.64 at 94%, \$361.38 at 95%. As a result, the price curve is convex. The derivative becomes markedly more costly as the strike nears the expected annual total fishable days.
 
