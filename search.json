@@ -94,7 +94,7 @@
     "href": "chapters/capstone.html",
     "title": "2  Capstone",
     "section": "",
-    "text": "Fisher Rainy Day Fund – A Parametric Insurance Policy\nSubmitted Feb 2, 2026",
+    "text": "Fisher Rainy Day Fund – A Parametric Insurance Policy\nSubmitted April 24, 2026",
     "crumbs": [
       "<span class='chapter-number'>2</span>  <span class='chapter-title'>Capstone</span>"
     ]
@@ -186,7 +186,7 @@
     "href": "chapters/downloads.html#individual-chapters",
     "title": "Appendix A — Downloads",
     "section": "A.2 Individual Chapters",
-    "text": "A.2 Individual Chapters\nIf you only need a specific section, select a chapter below:\n\nGitHub Setup\nProject Proposal\nPython Testing\nInteractive Python Notebook Part 1\n\n\n\n\n\n\n\nNote\n\n\n\nThese standalone PDFs are automatically updated every time the team pushes new code to GitHub.",
+    "text": "A.2 Individual Chapters\nIf you only need a specific section, select a chapter below:\n\nCapstone\nGitHub Setup\nProject Proposal\nPython Testing\nInteractive Python Notebook Part 1\n\n\n\n\n\n\n\nNote\n\n\n\nThese standalone PDFs are automatically updated every time the team pushes new code to GitHub.",
     "crumbs": [
       "Appendices",
       "<span class='chapter-number'>A</span>  <span class='chapter-title'>Downloads</span>"
