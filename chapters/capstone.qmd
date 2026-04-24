@@ -1,0 +1,180 @@
+---
+title: "Capstone"
+---
+
+## Fisher Rainy Day Fund – A Parametric Insurance Policy {.unnumbered}
+
+Submitted Feb 2, 2026
+
+## Introduction
+
+Fishermen are often unable to produce income due to other reason beyond their control. For example, weather and ocean conditions can make it unsafe to go fishing. Additionally, fisheries are sometimes closed deliberately to protect spawning times, ensure sustainable harvest rates, and allow over exploited stocks to replenish. While environmentally necessary, these restrictions diminish short-term fishing opportunities and income. The aim of this project is to create and cost a parametric derivative agreement that provides financial protection when fishing days are lost due to objectively defined negative environmental conditions. 
+
+The proposed Fisher Rainy Day Fund is a parametric insurance policy that is based on a Fishable Days Index (FDI). The contract counts the days in a season when fishing is legally permitted and environmentally feasible. This project uses a quantitative framework with three objectives: (1) define the fishable days using wind and wave meteorological conditions, (2) model the stochastic behavior of fishable and unfishable days through a Poisson-binomial distribution, and (3) price an index-based derivative. The system is based on weather derivative pricing but altered slightly to fit the operational realities of a small-scale island-based fisheries.
+
+## Background
+
+Income shocks have a big impact on small fisheries. The performance of traditional indemnity insurance in this sector is not up to the mark as it becomes difficult to verify losses and claims are settled slowly. Furthermore, controlling moral hazard is difficult. For this reason, many fishers are not insured. Parametric and index-based products provide clear and low-cost alternatives, as payouts depend on objective indices rather than observed losses (Skees, 2008).
+
+## Methods
+
+### Sources of Data
+
+This study integrates four primary datasets to construct and validate the Fishable Days Index (FDI) for the St. Croix commercial fishery that targets Caribbean Spiny Lobster. Each dataset spans a study period from January 1, 1985, to December 28, 2024, resulting in a daily time series of 14,607 observations. All data loading, merging, and transformation were performed with the programming language “Python” to ensure full reproducibility and to avoid manual manipulation of the four source files.
+
+The first dataset consists of daily commercial catch reports from individual fishers (Southeast Fisheries Science Center, 2026). Each observation records information for every fishing trip made by vessels fishing in St. Croix. The important variables utilized for this analysis were the date, total number of trips, number of trips specifically for the Caribbean Spiny Lobster (CSL), and total pounds of all species caught alongside pounds of solely CSL. Critically, the dataset is a limited event log: rows are present only on days when at least three fishers filed a self-reported logbook. Days with fewer than three individual reports are suppressed to zero to protect fisher privacy, meaning that missing continuous-date rows represent a mix of truly inactive days and days with only one or two reported trips.
+
+The second and third datasets of wind speed and wave height respectively, are derived from the ERA5 reanalysis product produced by the European Centre for Medium-Range Weather Forecasts (ECMWF). ERA5 provides hourly estimates of atmospheric and oceanic variables at a grid resolution of 31 km from 1940 onwards, reconstructed from historical observations and numerical weather prediction models (Hersbach et al., 2020). The wind dataset provides hourly eastward, u10, and northward, v10, wind components from 10 meters above the surface, as well as the instantaneous wind gust speed, fg10, for a single grid point representative of the St. Croix region (17.75°N, 64.75°W). The wave dataset provides hourly significant wave height, swh, at a nearby grid point (18.0°N, 64.5°W), defined as the average height of the greatest one-third of waves.
+
+The fourth dataset consists of annual total population estimates for the United States Virgin Islands sourced from the World Bank, series POPTOTVIA647NWDB. Population data are used solely to normalize fishing activity metrics and remove secular trends in fleet capacity from the validation analysis, as described further below.
+
+#### Daily Calendar Framework Construction
+
+A complete daily calendar skeleton was constructed spanning the full study period using pandas date_range functionality, producing a main data frame of exactly 14,607 rows. The limited fishing report file was left-joined onto this skeleton so that days absent from the original file became explicit rows with zero values for all fishing activity columns rather than structural absences. This distinction is significant: a day with zero reported trips carries different analytical meaning depending on whether it reflects true fishing trip inactivity, privacy-based censoring of low-report days, or adverse weather conditions. The calendar join method makes all three types of zero-day observable within the same framework.
+
+Hourly ERA5 wind data were processed by first computing the scalar wind speed from the u and v vector components as the Euclidean magnitude, expressed formally as 
+$|W| = \sqrt{u_{10}^2 + v_{10}^2}$ with units of meters per second $(m/s)$. Wind speeds were additionally converted to knots using the exact conversion factor of $1 m/s = 1.9438449 knots$. Both scalar wind speed and gust speed were then transformed from hourly to daily frequency by taking the maximum of the daily values. The choice of daily maximum rather than daily mean reflects the operational reality that a single period of dangerous wind or wave conditions within a day is sufficient to prevent fishing activity regardless of conditions during other hours. This process was replicated to transform hourly significant wave heights to daily maximum values.
+
+To isolate climate-driven variation in lobster fishing activity from background trends driven by changes in the island's population and fishing fleet capacity, all fishing activity metrics used in the threshold validation were normalized by annual population. Specifically, CSL trip rates were expressed as the number of lobster trips per 1,000 residents, and CSL catch rates were expressed as pounds of lobster caught per 1,000 residents per day. This normalization process allows for using the activity rates of fishing rather than raw counts, ensuring that this signal reflects responses to environmental conditions rather than changes driven by population demands.
+
+The four datasets were merged into a single main daily table using calendar date as the primary join factor for climate data and integer year as the join factor for annual population values. Forward-filling was applied to any missing climate values arising from gaps in hourly ERA5 coverage, carrying the most recent available observation forward. The final main table contains 14 columns covering key information of date identifiers, fishing activity metrics, daily maximum wind speed and gust in both m/s and knots, daily maximum significant wave height, and annual population.
+
+#### Weekday Behavioral Bias
+
+Prior to threshold calibration, a weekday bias analysis was conducted to determine whether fishing activity exhibited systematic day-of-week patterns unrelated to climate conditions. Mean population-adjusted lobster trip rates and the proportion of days with any reported lobster activity were computed for each day of the week across the full 40-year study period.
+
+The analysis revealed a pronounced decline in fishing activity on Sunday relative to all other days of the week. The mean CSL trip rate for just Sundays had a value of 0.016 trips per 1,000 people compared to a range of 0.034 to 0.046 on all other weekdays, and a day-active rate of 32.1% compared to 54.4% to 62.8% on other days. This pattern is consistent with traditions of the United States Virgin Islands, where a decrease in labor on Sunday is culturally normative and not a response to environmental conditions. Sunday observations were therefore excluded from the climate threshold validation analysis to prevent behavioral suppression from contaminating the climate signal. Sunday observations were retained within the Fishable Days Index construction itself, as the index measures climate-based fishability rather than observed fishing behavior.
+
+#### FDI Definition and Threshold Selection
+
+The Fishable Days Index (*FDI*) is defined as a binary daily indicator equal to one (*FDI = 1* on safe days) on days when environmental conditions are consistent with safe small-vessel lobster fishing operations, otherwise FDI is equal to zero (*FDI = 0* on unsafe days). For the St. Croix CSL fishery, the index is determined by two simultaneous climate conditions: daily maximum wind speed must not exceed a specified limit, and daily maximum significant wave height must not exceed a separate specified limit. Since lobster fishing in St. Croix is open year-round with no regulatory seasonal closure, the FDI contains no regulatory component and is determined entirely by the environmental conditions. Therefore, the annual FDI for any given season is the sum of daily FDI values over a 365-day calendar year.
+
+Initial threshold values were drawn from the small vessel operability literature. Wind speeds at or above 20 knots (approximately 10.3 m/s) are widely cited as the threshold above which small craft advisories apply in United States coastal waters, and significant wave heights above 2.0 to 2.5 meters are considered the upper operational limit for vessels typically used in St. Croix lobster fisheries. These values were used initially as starting parameters and evaluated against observed fishing activity data.
+
+#### Threshold Validation
+
+The selected thresholds were validated by testing whether days classified as fishable demonstrated higher population-adjusted lobster fishing activity than days classified as unfishable and validated with the fishing report data. Sunday observations were excluded from this analysis as described in Section 1.34. This validation compared mean CSL trip rates per 1,000 people and the proportion of days with any reported lobster activity between the two FDI categories.
+
+Using the final thresholds (8.5 m/s and 1.75 m), fishable days had an average CSL trip rate of 0.044 trips per 1,000 people compared to 0.039 on unfishable days, and an active-day rate of 62.5% in contrast to 56.8% on unfishable days. This difference is understood to be conservative relative to what the true climate signal likely produces. The privacy-based censoring rule applied to the fishing report data suppresses observations to zero on any day with fewer than three individual fisher reports. This censoring feature disproportionately affects days near the threshold boundary, where marginal fishing conditions may motivate only one or two fishers to go out, which are the most informative observations for threshold calibration. Therefore, the true separation between fishable and unfishable days is likely greater than these validation statistics suggest.
+
+The sensitivity of the validation result to the threshold values was additionally assessed by identifying that wind speed is the binding constraint in the St. Croix context. Inspection of the sensitivity heatmap reveals that varying the wave threshold from 1.5 to 2.5 meters at a fixed wind threshold of 8.5 m/s changes the fishable day rate by only 4.8 percentage points (52.7% to 57.5%), while varying the wind threshold from 7.5 to 13.0 m/s at a fixed wave height of 1.75 meters produces a range from 34.6% to 81.7%.
+
+### Methodology for Pricing the Weather Derivative
+
+#### Contract purpose and pricing logic
+
+The agreement shifts the risk of adverse weather conditions from the derivative buyer to the seller. The contract will not track the actual day-to-day business loss. In contrast, it observes a weather-based index. The design is based on the essential structure of weather derivatives and index insurance. Buyer pays a premium upfront (Alaton et al., 2002; Cao & Wei, 2004). If the index exceeds the trigger threshold during the contract period, the seller makes the contract payment. The contract reduces loss-adjustment costs by generating objective settlements from the recorded weather data and a priori estimated losses instead of from audited firm losses (Bemš & Aydin, 2022; World Bank, 2023).
+
+The contract value in this report is based on an actuarial expected payoff. Since the underlying weather variable is not traded in deep or futures markets, the choice of a predetermined payoff fits well with weather derivatives. Earlier research applies identical expected loss analysis reasoning for temperature, rainfall, and agricultural weather-index contracts (Alaton et al., 2002; Bemš & Aydin, 2022; Richards et al., 2004). Some other pricing models can be mentioned as well, e.g. equilibrium, indifference, or copula-based approaches. However, the actuarial approach provides a clear starting point and aligns with available data and the objective of pricing a fishability-based trigger from past weather conditions (Bressan & Romagnoli, 2021; Cao & Wei, 2004; Xu et al., 2008).
+
+#### Index definition and contract trigger
+
+Let the contract cover $T$ calendar days. For each day $j$, define an indicator variable $X_j$. Set $X_j=1$ when observed weather conditions support fishing on day $j$. Set $X_j=0$ when weather conditions do not support fishing. The total number of fishable days will be counted by the contract over the entire window. Through this index, a noisy weather sequence is reduced to one contract level quantity that is easily priced by the seller and interpretable by the buyer. The cited framework is consonant with standard weather-derivative design, whereby pay-off is based on a transparent index rather than on realized revenue or profit (Bemš & Aydin, 2022; Jewson & Brix, 2005; World Bank, 2023).
+
+The seasonal fishable-day index is $N=\sum\limits_{j=1}^{n}X_i$. Here, $N$ counts the number of fishable days in the contract period. Let $K$ denote the strike on fishable days. The contract triggers when fishable days fall below the strike. In mathematical form, the trigger event equals $N<K$. That event defines the “limiting” or threshold-crossing event for the contract. A higher strike makes the trigger easier to hit. A lower strike makes the trigger harder to hit (World Bank, 2011, 2023).
+
+#### Historical estimation of daily fishability probabilities
+
+For every contract day, we estimate the fishable-day probability. Let $p_j$ represent the probability that day $j$ is fishable. The $p_j$ estimates take place after the index classifies each historical day as either fishable or non-fishable. In effect, we compute one empirical probability for every calendar day in the contract window, pooling the same month-day across historical years. That measure saves seasonality. In addition, it gives January and September distinct probabilities. This step is important because weather derivatives usually require careful treatment of seasonality and calendar structure prior to pricing (Alaton et al., 2002; Jewson & Brix, 2005).
+
+Instead of imposing a single probability common to every day, we allow every day to have its own estimated probability $p_j$. This flexibility inspires the Poisson-binomial model. All daily probabilities would have to be matched by the ordinary binomial model. The Poisson-binomial model can handle independent daily Bernoulli trials with unequal success probabilities, which fits a seasonal weather calendar much better (Biscarri et al., 2018; Chen & Liu, 1997; Hong, 2013).
+
+### Poisson-Binomial Model
+
+#### Why this model fits the problem
+
+The Poisson-binomial distribution signifies the total of independent Bernoulli variables that need not share the same success probability. It harmonizes with the contractual weather-based index in a natural fashion as there’s a predefined conditions that define total fishable days. Every day has its own historical fishability probability $p_j$. After considering the daily indicators, the model considered daily probabilities as independent and treats them as Bernoulli variables (Fishable or Non-fishable). The seasonal count $N$ was made to follow a Poisson-binomial distribution. Research in statistics on this distribution has established the theory, computation and use of a distribution with a trial probability that varies (Chen & Liu, 1997; Hong, 2013). Formally, $X_j\sim\text{Bernoulli}(p_j), \quad j=1,2,\dots, T$ and assume independence across days, $N=\sum\limits_{j=1}^{T} X_j \sim \text{Poisson-Binomial}(p_1,  p_2, \dots, p_T)$. The expected number of fishable days follows, $E[N]=\sum\limits_{j=1}^{T}p_j$. The variance follows, $Var(N)=\sum\limits_{j=1}^T(1-p_j)$.These moments summarize the center and spread of the seasonal fishable-day distribution under the independence assumption.
+
+#### Probability of mass function
+The exact probability that the season ends with exactly 𝑛 fishable days equals $$P(N=n)=\sum\limits_{A\epsilon F_n} \prod\limits_{j\epsilon Ap_j}(1-p_j), \quad n=1,2,\dots, T$$
+
+Where $F_n$ denotes the collection of all subsets of $\{1, \dots, T\}$ that contain exactly $n$ elements. This equation sums up the probability of every possible path that produces exactly $n$ fishable days. The equation gives the full probability mass function of the contract index. It also provides the foundation for trigger probability and price calculations (Chen & Liu, 1997; Fernandez & Williams, 2010; Hong, 2013).
+
+This report does not enumerate all subsets directly because that route grows expensive when 𝑇becomes large. Instead, the code uses recursive convolution, which updates the distribution one day at a time. Let $f_m(n)$ denote the probability of obtaining $n$ fishable days after the first $m$ contract days. Start with $f_0(0)=1, f_0(n) = 0, \text{ for } n>0$. Then update with $f_m(n)=(1-p_m)f_{m-1}(n) + p_mf_{m-1}(n-1), \text{ for } m=1,2,\dots, T$ and admissible $n$. After the last update, $f_T(n)=P(N=n). Statistical studies show that recursive and Fourier-based methods provide exact or highly efficient ways to compute the Poisson-binomial distribution in applied work (Biscarri et al., 2018; Chen & Liu, 1997; Fernandez & Williams, 2010; Hong, 2013).
+
+#### Limiting Probability Equation
+
+
+
+#### Trigger probability under the strike limit
+
+
+
+#### Payoff Design
+
+
+
+#### General payoff function
+
+
+
+#### Fixed-payout contract used in the code
+
+
+
+#### Step-by-Step Pricing Procedure
+
+
+
+#### Build the daily index
+
+
+
+#### Estimate Day-specific probabilities
+
+
+
+#### Compute the seasonal distribution
+
+
+
+#### Interpretation of the Price
+
+
+
+#### Results and Findings
+
+
+
+#### Threshold sensitivity and final index choice
+
+
+
+#### Contract window summary and annual fishable-day distribution
+
+
+
+#### Seasonal pattern in daily fishability probability 
+
+
+
+#### Strike design and trigger behavior
+
+
+
+#### Derivative price profile across strike levels 
+
+
+
+#### Joint interpretation of trigger probability and premium
+
+## Discussion
+
+This project did not explicitly consider related logistics and financial overheads of pricing a weather-based derivative to cover non-fishable days. Here, we discuss some of the logistics the proposed rainy day fisher fund would need to further consider including reinsurance, markups, and pooling risk. To offer the parametric weather-based insurance, the insurer would need to have sufficient funds and ensure that payouts would be rapid upon reaching strike conditions. Unless a fishing community were to develop a reciprocal insurance exchange, through a self-insurance pool with sufficient funds to cover potential payouts, the cost of issuing any parametric insurance policy would also need to include operating expenses and reinsurance. Since this analysis consisted only of a single industry located in a small geographic area, the proposed program could benefit from developing similar frameworks across a wider geographical region or including other types of industries to diversify risk. Such pooling of risk would reduce the expenses of external reinsurance.
+
+The process of pricing a parametric insurance policy serves as a simplified case study and exploration of the fundamental dynamics of pricing parametric insurance. First, we focused on developing a fishable day index as an objective metric evaluated from specific timeseries of meteorological data. Then we utilized pricing. Although we intentionally structured this analysis to be simple to interpret and evaluate, we acknowledge that refining the methods could lead to more accurate strike probabilities. High-quality fisher data and rationales for staying in port would be the primary tool for reducing basis risk. Direct conversations or surveys with fishers could improve the estimated accuracy of losses and help identify additional threshold conditions that allow effort adaptations versus conditions that impede all potential fishing activity.
+
+The result of the sensitivity test showed that the index varied strongly with thresholds of winds and waves. The thresholds are too strict thus labelling too many days non-fishable, making the index less practical. Contract triggers become weaker when very loose thresholds classify all days as fishable. The 8.5 m/s wind speed and 1.75m wave height value were selected to avoid extremes. It creates about 206.95 fishable days each year and has enough annual variation for pricing. Recent studies connecting weather thresholds and sea-state limits to marine access and operational downtime are consistent with this outcome. As per research, what is selected as threshold must depict actual working conditions, and not just the meteorological variation (Chitteth Ramachandran et al., 2022; Costas et al., 2023; Karathanasi et al., 2022). This threshold strikes a nice balance, as demonstrated in our study. It still preserves commercial meaning and reflects real fishing conditions.
+
+The pricing results also strengthen the structure of contracts. The regular fishability likelihoods follow a clear seasonal pattern, so the risk does not remain constant throughout the year. The observed pattern is a strong endorsement for the implementation of the Poisson-binomial model which makes the probabilities daily contract period-varying. The analysis of strikes shows practically no protection from low strikes, i.e. strikes from 80% to 87%, which is hardly that the trigger will activate. On the other hand, 93% to 95% strikes lead to the tanks producing a more active hedge with increased trigger probabilities and higher premiums. The evidence presented here is consistent with other studies on parametric insurance which find significant dependence of contract performance on trigger design and threshold placement which is typically at the core of the loss distribution (Larsson, 2023; Xu et al., 2008). The data indicates that the upper strike range offers protection that is the most useful for fishers that want coverage during moderately adverse years, as opposed to only extreme years.
+
+Currently, we still have limited information that we can use to independently determine fishable days. Although we did not consider that day-to-day business data would be required, information related to costs, revenue, and rationale for non-fished days would be critical to improve weather derivative pricing. Ideally, the benefits associated with rapid payments under a straightforward parametric insurance framework could serve as motivation for improving the quantity and quality of self-reported fisher activity. By establishing a transparent parametric framework, we were able to develop a user interface dashboard to communicate the weather derivative pricing over a range of strike percentages and different wind and wave threshold scenarios. By maintaining and improving this interactive dashboard, fishers would be able to customize the conditions to meet personal needs and preferences related to risk tolerance and budget. Ideally, creating a positive feedback loop of improved reporting, leading to more accurate thresholds, thereby reducing basis risk and making the insurance more affordable.
+
+## Conclusion
+
+This study proposes the fishable-day index for developing parametric insurance contracts for fishers. The procedure creates a daily index based on either wind speed or wave height. It then estimates day-specific probabilities and applies to a Poisson-binomial model for seasonality. The findings indicate that selection of thresholds strongly governs index behavior. Highly restrictive parameters significantly decrease fishing days. Loosening limitations removes risk. The chosen thresholds of 8.5 m/s for wind and 1.75 m for wave height create a balanced set of criteria. It generates approximately 207 fishable days annually and sustains enough variance for pricing. The validation confirms that fishable days correspond with a peak fishing activity, thus justifying the practical relevance of the index. The seasonal probability pattern bolsters the choice of model since it shows real changes in fishing conditions during the year, allowing us to avoid an assumption of constant risk. The pricing results have important economic consequences. Strike levels that are too low mean almost zero trigger probability, which also does not offer much protection. Increasing the strike levels increases the chances of triggering and the premium. The range from 93% to 95% offers the most suitable balance of cost and coverage. The contract can respond to conditions that are only moderate or worse rather than only extreme events. The convex price pattern indicates that pricing is driven more by trigger probability than by payout size. The paper also identifies major limitations. Operational costs, reinsurance, and market risk loading are not included. It is also dependent on limited data of fishing activity that may mask true behavior because of reporting limitations. In the future, we must improve the quality of data, including fisher feedback, and further refine the threshold conditions. Broadening the framework to other regions or sectors would allow risk pooling. The research provides a well-defined and pragmatic framework for constructing a weather-based insurance apparatus beneficial to fishers under uncertain conditions of the sea.
+
+## References
+
+::: {#refs}
+:::
