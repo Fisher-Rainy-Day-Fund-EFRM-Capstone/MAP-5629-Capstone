@@ -1,5 +1,23 @@
 ---
-title: "Capstone"
+title: "Fisher Rainy Day Fund – A Parametric Insurance Policy"
+subtitle: "MAP 5629: Quantitative Capstone in Environmental Finance"
+author:
+  - name: Md Tanvir Hossain
+  affiliations:
+      - ref: fiu
+  - name: Veronica Prelaz
+  affiliations:
+      - ref: fiu
+  - name: Adyan Rios
+  affiliations:
+      - ref: fiu
+affiliations:
+  - id: ufl
+    name: Florida International University
+    department: Institute of Environment
+date: "April 24, 2026"
+abstract: |
+  Prepared for Dr. Pablo Olivares.
 ---
 
 ## Fisher Rainy Day Fund – A Parametric Insurance Policy {.unnumbered}
