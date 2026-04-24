@@ -311,7 +311,7 @@ window.Quarto = {
 <section id="sources-of-data" class="level3" data-number="2.3.1">
 <h3 data-number="2.3.1" class="anchored" data-anchor-id="sources-of-data"><span class="header-section-number">2.3.1</span> Sources of Data</h3>
 <p>This study integrates four primary datasets to construct and validate the Fishable Days Index (FDI) for the St.&nbsp;Croix commercial fishery that targets Caribbean Spiny Lobster. Each dataset spans a study period from January 1, 1985, to December 28, 2024, resulting in a daily time series of 14,607 observations. All data loading, merging, and transformation were performed with the programming language “Python” to ensure full reproducibility and to avoid manual manipulation of the four source files.</p>
-<p>The first dataset consists of daily commercial catch reports from individual fishers (Southeast Fisheries Science Center, 2026). Each observation records information for every fishing trip made by vessels fishing in St.&nbsp;Croix. The important variables utilized for this analysis were the date, total number of trips, number of trips specifically for the Caribbean Spiny Lobster (CSL), and total pounds of all species caught alongside pounds of solely CSL. The dataset is a limited event log: rows are present only on days when at least three fishers filed a self-reported logbook. Days with fewer than three individual reports are suppressed to zero to protect fisher privacy, meaning that missing continuous-date rows represent a mix of truly inactive days and days with only one or two reported trips.</p>
+<p>The first dataset consists of daily commercial catch reports from individual fishers <span class="citation" data-cites="caribbea">(<a href="capstone.html#ref-caribbea" role="doc-biblioref"><span>“Caribbean ST Croix Logbook Survey (Vessels) | InPort,”</span> n.d.</a>)</span>. Each observation records information for every fishing trip made by vessels fishing in St.&nbsp;Croix. The important variables utilized for this analysis were the date, total number of trips, number of trips specifically for the Caribbean Spiny Lobster (CSL), and total pounds of all species caught alongside pounds of solely CSL. The dataset is a limited event log: rows are present only on days when at least three fishers filed a self-reported logbook. Days with fewer than three individual reports are suppressed to zero to protect fisher privacy, meaning that missing continuous-date rows represent a mix of truly inactive days and days with only one or two reported trips.</p>
 <p>The second and third datasets of wind speed and wave height respectively, are derived from the ERA5 reanalysis product produced by the European Centre for Medium-Range Weather Forecasts (ECMWF). ERA5 provides hourly estimates of atmospheric and oceanic variables at a grid resolution of 31 km from 1940 onwards, reconstructed from historical observations and numerical weather prediction models <span class="citation" data-cites="hersbach2020">(<a href="capstone.html#ref-hersbach2020" role="doc-biblioref">Hersbach et al. 2020</a>)</span>. The wind dataset provides hourly eastward, u10, and northward, v10, wind components from 10 meters above the surface, as well as the instantaneous wind gust speed, fg10, for a single grid point representative of the St.&nbsp;Croix region (17.75°N, 64.75°W). The wave dataset provides hourly significant wave height, swh, at a nearby grid point (18.0°N, 64.5°W), defined as the average height of the greatest one-third of waves.</p>
 <p>The fourth dataset consists of annual total population estimates for the United States Virgin Islands sourced from the World Bank, series POPTOTVIA647NWDB. Population data are used solely to normalize fishing activity metrics and remove secular trends in fleet capacity from the validation analysis, as described further below.</p>
 <section id="daily-calendar-framework-construction" class="level4" data-number="2.3.1.1">
@@ -342,7 +342,7 @@ window.Quarto = {
 <h3 data-number="2.3.2" class="anchored" data-anchor-id="methodology-for-pricing-the-weather-derivative"><span class="header-section-number">2.3.2</span> Methodology for Pricing the Weather Derivative</h3>
 <section id="contract-purpose-and-pricing-logic" class="level4" data-number="2.3.2.1">
 <h4 data-number="2.3.2.1" class="anchored" data-anchor-id="contract-purpose-and-pricing-logic"><span class="header-section-number">2.3.2.1</span> Contract purpose and pricing logic</h4>
-<p>The agreement shifts the risk of adverse weather conditions from the derivative buyer to the seller. The contract will not track the actual day-to-day business loss. In contrast, it observes a weather-based index. The design is based on the essential structure of weather derivatives and index insurance. Buyer pays a premium upfront (Alaton et al., 2002; Cao &amp; Wei, 2004). If the index exceeds the trigger threshold during the contract period, the seller makes the contract payment. The contract reduces loss-adjustment costs by generating objective settlements from the recorded weather data and a priori estimated losses instead of from audited firm losses (Bemš &amp; Aydin, 2022; World Bank, 2023).</p>
+<p>The agreement shifts the risk of adverse weather conditions from the derivative buyer to the seller. The contract will not track the actual day-to-day business loss. In contrast, it observes a weather-based index. The design is based on the essential structure of weather derivatives and index insurance. Buyer pays a premium upfront [<span class="citation" data-cites="alaton2002">Alaton, Djehiche, and Stillberger (<a href="capstone.html#ref-alaton2002" role="doc-biblioref">2002</a>)</span>; @cao2004]. If the index exceeds the trigger threshold during the contract period, the seller makes the contract payment. The contract reduces loss-adjustment costs by generating objective settlements from the recorded weather data and a priori estimated losses instead of from audited firm losses <span class="citation" data-cites="bems2021 worldbank2023">(<a href="capstone.html#ref-bems2021" role="doc-biblioref">Bemš and Aydin 2021</a>; <a href="capstone.html#ref-worldbank2023" role="doc-biblioref">World Bank 2023</a>)</span>.</p>
 <p>The contract value in this report is based on an actuarial expected payoff. Since the underlying weather variable is not traded in deep or futures markets, the choice of a predetermined payoff fits well with weather derivatives. Earlier research applies identical expected loss analysis reasoning for temperature, rainfall, and agricultural weather-index contracts (Alaton et al., 2002; Bemš &amp; Aydin, 2022; Richards et al., 2004). Some other pricing models can be mentioned as well, e.g.&nbsp;equilibrium, indifference, or copula-based approaches. However, the actuarial approach provides a clear starting point and aligns with available data and the objective of pricing a fishability-based trigger from past weather conditions (Bressan &amp; Romagnoli, 2021; Cao &amp; Wei, 2004; Xu et al., 2008).</p>
 </section>
 <section id="index-definition-and-contract-trigger" class="level4" data-number="2.3.2.2">
@@ -464,6 +464,19 @@ window.Quarto = {
 <section id="references" class="level2" data-number="2.6">
 <h2 data-number="2.6" class="anchored" data-anchor-id="references"><span class="header-section-number">2.6</span> References</h2>
 <div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
+<div id="ref-alaton2002" class="csl-entry" role="listitem">
+Alaton, Peter, Boualem Djehiche, and David Stillberger. 2002. <span>“On
+Modelling and Pricing Weather Derivatives.”</span> <em>Applied
+Mathematical Finance</em> 9 (1): 1–20. <a href="https://doi.org/10.1080/13504860210132897">https://doi.org/10.1080/13504860210132897</a>.
+</div>
+<div id="ref-bems2021" class="csl-entry" role="listitem">
+Bemš, Július, and Caner Aydin. 2021. <span>“Introduction to Weather
+Derivatives.”</span> <em>WIREs Energy and Environment</em> 11 (3). <a href="https://doi.org/10.1002/wene.426">https://doi.org/10.1002/wene.426</a>.
+</div>
+<div id="ref-caribbea" class="csl-entry" role="listitem">
+<span>“Caribbean ST Croix Logbook Survey (Vessels) | InPort.”</span>
+n.d. <a href="https://www.fisheries.noaa.gov/inport/item/30423">https://www.fisheries.noaa.gov/inport/item/30423</a>.
+</div>
 <div id="ref-hersbach2020" class="csl-entry" role="listitem">
 Hersbach, Hans, Bill Bell, Paul Berrisford, Shoji Hirahara, András
 Horányi, Joaquín Muñoz-Sabater, Julien Nicolas, et al. 2020. <span>“The
@@ -474,6 +487,10 @@ Meteorological Society</em> 146 (730): 1999–2049. <a href="https://doi.org/10.
 Skees, Jerry R. 2008. <span>“Innovations in Index Insurance for the Poor
 in Lower Income Countries.”</span> <em>Agricultural and Resource
 Economics Review</em> 37 (1): 1–15. <a href="https://doi.org/10.1017/s1068280500002094">https://doi.org/10.1017/s1068280500002094</a>.
+</div>
+<div id="ref-worldbank2023" class="csl-entry" role="listitem">
+World Bank. 2023. <span>“Index-Based Weather Derivative: Product
+Note.”</span> <a href="https://thedocs.worldbank.org/en/doc/29d15a97a9791b5e6cfac1c302d08f08-0340012023/original/product-note-index-based-weather-derivative.pdf">https://thedocs.worldbank.org/en/doc/29d15a97a9791b5e6cfac1c302d08f08-0340012023/original/product-note-index-based-weather-derivative.pdf</a>.
 </div>
 </div>
 
