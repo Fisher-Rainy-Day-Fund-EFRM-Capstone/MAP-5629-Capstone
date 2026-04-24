@@ -13,6 +13,7 @@ book:
   chapters:
     - index.qmd
     - chapters/proposal.qmd
+    - chapters/capstone.qmd
   appendices:
     - chapters/downloads.qmd
     - chapters/github.qmd
