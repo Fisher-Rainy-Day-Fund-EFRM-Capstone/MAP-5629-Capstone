@@ -8,7 +8,7 @@ author:
   - name: Veronica Prelaz
   - name: Adyan Rios
 date: "April 24, 2026"
-bibliography: references.bib
+bibliography: chapters/references.bib
 ---
 
 ## Fisher Rainy Day Fund – A Parametric Insurance Policy {.unnumbered}
@@ -23,7 +23,7 @@ The proposed Fisher Rainy Day Fund is a parametric insurance policy that is base
 
 ## Background
 
-Income shocks have a big impact on small fisheries. The performance of traditional indemnity insurance in this sector is not up to the mark as it becomes difficult to verify losses and claims are settled slowly. Furthermore, controlling moral hazard is difficult. For this reason, many fishers are not insured. Parametric and index-based products provide clear and low-cost alternatives, as payouts depend on objective indices rather than observed losses ([@skees2008]).
+Income shocks have a big impact on small fisheries. The performance of traditional indemnity insurance in this sector is not up to the mark as it becomes difficult to verify losses and claims are settled slowly. Furthermore, controlling moral hazard is difficult. For this reason, many fishers are not insured. Parametric and index-based products provide clear and low-cost alternatives, as payouts depend on objective indices rather than observed losses [@skees2008].
 
 ## Methods
 
