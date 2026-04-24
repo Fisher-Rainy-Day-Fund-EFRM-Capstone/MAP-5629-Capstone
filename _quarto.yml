@@ -1,5 +1,7 @@
 project:
   type: book
+  
+bibliography: references.bib
 
 book:
   title: "Capstone"
