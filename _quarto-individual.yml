@@ -16,5 +16,7 @@ format:
      header-includes: |
       \let\oldtableofcontents\tableofcontents
       \renewcommand{\tableofcontents}{\oldtableofcontents\clearpage}
-      
+      % Centralize Abstract logic:
+      \usepackage{etoolbox}
+      \patchcmd{\abstract}{\quotation}{\quotation\centering}{}{}
 # quarto render --profile individual --to pdf
